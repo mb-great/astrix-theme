@@ -6,6 +6,7 @@
 <!DOCTYPE html>
 <html <?php language_attributes(); ?>>
 <head>
+  <script>document.documentElement.className += ' js';</script>
   <meta charset="<?php bloginfo('charset'); ?>">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="preconnect" href="https://fonts.googleapis.com">

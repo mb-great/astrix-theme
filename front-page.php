@@ -39,14 +39,14 @@ $front_id = (int) get_option('page_on_front');
     <div style="grid-column: 1 / span 7; display: flex; flex-direction: column; gap: clamp(26px, 3.6vh, 40px);">
       <div style="display: flex; align-items: center; gap: 14px; opacity: 0; animation: riseIn 1s cubic-bezier(0.16, 1, 0.3, 1) 0.35s forwards;">
         <span style="width: 22px; height: 1px; background: #C56A37;"></span>
-        <span style="font-size: 11.5px; letter-spacing: 0.32em; font-weight: 500; color: #7A6F63; text-transform: uppercase;"><?php echo esc_html(get_field('hero_eyebrow', $front_id)); ?></span>
+        <span style="font-size: 11.5px; letter-spacing: 0.32em; font-weight: 500; color: #7A6F63; text-transform: uppercase;"><?php echo esc_html(astrix_field('hero_eyebrow', $front_id)); ?></span>
       </div>
       <h1 style="margin: 0; font-weight: 600; font-size: clamp(42px, 5.2vw, 88px); line-height: 1.03; letter-spacing: -0.035em; max-width: 15ch; text-wrap: balance;">
-        <span style="display: block; opacity: 0; animation: riseIn 1.1s cubic-bezier(0.16, 1, 0.3, 1) 0.5s forwards;"><?php echo esc_html(get_field('hero_h1_line1', $front_id)); ?></span>
-        <span style="display: block; opacity: 0; animation: riseIn 1.1s cubic-bezier(0.16, 1, 0.3, 1) 0.68s forwards;"><?php echo esc_html(get_field('hero_h1_line2', $front_id)); ?> <em style="font-family: 'Instrument Serif', serif; font-style: italic; font-weight: 400; letter-spacing: -0.01em; color: #C56A37;"><?php echo esc_html(get_field('hero_h1_emphasis', $front_id)); ?></em> <?php echo esc_html(get_field('hero_h1_line2_end', $front_id)); ?></span>
+        <span style="display: block; opacity: 0; animation: riseIn 1.1s cubic-bezier(0.16, 1, 0.3, 1) 0.5s forwards;"><?php echo esc_html(astrix_field('hero_h1_line1', $front_id)); ?></span>
+        <span style="display: block; opacity: 0; animation: riseIn 1.1s cubic-bezier(0.16, 1, 0.3, 1) 0.68s forwards;"><?php echo esc_html(astrix_field('hero_h1_line2', $front_id)); ?> <em style="font-family: 'Instrument Serif', serif; font-style: italic; font-weight: 400; letter-spacing: -0.01em; color: #C56A37;"><?php echo esc_html(astrix_field('hero_h1_emphasis', $front_id)); ?></em> <?php echo esc_html(astrix_field('hero_h1_line2_end', $front_id)); ?></span>
       </h1>
       <div style="opacity: 0; animation: riseIn 1.1s cubic-bezier(0.16, 1, 0.3, 1) 0.9s forwards; display: flex; flex-direction: column; gap: 16px;">
-        <p style="margin: 0; font-size: clamp(17px, 1.5vw, 21px); line-height: 1.5; font-weight: 500; color: #211C17; max-width: 46ch;"><?php echo esc_html(get_field('hero_para', $front_id)); ?></p>
+        <p style="margin: 0; font-size: clamp(17px, 1.5vw, 21px); line-height: 1.5; font-weight: 500; color: #211C17; max-width: 46ch;"><?php echo esc_html(astrix_field('hero_para', $front_id)); ?></p>
       </div>
       <div style="display: flex; align-items: center; gap: 28px; flex-wrap: wrap; opacity: 0; animation: riseIn 1.1s cubic-bezier(0.16, 1, 0.3, 1) 1.1s forwards;">
         <a href="<?php echo esc_url(home_url('/contact')); ?>" data-magnetic class="ax-cta-dark" style="display: inline-flex; align-items: center; gap: 12px; background: linear-gradient(135deg, #2A2019, #1A1611); color: #F5F1EA; font-size: 14.5px; font-weight: 500; padding: 16px 30px; border-radius: 100px; transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease;">
@@ -89,8 +89,8 @@ $front_id = (int) get_option('page_on_front');
   <div class="ax-grain-layer"></div>
   <span class="ax-word" style="right: clamp(28px, 5vw, 72px); top: clamp(60px, 12vh, 120px); font-size: clamp(64px, 9vw, 168px); color: rgba(245,241,234,0.12); text-align: right;">Terrain</span>
   <div style="position: relative; z-index: 3; grid-column: 1 / span 10; display: flex; flex-direction: column; gap: 24px;">
-    <span style="font-size: 11.5px; letter-spacing: 0.32em; color: rgba(245,241,234,0.7); text-transform: uppercase; font-weight: 500;"><?php echo esc_html(get_field('ch1_eyebrow', $front_id)); ?></span>
-    <p style="margin: 0; font-size: clamp(28px, 3.6vw, 54px); line-height: 1.18; letter-spacing: -0.025em; font-weight: 500; max-width: 24ch; text-wrap: balance;"><?php echo wp_kses_post(get_field('ch1_headline', $front_id)); ?></p>
+    <span style="font-size: 11.5px; letter-spacing: 0.32em; color: rgba(245,241,234,0.7); text-transform: uppercase; font-weight: 500;"><?php echo esc_html(astrix_field('ch1_eyebrow', $front_id)); ?></span>
+    <p style="margin: 0; font-size: clamp(28px, 3.6vw, 54px); line-height: 1.18; letter-spacing: -0.025em; font-weight: 500; max-width: 24ch; text-wrap: balance;"><?php echo wp_kses_post(astrix_field('ch1_headline', $front_id)); ?></p>
   </div>
 </div>
 
@@ -100,9 +100,9 @@ $front_id = (int) get_option('page_on_front');
   <div class="grid-12" style="position: relative; z-index: 2; display: grid; grid-template-columns: repeat(12, 1fr); gap: 24px; padding: clamp(120px, 20vh, 220px) clamp(28px, 5vw, 72px) clamp(70px, 11vh, 130px);">
     <div data-reveal style="grid-column: 1 / span 12; display: flex; align-items: center; gap: 14px;">
       <span style="width: 22px; height: 1px; background: #C56A37;"></span>
-      <span style="font-size: 11.5px; letter-spacing: 0.32em; font-weight: 500; color: #7A6F63; text-transform: uppercase;"><?php echo esc_html(get_field('ch2_eyebrow', $front_id)); ?></span>
+      <span style="font-size: 11.5px; letter-spacing: 0.32em; font-weight: 500; color: #7A6F63; text-transform: uppercase;"><?php echo esc_html(astrix_field('ch2_eyebrow', $front_id)); ?></span>
     </div>
-    <h2 data-reveal style="grid-column: 1 / span 11; margin: clamp(24px, 3vh, 40px) 0 clamp(40px, 7vh, 80px); font-weight: 600; font-size: clamp(38px, 5.4vw, 88px); line-height: 1.04; letter-spacing: -0.035em;"><?php echo wp_kses_post(get_field('ch2_headline', $front_id)); ?></h2>
+    <h2 data-reveal style="grid-column: 1 / span 11; margin: clamp(24px, 3vh, 40px) 0 clamp(40px, 7vh, 80px); font-weight: 600; font-size: clamp(38px, 5.4vw, 88px); line-height: 1.04; letter-spacing: -0.035em;"><?php echo wp_kses_post(astrix_field('ch2_headline', $front_id)); ?></h2>
     
     <div data-reveal class="ax-frame" style="grid-column: 1 / span 5; border-radius: 4px; aspect-ratio: 0.92; min-height: clamp(300px, 44vh, 480px);">
       <img class="ax-photo" style="animation: kenburns 24s ease-in-out infinite alternate;" src="<?php echo esc_url($theme_uri . '/assets/revolution-still-life-design (2).webp'); ?>" alt="Doing more, being heard less">
@@ -119,7 +119,7 @@ $front_id = (int) get_option('page_on_front');
     </div>
 
     <div data-reveal style="grid-column: 2 / span 10; margin: clamp(60px, 10vh, 130px) 0 0;">
-      <p style="margin: 0; font-family: 'Instrument Serif', serif; font-style: italic; font-weight: 400; font-size: clamp(30px, 4.4vw, 66px); line-height: 1.16; letter-spacing: -0.01em; color: #211C17; max-width: 20ch; text-wrap: balance;"><?php echo wp_kses_post(get_field('ch2_pullquote', $front_id)); ?></p>
+      <p style="margin: 0; font-family: 'Instrument Serif', serif; font-style: italic; font-weight: 400; font-size: clamp(30px, 4.4vw, 66px); line-height: 1.16; letter-spacing: -0.01em; color: #211C17; max-width: 20ch; text-wrap: balance;"><?php echo wp_kses_post(astrix_field('ch2_pullquote', $front_id)); ?></p>
     </div>
   </div>
 </section>
@@ -198,10 +198,10 @@ $front_id = (int) get_option('page_on_front');
     <div style="grid-column: 1 / span 5; display: flex; flex-direction: column; gap: clamp(24px, 4vh, 40px);">
       <div data-reveal style="display: flex; align-items: center; gap: 14px;">
         <span style="width: 22px; height: 1px; background: #C56A37;"></span>
-        <span style="font-size: 11.5px; letter-spacing: 0.32em; font-weight: 500; color: #7A6F63; text-transform: uppercase;"><?php echo esc_html(get_field('ch3_eyebrow', $front_id)); ?></span>
+        <span style="font-size: 11.5px; letter-spacing: 0.32em; font-weight: 500; color: #7A6F63; text-transform: uppercase;"><?php echo esc_html(astrix_field('ch3_eyebrow', $front_id)); ?></span>
       </div>
-      <h2 data-reveal style="margin: 0; font-weight: 600; font-size: clamp(38px, 4.6vw, 72px); line-height: 1.04; letter-spacing: -0.035em;"><?php echo esc_html(get_field('ch3_headline', $front_id)); ?><span style="font-size: 0.34em; font-weight: 500; vertical-align: super; color: #9A8E7D;">™</span></h2>
-      <p data-reveal style="margin: 0; font-size: 15.5px; line-height: 1.72; color: #7A6F63; max-width: 46ch; text-wrap: pretty;"><?php echo esc_html(get_field('ch3_body', $front_id)); ?></p>
+      <h2 data-reveal style="margin: 0; font-weight: 600; font-size: clamp(38px, 4.6vw, 72px); line-height: 1.04; letter-spacing: -0.035em;"><?php echo esc_html(astrix_field('ch3_headline', $front_id)); ?><span style="font-size: 0.34em; font-weight: 500; vertical-align: super; color: #9A8E7D;">™</span></h2>
+      <p data-reveal style="margin: 0; font-size: 15.5px; line-height: 1.72; color: #7A6F63; max-width: 46ch; text-wrap: pretty;"><?php echo esc_html(astrix_field('ch3_body', $front_id)); ?></p>
       
       <div data-reveal class="ax-frame" style="border-radius: 4px; aspect-ratio: 16/7;">
         <img class="ax-photo" style="filter: grayscale(0.2) contrast(1.0) brightness(1.05);" src="<?php echo esc_url($theme_uri . '/assets/crumpled-papers-with-directional-arrows-pointing-toward-light-bulb-white-background-777d965a.webp'); ?>" alt="Iteration becoming an idea">
@@ -211,24 +211,24 @@ $front_id = (int) get_option('page_on_front');
       <!-- 7 Stages Accordion -->
       <div data-reveal style="display: flex; flex-direction: column;">
         <?php
-        $stage_posts = get_posts(array('post_type' => 'engine_stage', 'numberposts' => -1, 'orderby' => 'menu_order', 'order' => 'ASC'));
+        $stage_posts = astrix_items('engine_stage', array('tag', 'line', 'capabilities'));
         foreach ($stage_posts as $i => $stage_post):
-          $caps_lines = array_filter(array_map('trim', explode("\n", get_field('capabilities', $stage_post->ID))));
+          $caps_lines = array_filter(array_map('trim', explode("\n", $stage_post['capabilities'])));
         ?>
         <div class="stage-item" style="border-top: 1px solid rgba(33,28,23,0.10);">
           <button class="stage-btn" type="button">
             <div style="display: grid; grid-template-columns: 40px 1fr auto; gap: 18px; align-items: baseline; padding: clamp(16px, 2.4vh, 22px) 0;">
               <span class="stage-num" style="font-size: 11.5px; font-weight: 600; letter-spacing: 0.1em; color: <?php echo $i === 0 ? '#C56A37' : '#B3A794'; ?>;"><?php echo esc_html(sprintf('%02d', $i + 1)); ?></span>
               <div style="display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap;">
-                <span class="stage-name" style="font-size: clamp(19px, 1.9vw, 25px); font-weight: 600; letter-spacing: -0.02em; color: <?php echo $i === 0 ? '#C56A37' : '#211C17'; ?>; transition: color 0.3s ease;"><?php echo esc_html(get_the_title($stage_post)); ?></span>
-                <span style="font-size: 12.5px; color: #9A8E7D;"><?php echo esc_html(get_field('tag', $stage_post->ID)); ?></span>
+                <span class="stage-name" style="font-size: clamp(19px, 1.9vw, 25px); font-weight: 600; letter-spacing: -0.02em; color: <?php echo $i === 0 ? '#C56A37' : '#211C17'; ?>; transition: color 0.3s ease;"><?php echo esc_html($stage_post['title']); ?></span>
+                <span style="font-size: 12.5px; color: #9A8E7D;"><?php echo esc_html($stage_post['tag']); ?></span>
               </div>
               <span class="stage-icon" style="font-size: 18px; color: #C56A37; transition: transform 0.3s ease; display: inline-block;">+</span>
             </div>
           </button>
           <div class="stage-body" style="max-height: <?php echo $i === 0 ? '220px' : '0px'; ?>; overflow: hidden; transition: max-height 0.5s cubic-bezier(0.16,1,0.3,1);">
             <div style="display: flex; flex-direction: column; gap: 12px; padding: 0 0 22px 58px;">
-              <p style="margin: 0; font-size: 14.5px; line-height: 1.6; color: #3A3229; max-width: 44ch;"><?php echo esc_html(get_field('line', $stage_post->ID)); ?></p>
+              <p style="margin: 0; font-size: 14.5px; line-height: 1.6; color: #3A3229; max-width: 44ch;"><?php echo esc_html($stage_post['line']); ?></p>
               <p style="margin: 0; font-size: 13px; line-height: 1.8; color: #7A6F63;"><?php echo esc_html(implode('  ·  ', $caps_lines)); ?></p>
             </div>
           </div>
@@ -256,11 +256,11 @@ $front_id = (int) get_option('page_on_front');
       <div style="display: flex; flex-direction: column; gap: 24px;">
         <div style="display: flex; align-items: center; gap: 14px;">
           <span style="width: 22px; height: 1px; background: #C56A37;"></span>
-          <span style="font-size: 11.5px; letter-spacing: 0.32em; font-weight: 500; color: #7A6F63; text-transform: uppercase;"><?php echo esc_html(get_field('ch4_eyebrow', $front_id)); ?></span>
+          <span style="font-size: 11.5px; letter-spacing: 0.32em; font-weight: 500; color: #7A6F63; text-transform: uppercase;"><?php echo esc_html(astrix_field('ch4_eyebrow', $front_id)); ?></span>
         </div>
-        <h2 style="margin: 0; font-weight: 600; font-size: clamp(34px, 4.4vw, 66px); line-height: 1.04; letter-spacing: -0.035em; max-width: 17ch;"><?php echo wp_kses_post(get_field('ch4_headline', $front_id)); ?></h2>
+        <h2 style="margin: 0; font-weight: 600; font-size: clamp(34px, 4.4vw, 66px); line-height: 1.04; letter-spacing: -0.035em; max-width: 17ch;"><?php echo wp_kses_post(astrix_field('ch4_headline', $front_id)); ?></h2>
       </div>
-      <p style="margin: 0; max-width: 36ch; font-size: 15px; line-height: 1.68; color: #7A6F63;"><?php echo esc_html(get_field('ch4_body', $front_id)); ?></p>
+      <p style="margin: 0; max-width: 36ch; font-size: 15px; line-height: 1.68; color: #7A6F63;"><?php echo esc_html(astrix_field('ch4_body', $front_id)); ?></p>
     </div>
 
     <div data-reveal class="ax-frame" style="grid-column: 1 / span 12; border-radius: 4px; aspect-ratio: 16/6; min-height: 240px; margin-bottom: clamp(24px, 4vh, 44px);">
@@ -272,13 +272,13 @@ $front_id = (int) get_option('page_on_front');
 
     <div class="eco-grid" style="grid-column: 1 / span 12; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: rgba(33,28,23,0.10);">
       <?php
-      $ecosystem_posts = get_posts(array('post_type' => 'ecosystem', 'numberposts' => -1, 'orderby' => 'menu_order', 'order' => 'ASC'));
+      $ecosystem_posts = astrix_items('ecosystem', array('numeral', 'parts'));
       foreach ($ecosystem_posts as $eco_post):
       ?>
       <div data-reveal class="ax-eco-card" style="background: #F5F1EA; padding: clamp(28px, 4.4vh, 44px) clamp(22px, 2.4vw, 34px); display: flex; flex-direction: column; gap: 14px; min-height: 220px; transition: background 0.4s ease;">
-        <span style="font-family: 'Instrument Serif', serif; font-style: italic; font-size: 22px; color: #C56A37;"><?php echo esc_html(get_field('numeral', $eco_post->ID)); ?></span>
-        <h3 style="margin: 0; font-size: clamp(19px, 1.9vw, 24px); font-weight: 600; letter-spacing: -0.02em;"><?php echo esc_html(get_the_title($eco_post)); ?></h3>
-        <p style="margin: 0; font-size: 13.5px; line-height: 1.62; color: #7A6F63; text-wrap: pretty;"><?php echo esc_html(get_field('parts', $eco_post->ID)); ?></p>
+        <span style="font-family: 'Instrument Serif', serif; font-style: italic; font-size: 22px; color: #C56A37;"><?php echo esc_html($eco_post['numeral']); ?></span>
+        <h3 style="margin: 0; font-size: clamp(19px, 1.9vw, 24px); font-weight: 600; letter-spacing: -0.02em;"><?php echo esc_html($eco_post['title']); ?></h3>
+        <p style="margin: 0; font-size: 13.5px; line-height: 1.62; color: #7A6F63; text-wrap: pretty;"><?php echo esc_html($eco_post['parts']); ?></p>
       </div>
       <?php endforeach; ?>
     </div>
@@ -297,10 +297,10 @@ $front_id = (int) get_option('page_on_front');
     <div class="sticky-col" data-reveal style="grid-column: 1 / span 4; position: sticky; top: 12vh; align-self: start; display: flex; flex-direction: column; gap: 22px;">
       <div style="display: flex; align-items: center; gap: 14px;">
         <span style="width: 22px; height: 1px; background: #C56A37;"></span>
-        <span style="font-size: 11.5px; letter-spacing: 0.32em; font-weight: 500; color: rgba(245,241,234,0.6); text-transform: uppercase;"><?php echo esc_html(get_field('ch5_eyebrow', $front_id)); ?></span>
+        <span style="font-size: 11.5px; letter-spacing: 0.32em; font-weight: 500; color: rgba(245,241,234,0.6); text-transform: uppercase;"><?php echo esc_html(astrix_field('ch5_eyebrow', $front_id)); ?></span>
       </div>
-      <h2 style="margin: 0; font-weight: 600; font-size: clamp(32px, 4vw, 58px); line-height: 1.05; letter-spacing: -0.035em;"><?php echo wp_kses_post(get_field('ch5_headline', $front_id)); ?></h2>
-      <p style="margin: 0; font-size: 15px; line-height: 1.7; color: rgba(245,241,234,0.68); max-width: 38ch; text-wrap: pretty;"><?php echo esc_html(get_field('ch5_body', $front_id)); ?></p>
+      <h2 style="margin: 0; font-weight: 600; font-size: clamp(32px, 4vw, 58px); line-height: 1.05; letter-spacing: -0.035em;"><?php echo wp_kses_post(astrix_field('ch5_headline', $front_id)); ?></h2>
+      <p style="margin: 0; font-size: 15px; line-height: 1.7; color: rgba(245,241,234,0.68); max-width: 38ch; text-wrap: pretty;"><?php echo esc_html(astrix_field('ch5_body', $front_id)); ?></p>
       
       <div data-reveal class="ax-frame" style="border-radius: 4px; aspect-ratio: 1.3;">
         <img class="ax-photo" style="animation: kenburns 26s ease-in-out infinite alternate;" src="<?php echo esc_url($theme_uri . '/assets/double-exposure-engineer-holding-blueprints-city-skyline-ai-generated-696183aa.webp'); ?>" alt="Engineering as half the argument">
@@ -311,13 +311,13 @@ $front_id = (int) get_option('page_on_front');
 
     <div style="grid-column: 6 / span 7; display: flex; flex-direction: column;">
       <?php
-      $tech_posts = get_posts(array('post_type' => 'tech_capability', 'numberposts' => -1, 'orderby' => 'menu_order', 'order' => 'ASC'));
+      $tech_posts = astrix_items('tech_capability', array('subtitle', 'items'));
       foreach ($tech_posts as $tech_post):
-        $tech_items = array_filter(array_map('trim', explode("\n", get_field('items', $tech_post->ID))));
+        $tech_items = array_filter(array_map('trim', explode("\n", $tech_post['items'])));
       ?>
       <div data-reveal style="display: grid; grid-template-columns: minmax(150px, 1fr) 2.2fr; gap: clamp(16px, 3vw, 36px); padding: clamp(26px, 4vh, 38px) 0; border-top: 1px solid rgba(245,241,234,0.14);">
         <div style="display: flex; flex-direction: column; gap: 8px;">
-          <h3 style="margin: 0; font-size: clamp(17px, 1.7vw, 22px); font-weight: 600; letter-spacing: -0.02em;"><?php echo esc_html(get_the_title($tech_post)); ?></h3>
+          <h3 style="margin: 0; font-size: clamp(17px, 1.7vw, 22px); font-weight: 600; letter-spacing: -0.02em;"><?php echo esc_html($tech_post['title']); ?></h3>
         </div>
         <div style="display: flex; flex-direction: column; gap: 14px;">
           <div style="display: flex; flex-wrap: wrap; gap: 8px;">
@@ -325,7 +325,7 @@ $front_id = (int) get_option('page_on_front');
             <span style="font-size: 12px; font-weight: 500; letter-spacing: 0.04em; color: rgba(245,241,234,0.85); border: 1px solid rgba(245,241,234,0.22); border-radius: 100px; padding: 7px 14px;"><?php echo esc_html($item); ?></span>
             <?php endforeach; ?>
           </div>
-          <p style="margin: 0; font-size: 13.5px; line-height: 1.6; color: rgba(245,241,234,0.55); max-width: 44ch;"><?php echo esc_html(get_field('subtitle', $tech_post->ID)); ?></p>
+          <p style="margin: 0; font-size: 13.5px; line-height: 1.6; color: rgba(245,241,234,0.55); max-width: 44ch;"><?php echo esc_html($tech_post['subtitle']); ?></p>
         </div>
       </div>
       <?php endforeach; ?>
@@ -342,29 +342,30 @@ $front_id = (int) get_option('page_on_front');
     <?php if (false): ?>
     <div data-reveal style="grid-column: 1 / span 12; display: flex; align-items: center; gap: 14px; margin-bottom: clamp(30px, 5vh, 50px);">
       <span style="width: 22px; height: 1px; background: #C56A37;"></span>
-      <span style="font-size: 11.5px; letter-spacing: 0.32em; font-weight: 500; color: #7A6F63; text-transform: uppercase;"><?php echo esc_html(get_field('ch6_eyebrow', $front_id)); ?></span>
+      <span style="font-size: 11.5px; letter-spacing: 0.32em; font-weight: 500; color: #7A6F63; text-transform: uppercase;"><?php echo esc_html(astrix_field('ch6_eyebrow', $front_id)); ?></span>
     </div>
 
     <?php
-    $proof_posts = get_posts(array(
-      'post_type' => 'case_study', 'numberposts' => -1, 'orderby' => 'menu_order', 'order' => 'ASC',
-      'meta_query' => array(array('key' => 'show_on_homepage', 'value' => '1', 'compare' => '=')),
-    ));
+    $proof_posts = astrix_items(
+      'case_study',
+      array('client', 'from_text', 'to_text', 'metric', 'metric_label'),
+      array('meta_query' => array(array('key' => 'show_on_homepage', 'value' => '1', 'compare' => '=')))
+    );
     foreach ($proof_posts as $proof_post):
     ?>
     <a href="<?php echo esc_url(home_url('/work')); ?>" data-reveal class="proof-grid" style="grid-column: 1 / span 12; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: clamp(20px, 3vw, 48px); align-items: center; padding: clamp(30px, 5vh, 48px) 0; border-top: 1px solid rgba(33,28,23,0.12);">
       <div style="display: flex; flex-direction: column; gap: 8px;">
-        <span style="font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: #9A8E7D;"><?php echo esc_html(get_field('client', $proof_post->ID)); ?></span>
+        <span style="font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: #9A8E7D;"><?php echo esc_html($proof_post['client']); ?></span>
       </div>
       <div style="display: flex; align-items: center; gap: 14px;">
-        <span style="font-size: 14px; color: #7A6F63;"><?php echo esc_html(get_field('from_text', $proof_post->ID)); ?></span>
+        <span style="font-size: 14px; color: #7A6F63;"><?php echo esc_html($proof_post['from_text']); ?></span>
         <span style="color: #C56A37; font-size: 16px;">→</span>
-        <span style="font-size: 14px; font-weight: 500; color: #211C17;"><?php echo esc_html(get_field('to_text', $proof_post->ID)); ?></span>
+        <span style="font-size: 14px; font-weight: 500; color: #211C17;"><?php echo esc_html($proof_post['to_text']); ?></span>
       </div>
       <div style="display: flex; align-items: center; justify-content: flex-end; gap: clamp(20px, 3vw, 40px);">
         <div style="display: flex; flex-direction: column; gap: 2px; text-align: right;">
-          <span style="font-size: clamp(24px, 2.4vw, 36px); font-weight: 600; letter-spacing: -0.03em; color: #C56A37;"><?php echo esc_html(get_field('metric', $proof_post->ID)); ?></span>
-          <span style="font-size: 12px; color: #9A8E7D;"><?php echo esc_html(get_field('metric_label', $proof_post->ID)); ?></span>
+          <span style="font-size: clamp(24px, 2.4vw, 36px); font-weight: 600; letter-spacing: -0.03em; color: #C56A37;"><?php echo esc_html($proof_post['metric']); ?></span>
+          <span style="font-size: 12px; color: #9A8E7D;"><?php echo esc_html($proof_post['metric_label']); ?></span>
         </div>
         <span style="font-size: 15px; color: #B3A794;">↗</span>
       </div>
@@ -413,10 +414,10 @@ $front_id = (int) get_option('page_on_front');
     <div data-reveal style="grid-column: 1 / span 4; display: flex; flex-direction: column; gap: 22px;">
       <div style="display: flex; align-items: center; gap: 14px;">
         <span style="width: 22px; height: 1px; background: #C56A37;"></span>
-        <span style="font-size: 11.5px; letter-spacing: 0.32em; font-weight: 500; color: #7A6F63; text-transform: uppercase;"><?php echo wp_kses_post(get_field('ch7_eyebrow', $front_id)); ?></span>
+        <span style="font-size: 11.5px; letter-spacing: 0.32em; font-weight: 500; color: #7A6F63; text-transform: uppercase;"><?php echo wp_kses_post(astrix_field('ch7_eyebrow', $front_id)); ?></span>
       </div>
-      <h2 style="margin: 0; font-weight: 600; font-size: clamp(30px, 3.6vw, 54px); line-height: 1.06; letter-spacing: -0.032em;"><?php echo wp_kses_post(get_field('ch7_headline', $front_id)); ?></h2>
-      <p style="margin: 0; font-size: 15px; line-height: 1.68; color: #7A6F63; max-width: 36ch;"><?php echo esc_html(get_field('ch7_body', $front_id)); ?></p>
+      <h2 style="margin: 0; font-weight: 600; font-size: clamp(30px, 3.6vw, 54px); line-height: 1.06; letter-spacing: -0.032em;"><?php echo wp_kses_post(astrix_field('ch7_headline', $front_id)); ?></h2>
+      <p style="margin: 0; font-size: 15px; line-height: 1.68; color: #7A6F63; max-width: 36ch;"><?php echo esc_html(astrix_field('ch7_body', $front_id)); ?></p>
       
       <div style="display: flex; flex-direction: column; gap: 6px; margin-top: 10px; border-top: 1px solid rgba(33,28,23,0.14); padding-top: 16px;">
         <span style="font-size: 10.5px; letter-spacing: 0.28em; text-transform: uppercase; color: #B3A794; font-weight: 500;">Recognition</span>
@@ -428,8 +429,8 @@ $front_id = (int) get_option('page_on_front');
     </div>
 
     <a href="<?php echo esc_url(home_url('/perspective')); ?>" data-reveal style="grid-column: 6 / span 4; display: flex; flex-direction: column; gap: 18px; border-top: 1px solid rgba(33,28,23,0.14); padding-top: clamp(24px, 4vh, 36px);">
-      <span style="font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: #9A8E7D;"><?php echo esc_html(get_field('essay_kicker', $front_id)); ?></span>
-      <h3 style="margin: 0; font-weight: 600; font-size: clamp(26px, 3vw, 46px); line-height: 1.08; letter-spacing: -0.028em; max-width: 20ch; text-wrap: balance;"><?php echo wp_kses_post(get_field('essay_headline', $front_id)); ?></h3>
+      <span style="font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: #9A8E7D;"><?php echo esc_html(astrix_field('essay_kicker', $front_id)); ?></span>
+      <h3 style="margin: 0; font-weight: 600; font-size: clamp(26px, 3vw, 46px); line-height: 1.08; letter-spacing: -0.028em; max-width: 20ch; text-wrap: balance;"><?php echo wp_kses_post(astrix_field('essay_headline', $front_id)); ?></h3>
       <span style="display: inline-flex; align-items: center; gap: 10px; font-size: 14.5px; font-weight: 500; color: #211C17;">Read the essay <span>↗</span></span>
     </a>
 
@@ -453,9 +454,9 @@ $front_id = (int) get_option('page_on_front');
     
     <div class="grid-12" style="position: relative; z-index: 1; display: grid; grid-template-columns: repeat(12, 1fr); gap: 24px; padding: clamp(90px, 16vh, 170px) clamp(28px, 5vw, 72px);">
       <div data-reveal style="grid-column: 1 / span 7; display: flex; flex-direction: column; gap: clamp(28px, 5vh, 48px);">
-        <span style="font-size: 11.5px; letter-spacing: 0.32em; color: #9A8E7D; text-transform: uppercase; font-weight: 500;"><?php echo esc_html(get_field('epilogue_eyebrow', $front_id)); ?></span>
-        <p style="margin: 0; font-size: clamp(34px, 4.6vw, 68px); line-height: 1.08; letter-spacing: -0.03em; font-weight: 500; max-width: 18ch; text-wrap: balance;"><?php echo wp_kses_post(get_field('epilogue_headline', $front_id)); ?></p>
-        <p style="margin: 0; font-size: 15.5px; line-height: 1.7; color: rgba(245,241,234,0.72); max-width: 52ch;"><?php echo esc_html(get_field('epilogue_body', $front_id)); ?></p>
+        <span style="font-size: 11.5px; letter-spacing: 0.32em; color: #9A8E7D; text-transform: uppercase; font-weight: 500;"><?php echo esc_html(astrix_field('epilogue_eyebrow', $front_id)); ?></span>
+        <p style="margin: 0; font-size: clamp(34px, 4.6vw, 68px); line-height: 1.08; letter-spacing: -0.03em; font-weight: 500; max-width: 18ch; text-wrap: balance;"><?php echo wp_kses_post(astrix_field('epilogue_headline', $front_id)); ?></p>
+        <p style="margin: 0; font-size: 15.5px; line-height: 1.7; color: rgba(245,241,234,0.72); max-width: 52ch;"><?php echo esc_html(astrix_field('epilogue_body', $front_id)); ?></p>
         <div style="display: flex; align-items: center; gap: 28px; flex-wrap: wrap; margin-top: 4px;">
           <a href="<?php echo esc_url(home_url('/contact')); ?>" data-magnetic class="ax-cta-light" style="display: inline-flex; align-items: center; gap: 12px; background: #F5F1EA; color: #211C17; font-size: 14.5px; font-weight: 500; padding: 16px 30px; border-radius: 100px; transition: transform 0.35s cubic-bezier(0.16,1,0.3,1), box-shadow 0.35s ease;">
             Book a Discovery Session <span style="font-size: 15px;">→</span>

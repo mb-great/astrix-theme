@@ -7,6 +7,7 @@ if (!defined('ABSPATH')) {
   exit; // Exit if accessed directly.
 }
 
+require_once get_template_directory() . '/inc/fallback-content.php'; // must load first — defines the get_field() shim
 require_once get_template_directory() . '/inc/cpts.php';
 require_once get_template_directory() . '/inc/acf-fields.php';
 

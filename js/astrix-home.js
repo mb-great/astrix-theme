@@ -553,7 +553,7 @@
   }
 
   /* ── Boot on DOM ready ── */
-  document.addEventListener('DOMContentLoaded', () => {
+  function boot() {
     initHeroCanvas();
     initEcoCanvas();
     initThread();
@@ -561,5 +561,16 @@
     initReveal();
     initVideo();
     initNav();
-  });
+  }
+
+  // This script is enqueued in the footer. If it executes AFTER DOMContentLoaded
+  // has already fired (common on live/cached/slow connections), a plain
+  // addEventListener('DOMContentLoaded') never fires and NOTHING initialises —
+  // leaving all 40 [data-reveal] sections stuck at opacity:0, i.e. a blank page.
+  // Observed on astrixmedia.in 2026-08-07. Always gate on readyState.
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', boot);
+  } else {
+    boot();
+  }
 })();
