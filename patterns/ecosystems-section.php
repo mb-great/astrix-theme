@@ -6,9 +6,9 @@
  * Inserter: true
  */
 ?>
-<!-- wp:group {"tagName":"section","align":"full","className":"sec-ecosystems-wrap","style":{"spacing":{"padding":{"top":"clamp(100px, 16vh, 180px)","bottom":"clamp(100px, 16vh, 180px)","left":"clamp(24px, 4.5vw, 64px)","right":"clamp(24px, 4.5vw, 64px)"},"margin":{"top":"0","bottom":"0"}},"color":{"background":"#F5F1EA"}},"layout":{"type":"constrained","contentSize":"1440px"}} -->
-<section class="wp-block-group alignfull sec-ecosystems-wrap has-background" style="background-color:#F5F1EA;margin-top:0;margin-bottom:0;padding-top:clamp(100px, 16vh, 180px);padding-bottom:clamp(100px, 16vh, 180px);padding-left:clamp(24px, 4.5vw, 64px);padding-right:clamp(24px, 4.5vw, 64px);">
-  <div style="display:grid;grid-template-columns:repeat(12,1fr);gap:clamp(24px,3.5vw,48px);">
+<!-- wp:html -->
+<section class="sec-ecosystems-wrap" style="position:relative;background:#F5F1EA;padding:clamp(100px,16vh,180px) clamp(24px,4.5vw,64px);overflow:hidden;">
+  <div style="max-width:1440px;margin:0 auto;display:grid;grid-template-columns:repeat(12,1fr);gap:clamp(24px,3.5vw,48px);">
     <div style="grid-column:1 / span 12;display:flex;align-items:center;gap:12px;margin-bottom:12px;">
       <span style="display:inline-block;width:22px;height:1px;background:#C56A37;"></span>
       <span style="font-size:11.5px;letter-spacing:0.32em;font-weight:600;color:#7A6F63;text-transform:uppercase;">Chapter Four · What We Build</span>
@@ -43,4 +43,4 @@
     </div>
   </div>
 </section>
-<!-- /wp:group -->
+<!-- /wp:html -->

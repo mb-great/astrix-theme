@@ -2,13 +2,13 @@
 /**
  * Title: Astrix Custom <div> Container (12-Column Luxury Grid)
  * Slug: astrix/custom-div-block
- * Categories: astrix
+ * Categories: astrix-custom, astrix
  * Inserter: true
  */
 ?>
-<!-- wp:group {"tagName":"section","align":"full","className":"astrix-custom-grid-block","style":{"spacing":{"padding":{"top":"clamp(80px, 12vh, 140px)","bottom":"clamp(80px, 12vh, 140px)","left":"clamp(28px, 5vw, 72px)","right":"clamp(28px, 5vw, 72px)"},"margin":{"top":"0","bottom":"0"}},"color":{"background":"#F5F1EA"}},"layout":{"type":"constrained","contentSize":"1440px"}} -->
-<section class="wp-block-group alignfull astrix-custom-grid-block has-background" style="background-color:#F5F1EA;margin-top:0;margin-bottom:0;padding-top:clamp(80px, 12vh, 140px);padding-bottom:clamp(80px, 12vh, 140px);padding-left:clamp(28px, 5vw, 72px);padding-right:clamp(28px, 5vw, 72px);">
-  <div style="display:grid;grid-template-columns:repeat(12,1fr);gap:clamp(20px,3vw,36px);">
+<!-- wp:html -->
+<section class="astrix-custom-grid-block" style="position:relative;background:#F5F1EA;color:#211C17;padding:clamp(80px,12vh,140px) clamp(28px,5vw,72px);overflow:hidden;">
+  <div style="max-width:1440px;margin:0 auto;display:grid;grid-template-columns:repeat(12,1fr);gap:clamp(20px,3vw,36px);">
     <div style="grid-column:1 / span 12;margin-bottom:24px;">
       <div style="display:inline-flex;align-items:center;gap:12px;margin-bottom:12px;">
         <span style="display:inline-block;width:22px;height:1px;background:#C56A37;"></span>
@@ -28,4 +28,4 @@
     </div>
   </div>
 </section>
-<!-- /wp:group -->
+<!-- /wp:html -->

@@ -2,15 +2,14 @@
 /**
  * Title: Slide 5: Hero / Prologue (The Belief)
  * Slug: astrix/hero-section
- * Categories: astrix, featured
- * Description: Full-bleed luxury hero section with dual typography and CTA.
+ * Categories: astrix
  * Inserter: true
  */
 $theme_uri = get_template_directory_uri();
 ?>
-<!-- wp:group {"tagName":"section","align":"full","className":"sec-hero-wrap","style":{"spacing":{"padding":{"top":"clamp(100px, 14vh, 160px)","bottom":"clamp(60px, 8vh, 100px)","left":"clamp(24px, 4.5vw, 64px)","right":"clamp(24px, 4.5vw, 64px)"},"margin":{"top":"0","bottom":"0"}},"color":{"background":"#F5F1EA"}},"layout":{"type":"constrained","contentSize":"1440px"}} -->
-<section class="wp-block-group alignfull sec-hero-wrap has-background" style="background-color:#F5F1EA;margin-top:0;margin-bottom:0;padding-top:clamp(100px, 14vh, 160px);padding-bottom:clamp(60px, 8vh, 100px);padding-left:clamp(24px, 4.5vw, 64px);padding-right:clamp(24px, 4.5vw, 64px);">
-  <div style="display:grid;grid-template-columns:repeat(12,1fr);gap:clamp(24px,3.5vw,48px);align-items:center;">
+<!-- wp:html -->
+<section class="sec-hero-wrap" style="position:relative;background:#F5F1EA;color:#211C17;padding:clamp(100px,14vh,160px) clamp(24px,4.5vw,64px) clamp(60px,8vh,100px);overflow:hidden;">
+  <div style="max-width:1440px;margin:0 auto;display:grid;grid-template-columns:repeat(12,1fr);gap:clamp(24px,3.5vw,48px);align-items:center;">
     <div style="grid-column:1 / span 7;display:flex;flex-direction:column;gap:clamp(20px,3vh,32px);">
       <div style="display:inline-flex;align-items:center;gap:12px;">
         <span style="display:inline-block;width:22px;height:1px;background:#C56A37;"></span>
@@ -26,12 +25,12 @@ $theme_uri = get_template_directory_uri();
         Strategy, brand, technology, and marketing were never meant to operate in separate rooms. At Astrix, we bring them together as one connected growth ecosystem.
       </p>
 
-      <div style="margin-top:8px;display:flex;align-items:center;gap:16px;">
-        <a href="<?php echo esc_url(home_url('/contact')); ?>" style="display:inline-flex;align-items:center;gap:12px;background:#211C17;color:#F5F1EA;font-size:13.5px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;padding:16px 32px;border-radius:999px;text-decoration:none;">
+      <div style="margin-top:8px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
+        <a href="/contact" style="display:inline-flex;align-items:center;gap:12px;background:#211C17;color:#F5F1EA;font-size:13.5px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;padding:16px 32px;border-radius:999px;text-decoration:none;">
           <span>Start a Conversation</span>
           <span>→</span>
         </a>
-        <a href="<?php echo esc_url(home_url('/work')); ?>" style="font-size:13.5px;font-weight:600;letter-spacing:0.04em;color:#211C17;text-decoration:underline;text-underline-offset:4px;">
+        <a href="/work" style="font-size:13.5px;font-weight:600;letter-spacing:0.04em;color:#211C17;text-decoration:underline;text-underline-offset:4px;">
           View Selected Work
         </a>
       </div>
@@ -42,4 +41,4 @@ $theme_uri = get_template_directory_uri();
     </div>
   </div>
 </section>
-<!-- /wp:group -->
+<!-- /wp:html -->
