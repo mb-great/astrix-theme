@@ -11,11 +11,11 @@ $theme_uri = get_template_directory_uri();
     <div class="ft-grid" style="display: grid; grid-template-columns: 1.6fr 1fr 1fr 1.1fr; gap: clamp(36px,4vw,64px);">
 
       <div class="ft-brand" style="display: flex; flex-direction: column; gap: 22px;">
-        <div style="display: flex; align-items: center; gap: 12px;">
-          <img loading="lazy" decoding="async" src="<?php echo esc_url($theme_uri . '/assets/Astrix Logo-01.webp'); ?>" alt="Astrix Media logo" style="width: clamp(52px, 5vw, 67.5px); height: clamp(52px, 5vw, 67.5px); object-fit: contain; display: block;">
-          <span style="font-weight: 700; font-size: clamp(20px, 2vw, 25.3px); letter-spacing: 0.22em;">ASTRIX</span>
-          <span style="width: 1px; height: 15px; background: rgba(245,241,234,0.3); display: block;"></span>
-          <span style="font-size: clamp(11px, 1.15vw, 14.4px); letter-spacing: 0.28em; color: rgba(245,241,234,0.6); font-weight: 500;">MEDIA</span>
+        <div style="display: flex; align-items: center; gap: 14px;">
+          <img loading="lazy" decoding="async" src="<?php echo esc_url($theme_uri . '/assets/Astrix Logo-01.webp'); ?>" alt="Astrix Media logo" style="width: clamp(78px, 7.5vw, 100px); height: clamp(78px, 7.5vw, 100px); object-fit: contain; display: block;">
+          <span style="font-weight: 700; font-size: clamp(24px, 2.4vw, 30px); letter-spacing: 0.22em;">ASTRIX</span>
+          <span style="width: 1px; height: 18px; background: rgba(245,241,234,0.3); display: block;"></span>
+          <span style="font-size: clamp(13px, 1.3vw, 16.5px); letter-spacing: 0.28em; color: rgba(245,241,234,0.6); font-weight: 500;">MEDIA</span>
         </div>
         <p style="margin: 0; max-width: 34ch; font-family: 'Instrument Serif', serif; font-style: italic; font-size: clamp(22px,2.4vw,30px); line-height: 1.2; color: #F5F1EA;">
           We turn businesses into the brands people <span style="color: #C56A37;">choose.</span>

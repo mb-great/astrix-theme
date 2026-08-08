@@ -40,5 +40,11 @@ $front_id  = (int) get_option('page_on_front');
       </div>
       <?php endforeach; ?>
     </div>
+
+    <div data-reveal style="grid-column: 1 / span 12; display: flex; justify-content: center; margin-top: clamp(34px, 5vh, 56px);">
+      <a href="<?php echo esc_url(home_url('/services')); ?>" data-magnetic class="ax-cta-dark" style="display: inline-flex; align-items: center; gap: 12px; background: #211C17; color: #F5F1EA; font-size: 14.5px; font-weight: 500; padding: 16px 32px; border-radius: 100px; white-space: nowrap; transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease;">
+        <?php echo esc_html('Explore Our Services'); ?> <span style="font-size: 15px;">→</span>
+      </a>
+    </div>
   </div>
 </section>

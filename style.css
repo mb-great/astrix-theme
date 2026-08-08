@@ -585,6 +585,15 @@ body.nav-open #astrix-float-group {
   transition: opacity 0.26s ease, transform 0.26s cubic-bezier(0.16,1,0.3,1), visibility 0.26s;
   z-index: 60;
 }
+.ax-mega::before {
+  content: "";
+  position: absolute;
+  top: -16px;
+  left: 0;
+  right: 0;
+  height: 16px;
+  background: transparent;
+}
 .ax-nav-list > li.ax-open > .ax-mega,
 .ax-nav-list > li:hover > .ax-mega { opacity: 1; visibility: visible; pointer-events: auto; transform: translate(-50%, 0); }
 .ax-mega-inner { padding: clamp(22px, 2.4vw, 34px); }

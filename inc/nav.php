@@ -126,10 +126,11 @@ function astrix_nav_fallback() {
   global $astrix_nav_active;
   $active = isset($astrix_nav_active) ? $astrix_nav_active : '';
   $links = array(
-    'work'        => array('/work', 'Work'),
-    'services'    => array('/services', 'What We Do'),
-    'perspective' => array('/perspective', 'Insights'),
-    'studio'      => array('/studio', 'Who We Are'),
+    'home'        => array('/', 'Home'),
+    'services'    => array('/services', 'Our Services'),
+    'expertise'   => array('/our-expertise', 'Our Expertise'),
+    'clients'     => array('/our-clients', 'Our Clients'),
+    'contact'     => array('/contact', 'Contact'),
   );
   echo '<ul class="ax-nav-list">';
   foreach ($links as $key => $l) {

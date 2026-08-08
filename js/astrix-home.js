@@ -550,6 +550,36 @@
     window.addEventListener('resize', () => {
       if (window.innerWidth > 900 && sheet.classList.contains('is-open')) closeMenu();
     });
+
+    // Desktop mega menu accessible click / touch toggle
+    document.querySelectorAll('.ax-nav-list > li.ax-has-mega').forEach((li) => {
+      const link = li.querySelector(':scope > a');
+      if (!link) return;
+      link.addEventListener('click', (e) => {
+        if (window.innerWidth > 900) {
+          const isOpen = li.classList.contains('ax-open');
+          document.querySelectorAll('.ax-nav-list > li.ax-open').forEach((other) => {
+            if (other !== li) {
+              other.classList.remove('ax-open');
+              const a = other.querySelector(':scope > a');
+              if (a) a.setAttribute('aria-expanded', 'false');
+            }
+          });
+          li.classList.toggle('ax-open', !isOpen);
+          link.setAttribute('aria-expanded', !isOpen ? 'true' : 'false');
+        }
+      });
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('.ax-nav-list')) {
+        document.querySelectorAll('.ax-nav-list > li.ax-open').forEach((li) => {
+          li.classList.remove('ax-open');
+          const a = li.querySelector(':scope > a');
+          if (a) a.setAttribute('aria-expanded', 'false');
+        });
+      }
+    });
   }
 
   /* ── Boot on DOM ready ── */
