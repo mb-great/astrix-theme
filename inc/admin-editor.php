@@ -12,23 +12,36 @@ if (!defined('ABSPATH')) {
 }
 
 /**
- * Enqueue WordPress Media Uploader scripts and styles for Astrix Meta Boxes.
+ * Enqueue WordPress Media Uploader scripts and styles for Astrix Meta Boxes and Options Page.
  */
 add_action('admin_enqueue_scripts', function ($hook) {
-  if (in_array($hook, array('post.php', 'post-new.php'))) {
-    global $post;
-    if ($post && $post->post_type === 'page') {
-      wp_enqueue_media();
-      wp_enqueue_script(
-        'astrix-admin-js',
-        get_template_directory_uri() . '/js/astrix-admin.js',
-        array('jquery'),
-        filemtime(get_template_directory() . '/js/astrix-admin.js'),
-        true
-      );
-    }
+  if (in_array($hook, array('post.php', 'post-new.php', 'toplevel_page_astrix-editor'))) {
+    wp_enqueue_media();
+    wp_enqueue_script(
+      'astrix-admin-js',
+      get_template_directory_uri() . '/js/astrix-admin.js',
+      array('jquery'),
+      filemtime(get_template_directory() . '/js/astrix-admin.js'),
+      true
+    );
   }
 });
+
+/**
+ * Register prominent top-level WordPress Admin Menu: ⚡ Astrix Editor
+ */
+add_action('admin_menu', function () {
+  add_menu_page(
+    '⚡ Astrix Theme Editor',
+    '⚡ Astrix Editor',
+    'manage_options',
+    'astrix-editor',
+    'astrix_render_unified_options_page',
+    'dashicons-art',
+    2 // Position right below Dashboard
+  );
+});
+
 
 /**
  * Hide default empty editor on structured Astrix page templates so only the dedicated
@@ -428,4 +441,287 @@ add_action('save_post', function ($post_id) {
     }
   }
 });
+
+/**
+ * Render Unified ⚡ Astrix Editor Options Page.
+ */
+function astrix_render_unified_options_page() {
+  if (!current_user_can('manage_options')) {
+    wp_die('Unauthorized');
+  }
+
+  $front_id = (int) get_option('page_on_front');
+  if (!$front_id) {
+    $home_page = get_page_by_path('home');
+    if ($home_page) { $front_id = $home_page->ID; }
+  }
+
+  // Handle Save
+  $message = '';
+  if (isset($_POST['astrix_unified_submit']) && check_admin_referer('astrix_save_unified_options', 'astrix_unified_nonce')) {
+    // 1. Save global settings
+    if (isset($_POST['astrix_settings']) && is_array($_POST['astrix_settings'])) {
+      $current_settings = get_option(ASTRIX_OPT, array());
+      foreach ($_POST['astrix_settings'] as $k => $v) {
+        $current_settings[$k] = wp_kses_post(wp_unslash($v));
+      }
+      update_option(ASTRIX_OPT, $current_settings);
+    }
+
+    // 2. Save homepage meta fields
+    if ($front_id && isset($_POST['astrix_home_meta']) && is_array($_POST['astrix_home_meta'])) {
+      foreach ($_POST['astrix_home_meta'] as $k => $v) {
+        $clean = wp_kses_post(wp_unslash($v));
+        update_post_meta($front_id, $k, $clean);
+        update_post_meta($front_id, '_astrix_' . $k, $clean);
+        if (function_exists('update_field')) { update_field($k, $clean, $front_id); }
+      }
+    }
+
+    // 3. Save section toggles
+    if (isset($_POST['astrix_toggles'])) {
+      $toggles = array();
+      $all_sections = array('intro-gate', 'hero', 'challenge', 'invisible', 'connection', 'engine', 'ecosystems', 'stack', 'transformations', 'knowledge', 'spinner', 'epilogue');
+      foreach ($all_sections as $sec) {
+        $toggles[$sec] = isset($_POST['astrix_toggles'][$sec]) ? true : false;
+      }
+      update_option('astrix_section_toggles', $toggles);
+    }
+
+    $message = 'Settings saved successfully!';
+  }
+
+  $active_tab = isset($_GET['tab']) ? sanitize_text_field($_GET['tab']) : 'home';
+  $toggles = get_option('astrix_section_toggles', array(
+    'intro-gate'      => true,
+    'hero'            => true,
+    'challenge'       => true,
+    'invisible'       => true,
+    'connection'      => true,
+    'engine'          => false,
+    'ecosystems'      => true,
+    'stack'           => true,
+    'transformations' => true,
+    'knowledge'       => true,
+    'spinner'         => true,
+    'epilogue'        => true,
+  ));
+  ?>
+  <div class="wrap" style="max-width: 1080px; margin-top: 20px;">
+    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; border-bottom: 2px solid #221C16; padding-bottom: 14px;">
+      <div style="display: flex; align-items: center; gap: 14px;">
+        <span style="font-size: 26px;">⚡</span>
+        <div>
+          <h1 style="margin: 0; font-size: 24px; font-weight: 700; color: #221C16;">Astrix Theme Editor</h1>
+          <p style="margin: 2px 0 0; color: #646970; font-size: 13px;">Manage all 19 presentation deck slides, copy, images, and global company details in one place.</p>
+        </div>
+      </div>
+      <a href="<?php echo esc_url(home_url('/')); ?>" target="_blank" class="button button-secondary" style="font-weight: 600;">View Live Site ↗</a>
+    </div>
+
+    <?php if ($message): ?>
+      <div class="notice notice-success is-dismissible" style="margin-bottom: 20px;"><p><strong><?php echo esc_html($message); ?></strong></p></div>
+    <?php endif; ?>
+
+    <h2 class="nav-tab-wrapper" style="margin-bottom: 24px;">
+      <a href="?page=astrix-editor&tab=home" class="nav-tab <?php echo $active_tab === 'home' ? 'nav-tab-active' : ''; ?>">🏠 Homepage Slides</a>
+      <a href="?page=astrix-editor&tab=contact" class="nav-tab <?php echo $active_tab === 'contact' ? 'nav-tab-active' : ''; ?>">📞 Contact & Global Info</a>
+      <a href="?page=astrix-editor&tab=toggles" class="nav-tab <?php echo $active_tab === 'toggles' ? 'nav-tab-active' : ''; ?>">🎚️ Section Toggles</a>
+      <a href="<?php echo admin_url('edit.php?post_type=case_study'); ?>" class="nav-tab">📈 Client Case Studies ↗</a>
+    </h2>
+
+    <form method="post" action="">
+      <?php wp_nonce_field('astrix_save_unified_options', 'astrix_unified_nonce'); ?>
+
+      <?php if ($active_tab === 'home'): ?>
+        <!-- Tab 1: Homepage -->
+        <div style="background: #fff; border: 1px solid #ccd0d4; border-radius: 6px; padding: 24px; box-shadow: 0 1px 3px rgba(0,0,0,0.04);">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+            <h2 style="margin: 0; font-size: 18px;">Homepage Presentation Deck (19 Slides)</h2>
+            <input type="submit" name="astrix_unified_submit" class="button button-primary button-hero" value="Save All Changes">
+          </div>
+
+          <!-- Section 1: Hero -->
+          <div class="ax-box-section" style="background:#fdfdfd; border:1px solid #e2e4e7; border-radius:6px; padding:18px; margin-bottom: 20px;">
+            <h3 style="margin:0 0 12px; font-size:15px; font-weight:700; color:#C56A37;">🚀 Slide 5: Prologue / Hero Section</h3>
+            <div style="margin-bottom: 14px;">
+              <label style="display:block; font-weight:600; font-size:13px; margin-bottom:4px;">Hero Eyebrow</label>
+              <input type="text" name="astrix_home_meta[hero_eyebrow]" value="<?php echo esc_attr(astrix_field('hero_eyebrow', $front_id)); ?>" style="width:100%;">
+            </div>
+            <div style="display:grid; grid-template-columns: 2fr 1fr 1fr; gap:12px; margin-bottom: 14px;">
+              <div>
+                <label style="display:block; font-weight:600; font-size:13px; margin-bottom:4px;">Headline Line 1</label>
+                <input type="text" name="astrix_home_meta[hero_h1_line1]" value="<?php echo esc_attr(astrix_field('hero_h1_line1', $front_id)); ?>" style="width:100%;">
+              </div>
+              <div>
+                <label style="display:block; font-weight:600; font-size:13px; margin-bottom:4px;">Emphasis Word (Italic)</label>
+                <input type="text" name="astrix_home_meta[hero_h1_emphasis]" value="<?php echo esc_attr(astrix_field('hero_h1_emphasis', $front_id)); ?>" style="width:100%;">
+              </div>
+              <div>
+                <label style="display:block; font-weight:600; font-size:13px; margin-bottom:4px;">Line 2 End</label>
+                <input type="text" name="astrix_home_meta[hero_h1_line2_end]" value="<?php echo esc_attr(astrix_field('hero_h1_line2_end', $front_id)); ?>" style="width:100%;">
+              </div>
+            </div>
+            <div style="margin-bottom: 14px;">
+              <label style="display:block; font-weight:600; font-size:13px; margin-bottom:4px;">Intro Paragraph Narrative</label>
+              <textarea name="astrix_home_meta[hero_para]" rows="3" style="width:100%;"><?php echo esc_textarea(astrix_field('hero_para', $front_id)); ?></textarea>
+            </div>
+            <?php astrix_admin_image_field($front_id, 'hero_image', 'Hero System Image (Image 01)', 'deck-01-hero.webp'); ?>
+          </div>
+
+          <!-- Section 2: Chapter 1 -->
+          <div class="ax-box-section" style="background:#fdfdfd; border:1px solid #e2e4e7; border-radius:6px; padding:18px; margin-bottom: 20px;">
+            <h3 style="margin:0 0 12px; font-size:15px; font-weight:700; color:#C56A37;">📖 Slide 6: Chapter One (The Challenge)</h3>
+            <div style="margin-bottom: 14px;">
+              <label style="display:block; font-weight:600; font-size:13px; margin-bottom:4px;">Eyebrow</label>
+              <input type="text" name="astrix_home_meta[ch1_eyebrow]" value="<?php echo esc_attr(astrix_field('ch1_eyebrow', $front_id)); ?>" style="width:100%;">
+            </div>
+            <div style="margin-bottom: 14px;">
+              <label style="display:block; font-weight:600; font-size:13px; margin-bottom:4px;">Chapter One Headline</label>
+              <textarea name="astrix_home_meta[ch1_headline]" rows="2" style="width:100%;"><?php echo esc_textarea(astrix_field('ch1_headline', $front_id)); ?></textarea>
+            </div>
+          </div>
+
+          <!-- Section 3: Chapter 2 -->
+          <div class="ax-box-section" style="background:#fdfdfd; border:1px solid #e2e4e7; border-radius:6px; padding:18px; margin-bottom: 20px;">
+            <h3 style="margin:0 0 12px; font-size:15px; font-weight:700; color:#C56A37;">👁️ Slide 7–8: Chapter Two (Why Businesses Stay Invisible)</h3>
+            <div style="margin-bottom: 14px;">
+              <label style="display:block; font-weight:600; font-size:13px; margin-bottom:4px;">Headline</label>
+              <input type="text" name="astrix_home_meta[ch2_headline]" value="<?php echo esc_attr(astrix_field('ch2_headline', $front_id)); ?>" style="width:100%;">
+            </div>
+            <div style="margin-bottom: 14px;">
+              <label style="display:block; font-weight:600; font-size:13px; margin-bottom:4px;">Pullquote</label>
+              <textarea name="astrix_home_meta[ch2_pullquote]" rows="2" style="width:100%;"><?php echo esc_textarea(astrix_field('ch2_pullquote', $front_id)); ?></textarea>
+            </div>
+            <?php astrix_admin_image_field($front_id, 'ch2_image', 'Invisible 16:9 Letterbox Image (Image 02)', 'deck-02-invisible.webp'); ?>
+          </div>
+
+          <!-- Section 4: The Stack (Slide 14) -->
+          <div class="ax-box-section" style="background:#fdfdfd; border:1px solid #e2e4e7; border-radius:6px; padding:18px; margin-bottom: 20px;">
+            <h3 style="margin:0 0 12px; font-size:15px; font-weight:700; color:#C56A37;">💻 Slide 14: Chapter Five (The Stack Matrix)</h3>
+            <div style="margin-bottom: 14px;">
+              <label style="display:block; font-weight:600; font-size:13px; margin-bottom:4px;">Stack Headline</label>
+              <input type="text" name="astrix_home_meta[ch5_headline]" value="<?php echo esc_attr(astrix_field('ch5_headline', $front_id)); ?>" style="width:100%;">
+            </div>
+            <?php astrix_admin_image_field($front_id, 'ch5_image', 'The Stack Image (Image 03)', 'deck-03.webp'); ?>
+          </div>
+
+          <!-- Section 5: Epilogue (Slide 18) -->
+          <div class="ax-box-section" style="background:#fdfdfd; border:1px solid #e2e4e7; border-radius:6px; padding:18px; margin-bottom: 20px;">
+            <h3 style="margin:0 0 12px; font-size:15px; font-weight:700; color:#C56A37;">☕ Slide 18: Epilogue & Coffee Conversation CTA</h3>
+            <div style="margin-bottom: 14px;">
+              <label style="display:block; font-weight:600; font-size:13px; margin-bottom:4px;">Headline</label>
+              <input type="text" name="astrix_home_meta[epilogue_headline]" value="<?php echo esc_attr(astrix_field('epilogue_headline', $front_id)); ?>" style="width:100%;">
+            </div>
+            <div style="margin-bottom: 14px;">
+              <label style="display:block; font-weight:600; font-size:13px; margin-bottom:4px;">Body Text</label>
+              <textarea name="astrix_home_meta[epilogue_body]" rows="2" style="width:100%;"><?php echo esc_textarea(astrix_field('epilogue_body', $front_id)); ?></textarea>
+            </div>
+          </div>
+
+          <div style="margin-top: 24px; text-align: right;">
+            <input type="submit" name="astrix_unified_submit" class="button button-primary button-hero" value="Save All Changes">
+          </div>
+        </div>
+
+      <?php elseif ($active_tab === 'contact'): ?>
+        <!-- Tab 2: Contact & Global Info -->
+        <div style="background: #fff; border: 1px solid #ccd0d4; border-radius: 6px; padding: 24px; box-shadow: 0 1px 3px rgba(0,0,0,0.04);">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+            <h2 style="margin: 0; font-size: 18px;">Global Contact, Social & Address Details</h2>
+            <input type="submit" name="astrix_unified_submit" class="button button-primary button-hero" value="Save All Changes">
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px;">
+            <div>
+              <label style="display:block; font-weight:600; font-size:13px; margin-bottom:4px;">Primary Phone</label>
+              <input type="text" name="astrix_settings[phone_primary]" value="<?php echo esc_attr(astrix_setting('phone_primary')); ?>" style="width:100%;">
+            </div>
+            <div>
+              <label style="display:block; font-weight:600; font-size:13px; margin-bottom:4px;">Secondary Phone</label>
+              <input type="text" name="astrix_settings[phone_secondary]" value="<?php echo esc_attr(astrix_setting('phone_secondary')); ?>" style="width:100%;">
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px;">
+            <div>
+              <label style="display:block; font-weight:600; font-size:13px; margin-bottom:4px;">WhatsApp Number (Digits only, with country code)</label>
+              <input type="text" name="astrix_settings[whatsapp]" value="<?php echo esc_attr(astrix_setting('whatsapp')); ?>" style="width:100%;">
+            </div>
+            <div>
+              <label style="display:block; font-weight:600; font-size:13px; margin-bottom:4px;">Email Address</label>
+              <input type="email" name="astrix_settings[email]" value="<?php echo esc_attr(astrix_setting('email')); ?>" style="width:100%;">
+            </div>
+          </div>
+
+          <div style="margin-bottom: 20px;">
+            <label style="display:block; font-weight:600; font-size:13px; margin-bottom:4px;">Registered Office Address (Slide 19)</label>
+            <textarea name="astrix_settings[address]" rows="3" style="width:100%;"><?php echo esc_textarea(astrix_setting('address')); ?></textarea>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-bottom: 20px;">
+            <div>
+              <label style="display:block; font-weight:600; font-size:13px; margin-bottom:4px;">Instagram URL</label>
+              <input type="url" name="astrix_settings[instagram]" value="<?php echo esc_attr(astrix_setting('instagram')); ?>" style="width:100%;">
+            </div>
+            <div>
+              <label style="display:block; font-weight:600; font-size:13px; margin-bottom:4px;">LinkedIn URL</label>
+              <input type="url" name="astrix_settings[linkedin]" value="<?php echo esc_attr(astrix_setting('linkedin')); ?>" style="width:100%;">
+            </div>
+            <div>
+              <label style="display:block; font-weight:600; font-size:13px; margin-bottom:4px;">Facebook URL</label>
+              <input type="url" name="astrix_settings[facebook]" value="<?php echo esc_attr(astrix_setting('facebook')); ?>" style="width:100%;">
+            </div>
+          </div>
+
+          <div style="margin-top: 24px; text-align: right;">
+            <input type="submit" name="astrix_unified_submit" class="button button-primary button-hero" value="Save All Changes">
+          </div>
+        </div>
+
+      <?php elseif ($active_tab === 'toggles'): ?>
+        <!-- Tab 3: Section Toggles -->
+        <div style="background: #fff; border: 1px solid #ccd0d4; border-radius: 6px; padding: 24px; box-shadow: 0 1px 3px rgba(0,0,0,0.04);">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+            <h2 style="margin: 0; font-size: 18px;">Homepage 12-Section Visibility Toggles</h2>
+            <input type="submit" name="astrix_unified_submit" class="button button-primary button-hero" value="Save All Changes">
+          </div>
+          <p style="color:#646970; font-size:13px; margin-bottom:20px;">Check or uncheck any section to instantly show or hide it on the live homepage:</p>
+
+          <div style="display: flex; flex-direction: column; gap: 12px;">
+            <?php
+            $section_names = array(
+              'intro-gate'      => 'Intro Gate (6-hour localStorage brand splash screen)',
+              'hero'            => 'Prologue / Hero Section (The Belief)',
+              'challenge'       => 'Chapter 1: The Challenge (Video background)',
+              'invisible'       => 'Chapter 2: Why Businesses Stay Invisible (16:9 Letterbox & Pullquote)',
+              'connection'      => 'Chapter 3: The Missing Connection (SVG Animated Thread)',
+              'engine'          => 'Chapter 3: Transformation Engine (Hidden per PPTX slide 11)',
+              'ecosystems'      => 'Chapter 4: What We Build (4 Integrated Ecosystems)',
+              'stack'           => 'Chapter 5: The Stack Technology Matrix',
+              'transformations' => 'Chapter 6: Transformations & Case Studies',
+              'knowledge'       => 'Chapter 7: Knowledge & Recognition',
+              'spinner'         => 'Astrix Mark Dynamic Spinner',
+              'epilogue'        => 'Epilogue: Discovery Session / Coffee Callout',
+            );
+            foreach ($section_names as $sec_slug => $sec_label):
+              $is_on = !empty($toggles[$sec_slug]);
+            ?>
+              <label style="display:flex; align-items:center; gap:12px; font-size:14px; padding:10px 14px; background:#f9f9f9; border-radius:4px; border:1px solid #e2e4e7;">
+                <input type="checkbox" name="astrix_toggles[<?php echo esc_attr($sec_slug); ?>]" value="1" <?php checked($is_on, true); ?>>
+                <strong><?php echo esc_html($sec_label); ?></strong>
+              </label>
+            <?php endforeach; ?>
+          </div>
+
+          <div style="margin-top: 24px; text-align: right;">
+            <input type="submit" name="astrix_unified_submit" class="button button-primary button-hero" value="Save All Changes">
+          </div>
+        </div>
+      <?php endif; ?>
+    </form>
+  </div>
+  <?php
+}
+
 
