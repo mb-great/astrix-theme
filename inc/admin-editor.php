@@ -97,6 +97,59 @@ add_action('add_meta_boxes', function () {
 });
 
 /**
+ * Register Meta Box for Case Studies / Clients CPT.
+ */
+add_action('add_meta_boxes_case_study', function () {
+  add_meta_box('astrix_case_study_editor', '📈 Client Transformation & Growth Metric', 'astrix_render_case_study_metabox', 'case_study', 'normal', 'high');
+});
+
+function astrix_render_case_study_metabox($post) {
+  wp_nonce_field('astrix_save_meta', 'astrix_meta_nonce');
+  $client = get_post_meta($post->ID, 'client', true);
+  $from_text = get_post_meta($post->ID, 'from_text', true);
+  $to_text = get_post_meta($post->ID, 'to_text', true);
+  $metric = get_post_meta($post->ID, 'metric', true);
+  $metric_label = get_post_meta($post->ID, 'metric_label', true);
+  $show_hp = get_post_meta($post->ID, 'show_on_homepage', true);
+  if ($show_hp === '') { $show_hp = '1'; }
+  ?>
+  <div style="padding: 10px 0;">
+    <div style="margin-bottom: 16px;">
+      <label style="display: block; font-weight: 600; margin-bottom: 6px; font-size: 13px;">Client Name & Industry Category</label>
+      <input type="text" name="astrix_meta[client]" value="<?php echo esc_attr($client); ?>" placeholder="e.g. Meridian Financial · Fintech" style="width: 100%; padding: 8px; border-radius: 4px; border: 1px solid #8c8f94;">
+    </div>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px;">
+      <div>
+        <label style="display: block; font-weight: 600; margin-bottom: 6px; font-size: 13px;">From (Initial State)</label>
+        <input type="text" name="astrix_meta[from_text]" value="<?php echo esc_attr($from_text); ?>" placeholder="e.g. Quiet challenger" style="width: 100%; padding: 8px; border-radius: 4px; border: 1px solid #8c8f94;">
+      </div>
+      <div>
+        <label style="display: block; font-weight: 600; margin-bottom: 6px; font-size: 13px;">To (Transformed State)</label>
+        <input type="text" name="astrix_meta[to_text]" value="<?php echo esc_attr($to_text); ?>" placeholder="e.g. Category default" style="width: 100%; padding: 8px; border-radius: 4px; border: 1px solid #8c8f94;">
+      </div>
+    </div>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px;">
+      <div>
+        <label style="display: block; font-weight: 600; margin-bottom: 6px; font-size: 13px;">Percentage / Metric Value</label>
+        <input type="text" name="astrix_meta[metric]" value="<?php echo esc_attr($metric); ?>" placeholder="e.g. +240%" style="width: 100%; padding: 8px; border-radius: 4px; border: 1px solid #8c8f94;">
+      </div>
+      <div>
+        <label style="display: block; font-weight: 600; margin-bottom: 6px; font-size: 13px;">Metric Label</label>
+        <input type="text" name="astrix_meta[metric_label]" value="<?php echo esc_attr($metric_label); ?>" placeholder="e.g. Qualified pipeline" style="width: 100%; padding: 8px; border-radius: 4px; border: 1px solid #8c8f94;">
+      </div>
+    </div>
+    <div style="margin-top: 14px;">
+      <label style="font-weight: 600; font-size: 13px; display: inline-flex; align-items: center; gap: 8px;">
+        <input type="checkbox" name="astrix_meta[show_on_homepage]" value="1" <?php checked($show_hp, '1'); ?>>
+        Display this transformation card on the Homepage
+      </label>
+    </div>
+  </div>
+  <?php
+}
+
+
+/**
  * Helper to render an admin text / textarea field row.
  */
 function astrix_admin_field($post_id, $key, $label, $type = 'text', $help = '') {
@@ -347,16 +400,16 @@ function astrix_render_work_metabox($post) {
 }
 
 /**
- * Save Astrix Post Meta when page is saved/updated.
+ * Save Astrix Post Meta when any page or case study is saved/updated.
  */
-add_action('save_post_page', function ($post_id) {
+add_action('save_post', function ($post_id) {
   if (!isset($_POST['astrix_meta_nonce']) || !wp_verify_nonce($_POST['astrix_meta_nonce'], 'astrix_save_meta')) {
     return;
   }
   if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
     return;
   }
-  if (!current_user_can('edit_page', $post_id)) {
+  if (!current_user_can('edit_post', $post_id)) {
     return;
   }
 
@@ -373,3 +426,4 @@ add_action('save_post_page', function ($post_id) {
     }
   }
 });
+

@@ -10,9 +10,7 @@ $front_id  = (int) get_option('page_on_front');
 <!-- ── Chapter Six · Transformations, Not Portfolios ── -->
 <section id="work" style="position: relative; background: #F5F1EA; overflow: hidden;" data-screen-label="Chapter Six · Transformations">
   <div class="grid-12" style="position: relative; z-index: 2; display: grid; grid-template-columns: repeat(12, 1fr); gap: 24px; padding: clamp(90px, 15vh, 180px) clamp(28px, 5vw, 72px) clamp(50px, 8vh, 90px);">
-    <?php /* Temporarily disabled per request (2026-08-07) — mobile layout issue, kept in place for re-enable, not deleted. Flip `false` to `true` to restore. */ ?>
-    <?php if (false): ?>
-    <div data-reveal style="grid-column: 1 / span 12; display: flex; align-items: center; gap: 14px; margin-bottom: clamp(30px, 5vh, 50px);">
+    <div data-reveal style="grid-column: 1 / span 12; display: flex; align-items: center; gap: 14px; margin-bottom: clamp(20px, 3vh, 40px);">
       <span style="width: 22px; height: 1px; background: #C56A37;"></span>
       <span style="font-size: 11.5px; letter-spacing: 0.32em; font-weight: 500; color: #7A6F63; text-transform: uppercase;"><?php echo esc_html(astrix_field('ch6_eyebrow', $front_id)); ?></span>
     </div>
@@ -23,28 +21,33 @@ $front_id  = (int) get_option('page_on_front');
       array('client', 'from_text', 'to_text', 'metric', 'metric_label'),
       array('meta_query' => array(array('key' => 'show_on_homepage', 'value' => '1', 'compare' => '=')))
     );
-    foreach ($proof_posts as $proof_post):
+    if (!empty($proof_posts)):
+      foreach ($proof_posts as $proof_post):
     ?>
-    <a href="<?php echo esc_url(home_url('/work')); ?>" data-reveal class="proof-grid" style="grid-column: 1 / span 12; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: clamp(20px, 3vw, 48px); align-items: center; padding: clamp(30px, 5vh, 48px) 0; border-top: 1px solid rgba(33,28,23,0.12);">
-      <div style="display: flex; flex-direction: column; gap: 8px;">
-        <span style="font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: #9A8E7D;"><?php echo esc_html($proof_post['client']); ?></span>
+    <a href="<?php echo esc_url(home_url('/work')); ?>" data-reveal class="proof-grid" style="grid-column: 1 / span 12; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: clamp(20px, 3vw, 48px); align-items: center; padding: clamp(24px, 4vh, 40px) 0; border-top: 1px solid rgba(33,28,23,0.12); text-decoration: none; color: inherit;">
+      <div style="display: flex; flex-direction: column; gap: 6px;">
+        <span style="font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: #9A8E7D; font-weight: 600;"><?php echo esc_html($proof_post['client']); ?></span>
+        <span style="font-size: 15px; font-weight: 600; color: #211C17;"><?php echo esc_html($proof_post['title']); ?></span>
       </div>
-      <div style="display: flex; align-items: center; gap: 14px;">
-        <span style="font-size: 14px; color: #7A6F63;"><?php echo esc_html($proof_post['from_text']); ?></span>
-        <span style="color: #C56A37; font-size: 16px;">→</span>
-        <span style="font-size: 14px; font-weight: 500; color: #211C17;"><?php echo esc_html($proof_post['to_text']); ?></span>
+      <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
+        <span style="font-size: 13.5px; color: #7A6F63;"><?php echo esc_html($proof_post['from_text']); ?></span>
+        <span style="color: #C56A37; font-size: 15px;">→</span>
+        <span style="font-size: 13.5px; font-weight: 500; color: #211C17;"><?php echo esc_html($proof_post['to_text']); ?></span>
       </div>
-      <div style="display: flex; align-items: center; justify-content: flex-end; gap: clamp(20px, 3vw, 40px);">
+      <div style="display: flex; align-items: center; justify-content: flex-end; gap: clamp(16px, 2.5vw, 36px);">
         <div style="display: flex; flex-direction: column; gap: 2px; text-align: right;">
-          <span style="font-size: clamp(24px, 2.4vw, 36px); font-weight: 600; letter-spacing: -0.03em; color: #C56A37;"><?php echo esc_html($proof_post['metric']); ?></span>
-          <span style="font-size: 12px; color: #9A8E7D;"><?php echo esc_html($proof_post['metric_label']); ?></span>
+          <span style="font-size: clamp(22px, 2.2vw, 34px); font-weight: 600; letter-spacing: -0.03em; color: #C56A37;"><?php echo esc_html($proof_post['metric']); ?></span>
+          <span style="font-size: 11.5px; color: #9A8E7D;"><?php echo esc_html($proof_post['metric_label']); ?></span>
         </div>
         <span style="font-size: 15px; color: #B3A794;">↗</span>
       </div>
     </a>
-    <?php endforeach; ?>
+    <?php
+      endforeach;
+    ?>
     <div style="grid-column: 1 / span 12; border-top: 1px solid rgba(33,28,23,0.12);"></div>
     <?php endif; ?>
+
 
     <!-- 3-Column Progression Imagery -->
     <div data-reveal style="grid-column: 1 / span 4; margin-top: clamp(28px, 4vh, 48px); display: flex; flex-direction: column; gap: 10px;">
