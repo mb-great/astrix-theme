@@ -11,14 +11,23 @@ $theme_uri = get_template_directory_uri();
 global $astrix_nav_active;
 $astrix_nav_active = isset($astrix_nav_active) ? $astrix_nav_active : '';
 ?>
+<?php
+$custom_logo_id = get_theme_mod('custom_logo');
+$logo_url = $custom_logo_id ? wp_get_attachment_image_url($custom_logo_id, 'full') : ($theme_uri . '/assets/Astrix Logo-01.webp');
+$site_title = get_bloginfo('name', 'display');
+if (empty($site_title) || strpos($site_title, 'Local Test') !== false) { $site_title = 'ASTRIX'; }
+$tagline = get_bloginfo('description', 'display');
+if (empty($tagline)) { $tagline = 'MEDIA'; }
+?>
 <nav class="main-nav" style="position: relative; z-index: 3; display: flex; align-items: center; justify-content: space-between; padding: 28px clamp(28px, 5vw, 72px); background: #F5F1EA;">
-  <a href="<?php echo esc_url(home_url('/')); ?>" style="display: flex; align-items: center; gap: 14px;">
-    <img loading="eager" fetchpriority="high" decoding="async" src="<?php echo esc_url($theme_uri . '/assets/Astrix Logo-01.webp'); ?>" alt="Astrix" style="width: clamp(66px, 6.9vw, 88px); height: clamp(66px, 6.9vw, 88px); display: block; object-fit: contain;">
-    <span style="font-weight: 700; font-size: clamp(20px, 2.1vw, 26px); letter-spacing: 0.22em; color: #211C17;">ASTRIX</span>
+  <a href="<?php echo esc_url(home_url('/')); ?>" style="display: flex; align-items: center; gap: 14px; text-decoration: none;">
+    <img loading="eager" fetchpriority="high" decoding="async" src="<?php echo esc_url($logo_url); ?>" alt="<?php echo esc_attr($site_title); ?>" style="width: clamp(66px, 6.9vw, 88px); height: clamp(66px, 6.9vw, 88px); display: block; object-fit: contain;">
+    <span style="font-weight: 700; font-size: clamp(20px, 2.1vw, 26px); letter-spacing: 0.22em; color: #211C17; text-transform: uppercase;"><?php echo esc_html($site_title); ?></span>
     <span style="width: 1px; height: 16px; background: #D6CDBE; display: block;"></span>
-    <span style="font-size: clamp(12px, 1.2vw, 15px); letter-spacing: 0.28em; color: #9A8E7D; font-weight: 500;">MEDIA</span>
+    <span style="font-size: clamp(12px, 1.2vw, 15px); letter-spacing: 0.28em; color: #9A8E7D; font-weight: 500; text-transform: uppercase;"><?php echo esc_html($tagline); ?></span>
   </a>
   <div class="nav-links" style="display: flex; gap: clamp(20px, 3vw, 44px); align-items: center; font-size: 13.5px; font-weight: 500; letter-spacing: 0.02em;">
+
     <?php astrix_primary_nav(); ?>
     <a href="<?php echo esc_url(home_url('/contact')); ?>" class="axnav-cta" data-magnetic>Let's Connect!</a>
   </div>

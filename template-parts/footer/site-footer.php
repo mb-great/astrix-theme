@@ -16,12 +16,21 @@ $theme_uri = get_template_directory_uri();
     <div class="ft-grid" style="display: grid; grid-template-columns: 1.6fr 1fr 1fr 1.1fr; gap: clamp(36px,4vw,64px);">
 
       <div class="ft-brand" style="display: flex; flex-direction: column; gap: 22px;">
+        <?php
+        $custom_logo_id = get_theme_mod('custom_logo');
+        $logo_url = $custom_logo_id ? wp_get_attachment_image_url($custom_logo_id, 'full') : ($theme_uri . '/assets/Astrix Logo-01.webp');
+        $site_title = get_bloginfo('name', 'display');
+        if (empty($site_title) || strpos($site_title, 'Local Test') !== false) { $site_title = 'ASTRIX'; }
+        $tagline = get_bloginfo('description', 'display');
+        if (empty($tagline)) { $tagline = 'MEDIA'; }
+        ?>
         <div style="display: flex; align-items: center; gap: 14px;">
-          <img loading="lazy" decoding="async" src="<?php echo esc_url($theme_uri . '/assets/Astrix Logo-01.webp'); ?>" alt="Astrix Media logo" style="width: clamp(78px, 7.5vw, 100px); height: clamp(78px, 7.5vw, 100px); object-fit: contain; display: block;">
-          <span style="font-weight: 700; font-size: clamp(24px, 2.4vw, 30px); letter-spacing: 0.22em;">ASTRIX</span>
+          <img loading="lazy" decoding="async" src="<?php echo esc_url($logo_url); ?>" alt="<?php echo esc_attr($site_title); ?>" style="width: clamp(78px, 7.5vw, 100px); height: clamp(78px, 7.5vw, 100px); object-fit: contain; display: block;">
+          <span style="font-weight: 700; font-size: clamp(24px, 2.4vw, 30px); letter-spacing: 0.22em; text-transform: uppercase;"><?php echo esc_html($site_title); ?></span>
           <span style="width: 1px; height: 18px; background: rgba(245,241,234,0.3); display: block;"></span>
-          <span style="font-size: clamp(13px, 1.3vw, 16.5px); letter-spacing: 0.28em; color: rgba(245,241,234,0.6); font-weight: 500;">MEDIA</span>
+          <span style="font-size: clamp(13px, 1.3vw, 16.5px); letter-spacing: 0.28em; color: rgba(245,241,234,0.6); font-weight: 500; text-transform: uppercase;"><?php echo esc_html($tagline); ?></span>
         </div>
+
         <p style="margin: 0; max-width: 34ch; font-family: 'Instrument Serif', serif; font-style: italic; font-size: clamp(22px,2.4vw,30px); line-height: 1.2; color: #F5F1EA;">
           We turn businesses into the brands people <span style="color: #C56A37;">choose.</span>
         </p>
