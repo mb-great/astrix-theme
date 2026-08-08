@@ -73,15 +73,22 @@ add_action('add_meta_boxes', function () {
 });
 
 /**
- * Render the interactive Block Repeater interface in wp-admin.
+ * Render the interactive Block Repeater interface in wp-admin meta box.
  */
 function astrix_render_block_builder_metabox($post) {
   wp_nonce_field('astrix_save_block_builder', 'astrix_block_builder_nonce');
+  astrix_render_block_builder_component($post->ID);
+}
+
+/**
+ * Reusable Block Builder Component (used in Meta Box & Unified ⚡ Astrix Editor).
+ */
+function astrix_render_block_builder_component($post_id) {
   $available = astrix_get_available_blocks();
   
-  $saved_blocks = get_post_meta($post->ID, 'astrix_page_blocks', true);
+  $saved_blocks = get_post_meta($post_id, 'astrix_page_blocks', true);
   if (!is_array($saved_blocks) || empty($saved_blocks)) {
-    $saved_blocks = astrix_get_default_page_blocks($post->ID);
+    $saved_blocks = astrix_get_default_page_blocks($post_id);
   }
   ?>
   <style>

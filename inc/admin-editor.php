@@ -497,6 +497,7 @@ function astrix_render_unified_options_page() {
     }
 
     // 2. Save homepage meta fields
+    // 2. Save homepage meta fields
     if ($front_id && isset($_POST['astrix_home_meta']) && is_array($_POST['astrix_home_meta'])) {
       foreach ($_POST['astrix_home_meta'] as $k => $v) {
         $clean = wp_kses_post(wp_unslash($v));
@@ -506,7 +507,23 @@ function astrix_render_unified_options_page() {
       }
     }
 
-    // 3. Save section toggles
+    // 3. Save modular blocks & custom divs
+    if ($front_id && isset($_POST['astrix_blocks']) && is_array($_POST['astrix_blocks'])) {
+      $clean_blocks = array();
+      foreach ($_POST['astrix_blocks'] as $block) {
+        if (!empty($block['type'])) {
+          $clean_blocks[] = array(
+            'type'        => sanitize_text_field($block['type']),
+            'custom_html' => isset($block['custom_html']) ? wp_kses_post(wp_unslash($block['custom_html'])) : '',
+            'custom_css'  => isset($block['custom_css']) ? wp_strip_all_tags(wp_unslash($block['custom_css'])) : '',
+            'custom_js'   => isset($block['custom_js']) ? wp_unslash($block['custom_js']) : '',
+          );
+        }
+      }
+      update_post_meta($front_id, 'astrix_page_blocks', $clean_blocks);
+    }
+
+    // 4. Save section toggles
     if (isset($_POST['astrix_toggles'])) {
       $toggles = array();
       $all_sections = array('intro-gate', 'hero', 'challenge', 'invisible', 'connection', 'engine', 'ecosystems', 'stack', 'transformations', 'knowledge', 'spinner', 'epilogue');
@@ -519,7 +536,7 @@ function astrix_render_unified_options_page() {
     $message = 'Settings saved successfully!';
   }
 
-  $active_tab = isset($_GET['tab']) ? sanitize_text_field($_GET['tab']) : 'home';
+  $active_tab = isset($_GET['tab']) ? sanitize_text_field($_GET['tab']) : 'blocks';
   $toggles = get_option('astrix_section_toggles', array(
     'intro-gate'      => true,
     'hero'            => true,
@@ -541,7 +558,7 @@ function astrix_render_unified_options_page() {
         <span style="font-size: 26px;">⚡</span>
         <div>
           <h1 style="margin: 0; font-size: 24px; font-weight: 700; color: #221C16;">Astrix Theme Editor</h1>
-          <p style="margin: 2px 0 0; color: #646970; font-size: 13px;">Manage all 19 presentation deck slides, copy, images, and global company details in one place.</p>
+          <p style="margin: 2px 0 0; color: #646970; font-size: 13px;">Manage all 19 presentation deck slides, modular blocks, custom divs, copy, images, and global company details in one place.</p>
         </div>
       </div>
       <a href="<?php echo esc_url(home_url('/')); ?>" target="_blank" class="button button-secondary" style="font-weight: 600;">View Live Site ↗</a>
@@ -552,7 +569,8 @@ function astrix_render_unified_options_page() {
     <?php endif; ?>
 
     <h2 class="nav-tab-wrapper" style="margin-bottom: 24px;">
-      <a href="?page=astrix-editor&tab=home" class="nav-tab <?php echo $active_tab === 'home' ? 'nav-tab-active' : ''; ?>">🏠 Homepage Slides</a>
+      <a href="?page=astrix-editor&tab=blocks" class="nav-tab <?php echo $active_tab === 'blocks' ? 'nav-tab-active' : ''; ?>">🧱 Modular Blocks & Custom &lt;div&gt;s</a>
+      <a href="?page=astrix-editor&tab=home" class="nav-tab <?php echo $active_tab === 'home' ? 'nav-tab-active' : ''; ?>">🏠 Slide Copy & Images</a>
       <a href="?page=astrix-editor&tab=seo" class="nav-tab <?php echo $active_tab === 'seo' ? 'nav-tab-active' : ''; ?>">🔍 SEO & Social Share</a>
       <a href="?page=astrix-editor&tab=contact" class="nav-tab <?php echo $active_tab === 'contact' ? 'nav-tab-active' : ''; ?>">📞 Contact & Global Info</a>
       <a href="?page=astrix-editor&tab=toggles" class="nav-tab <?php echo $active_tab === 'toggles' ? 'nav-tab-active' : ''; ?>">🎚️ Section Toggles</a>
@@ -562,8 +580,26 @@ function astrix_render_unified_options_page() {
     <form method="post" action="">
       <?php wp_nonce_field('astrix_save_unified_options', 'astrix_unified_nonce'); ?>
 
-      <?php if ($active_tab === 'home'): ?>
-        <!-- Tab 1: Homepage -->
+      <?php if ($active_tab === 'blocks'): ?>
+        <!-- Tab 0: Modular Blocks & Custom Divs -->
+        <div style="background: #fff; border: 1px solid #ccd0d4; border-radius: 6px; padding: 24px; box-shadow: 0 1px 3px rgba(0,0,0,0.04);">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+            <div>
+              <h2 style="margin: 0; font-size: 18px; font-weight:700;">🧱 Modular Section Blocks & Custom &lt;div&gt; Builder</h2>
+              <p style="margin: 4px 0 0; color: #646970; font-size: 13px;">Add any section block, delete blocks with <strong>🗑️ Remove</strong>, click <strong>▲ Up / ▼ Down</strong> to reorder, or insert custom HTML/CSS/JS divs anywhere.</p>
+            </div>
+            <input type="submit" name="astrix_unified_submit" class="button button-primary button-hero" value="Save All Changes">
+          </div>
+
+          <?php astrix_render_block_builder_component($front_id); ?>
+
+          <div style="margin-top: 24px; text-align: right;">
+            <input type="submit" name="astrix_unified_submit" class="button button-primary button-hero" value="Save All Changes">
+          </div>
+        </div>
+
+      <?php elseif ($active_tab === 'home'): ?>
+        <!-- Tab 1: Homepage Slide Fields -->
         <div style="background: #fff; border: 1px solid #ccd0d4; border-radius: 6px; padding: 24px; box-shadow: 0 1px 3px rgba(0,0,0,0.04);">
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
             <h2 style="margin: 0; font-size: 18px;">Homepage Presentation Deck (19 Slides)</h2>
