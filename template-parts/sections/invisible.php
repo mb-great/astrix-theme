@@ -27,7 +27,13 @@ $front_id  = (int) get_option('page_on_front');
              max-width is required alongside min-height + aspect-ratio: Blink turns
              that min-height back into a minimum WIDTH and overflows the page. */ ?>
     <div data-reveal class="ax-frame" style="grid-column: 1 / span 12; border-radius: 4px; aspect-ratio: 16/9; min-height: clamp(280px, 46vh, 560px); max-width: 100%;">
-      <img class="ax-photo" style="animation: kenburns 26s ease-in-out infinite alternate; object-position: center top;" src="<?php echo esc_url($theme_uri . '/assets/deck-02-invisible.webp'); ?>" alt="Seen clearly, and therefore chosen">
+      <?php
+      $ch2_img = astrix_field('ch2_image', $front_id);
+      $ch2_img_src = $ch2_img ? $ch2_img : ($theme_uri . '/assets/deck-02-invisible.webp');
+      ?>
+      <img class="ax-photo" style="animation: kenburns 26s ease-in-out infinite alternate; object-position: center top;" src="<?php echo esc_url($ch2_img_src); ?>" alt="Seen clearly, and therefore chosen">
+
+
       <div class="ax-grain-layer"></div>
       <div style="position: absolute; inset: 0; z-index: 3; pointer-events: none; margin: 16px; border: 1px solid rgba(245,241,234,0.20);"></div>
       <span class="ax-word" style="left: 20px; bottom: 14px; font-size: clamp(36px, 4vw, 68px); color: rgba(245,241,234,0.16);">Noise</span>

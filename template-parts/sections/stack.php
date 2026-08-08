@@ -25,7 +25,13 @@ $front_id  = (int) get_option('page_on_front');
       <p style="margin: 0; font-size: 15px; line-height: 1.7; color: rgba(245,241,234,0.68); max-width: 38ch; text-wrap: pretty;"><?php echo esc_html(astrix_field('ch5_body', $front_id)); ?></p>
       
       <div data-reveal class="ax-frame" style="border-radius: 4px; aspect-ratio: 1.3;">
-        <img loading="lazy" decoding="async" class="ax-photo" style="animation: kenburns 26s ease-in-out infinite alternate;" src="<?php echo esc_url($theme_uri . '/assets/deck-03.webp'); ?>" alt="Engineering as half the argument">
+        <?php
+        $ch5_img = astrix_field('ch5_image', $front_id);
+        $ch5_img_src = $ch5_img ? $ch5_img : ($theme_uri . '/assets/deck-03.webp');
+        ?>
+        <img loading="lazy" decoding="async" class="ax-photo" style="animation: kenburns 26s ease-in-out infinite alternate;" src="<?php echo esc_url($ch5_img_src); ?>" alt="Engineering as half the argument">
+
+
         <div class="ax-grain-layer"></div>
         <div style="position: absolute; inset: 0; z-index: 3; pointer-events: none; margin: 14px; border: 1px solid rgba(245,241,234,0.22);"></div>
       </div>

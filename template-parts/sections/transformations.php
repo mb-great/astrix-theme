@@ -49,7 +49,11 @@ $front_id  = (int) get_option('page_on_front');
     <!-- 3-Column Progression Imagery -->
     <div data-reveal style="grid-column: 1 / span 4; margin-top: clamp(28px, 4vh, 48px); display: flex; flex-direction: column; gap: 10px;">
       <div class="ax-frame" style="border-radius: 4px; aspect-ratio: 1.15; max-width: 100%;">
-        <img loading="lazy" decoding="async" class="ax-photo" style="animation: kenburns 27s ease-in-out infinite alternate;" src="<?php echo esc_url($theme_uri . '/assets/deck-04-before.webp'); ?>" alt="Before: a business as silhouette">
+        <?php
+        $ch6_img = astrix_field('ch6_image_before', $front_id);
+        $ch6_img_src = $ch6_img ? $ch6_img : ($theme_uri . '/assets/deck-04-before.webp');
+        ?>
+        <img loading="lazy" decoding="async" class="ax-photo" style="animation: kenburns 27s ease-in-out infinite alternate;" src="<?php echo esc_url($ch6_img_src); ?>" alt="Before: a business as silhouette">
         <div class="ax-grain-layer"></div>
       </div>
       <span style="font-size: 11px; letter-spacing: 0.24em; text-transform: uppercase; color: #9A8E7D;">01 · Before</span>

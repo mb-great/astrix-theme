@@ -83,13 +83,30 @@ function astrix_fallback_fields() {
  * never imported)".
  */
 function astrix_field($selector, $post_id = null) {
+  if (!$post_id) {
+    $post_id = is_front_page() ? (int) get_option('page_on_front') : get_the_ID();
+  }
+
   $value = function_exists('get_field') ? get_field($selector, $post_id) : '';
   if ($value !== '' && $value !== null && $value !== false) {
     return $value;
   }
+
+  if ($post_id) {
+    $meta = get_post_meta($post_id, $selector, true);
+    if ($meta !== '' && $meta !== null && $meta !== false) {
+      return $meta;
+    }
+    $meta_prefixed = get_post_meta($post_id, '_astrix_' . $selector, true);
+    if ($meta_prefixed !== '' && $meta_prefixed !== null && $meta_prefixed !== false) {
+      return $meta_prefixed;
+    }
+  }
+
   $defaults = astrix_fallback_fields();
   return isset($defaults[$selector]) ? $defaults[$selector] : '';
 }
+
 
 /**
  * Baked-in repeating content, keyed by post type.

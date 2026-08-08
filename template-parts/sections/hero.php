@@ -30,9 +30,14 @@ $front_id  = (int) get_option('page_on_front');
         </a>
       </div>
     </div>
-    
     <div class="ax-frame" style="grid-column: 8 / span 5; align-self: stretch; border-radius: 4px; min-height: clamp(360px, 62vh, 660px); opacity: 0; animation: fadeIn 1.6s ease 0.7s forwards;">
-      <img loading="eager" fetchpriority="high" decoding="async" class="ax-photo" style="animation: kenburns 22s ease-in-out infinite alternate; object-position: center center;" src="<?php echo esc_url($theme_uri . '/assets/deck-01-hero.webp'); ?>" alt="Astrix — one integrated system, every part load-bearing">
+      <?php
+      $hero_img = astrix_field('hero_image', $front_id);
+      $hero_img_src = $hero_img ? $hero_img : ($theme_uri . '/assets/deck-01-hero.webp');
+      ?>
+      <img loading="eager" fetchpriority="high" decoding="async" class="ax-photo" style="animation: kenburns 22s ease-in-out infinite alternate; object-position: center center;" src="<?php echo esc_url($hero_img_src); ?>" alt="Astrix — one integrated system, every part load-bearing">
+
+
       <div class="ax-grain-layer"></div>
       <div style="position: absolute; inset: 0; z-index: 3; pointer-events: none; margin: 18px; border: 1px solid rgba(245,241,234,0.24);"></div>
       <span class="ax-word" style="left: 22px; bottom: 68px; font-size: clamp(46px, 5vw, 84px); color: rgba(245,241,234,0.16);">System</span>

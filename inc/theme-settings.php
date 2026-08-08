@@ -124,3 +124,33 @@ function astrix_render_settings_page() {
   </div>
   <?php
 }
+
+/**
+ * Integrate with WordPress Customizer (Appearance -> Customize -> Astrix Theme Settings).
+ */
+
+add_action('customize_register', function ($wp_customize) {
+  $wp_customize->add_section('astrix_customizer_section', array(
+    'title'       => 'Astrix Theme Settings',
+    'priority'    => 30,
+    'description' => 'Global contact info, office address, social links, and footer copy.',
+  ));
+
+  $schema = astrix_settings_schema();
+  foreach ($schema as $key => $def) {
+    $wp_customize->add_setting(ASTRIX_OPT . '[' . $key . ']', array(
+      'type'              => 'option',
+      'capability'        => 'edit_theme_options',
+      'default'           => $def[1],
+      'sanitize_callback' => ($def[2] === 'textarea' ? 'sanitize_textarea_field' : 'sanitize_text_field'),
+    ));
+
+    $wp_customize->add_control('astrix_ctrl_' . $key, array(
+      'label'       => $def[0],
+      'section'     => 'astrix_customizer_section',
+      'settings'    => ASTRIX_OPT . '[' . $key . ']',
+      'type'        => ($def[2] === 'textarea' ? 'textarea' : 'text'),
+    ));
+  }
+});
+

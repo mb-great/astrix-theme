@@ -14,10 +14,20 @@ require_once get_template_directory() . '/inc/acf-fields.php';
 require_once get_template_directory() . '/inc/nav.php';            // editable menus + mega-menu walker
 require_once get_template_directory() . '/inc/section-toggles.php';
 require_once get_template_directory() . '/inc/leads.php';
+require_once get_template_directory() . '/inc/admin-editor.php';
+
+require_once get_template_directory() . '/inc/block-patterns.php';
 
 function astrix_theme_setup() {
   add_theme_support('title-tag');
   add_theme_support('post-thumbnails');
+  add_theme_support('custom-logo', array(
+    'height'      => 100,
+    'width'       => 100,
+    'flex-height' => true,
+    'flex-width'  => true,
+  ));
+
   add_theme_support('html5', array(
     'search-form',
     'comment-form',
