@@ -119,36 +119,106 @@ function astrix_primary_nav() {
 }
 
 /**
- * The original hardcoded nav. Used when no menu has been assigned yet, so the
- * header can never come out empty on a fresh install.
+ * The fallback nav when no WordPress menu is assigned. Renders the complete
+ * multi-column mega menus for 'Our Services' and 'Our Expertise' per deck slides 1-4.
  */
 function astrix_nav_fallback() {
   global $astrix_nav_active;
   $active = isset($astrix_nav_active) ? $astrix_nav_active : '';
-  $links = array(
-    'home'        => array('/', 'Home'),
-    'services'    => array('/services', 'Our Services'),
-    'expertise'   => array('/our-expertise', 'Our Expertise'),
-    'clients'     => array('/our-clients', 'Our Clients'),
-    'contact'     => array('/contact', 'Contact'),
-  );
-  echo '<ul class="ax-nav-list">';
-  foreach ($links as $key => $l) {
-    printf(
-      '<li class="ax-nav-d0"><a href="%s" class="%s"><span>%s</span></a></li>',
-      esc_url(home_url($l[0])),
-      esc_attr('axnav-link' . ($active === $key ? ' axnav-on' : '')),
-      esc_html($l[1])
-    );
-  }
-  echo '</ul>';
+  ?>
+  <ul class="ax-nav-list">
+    <li class="ax-nav-d0"><a href="<?php echo esc_url(home_url('/')); ?>" class="<?php echo esc_attr('axnav-link' . ($active === 'home' ? ' axnav-on' : '')); ?>"><span>Home</span></a></li>
+    
+    <!-- Our Services (Deck Slide 2) -->
+    <li class="ax-nav-d0 ax-has-mega">
+      <a href="<?php echo esc_url(home_url('/services')); ?>" class="<?php echo esc_attr('axnav-link' . ($active === 'services' ? ' axnav-on' : '')); ?>" aria-haspopup="true" aria-expanded="false">
+        <span>Our Services</span>
+        <svg class="ax-caret" width="10" height="6" viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.4" fill="none" stroke-linecap="round"/></svg>
+      </a>
+      <div class="ax-mega">
+        <div class="ax-mega-inner">
+          <ul class="ax-mega-cols">
+            <li class="ax-col-head">
+              <a href="<?php echo esc_url(home_url('/services')); ?>">Strategy &amp; Brand</a>
+              <ul class="ax-mega-sub">
+                <li><a href="<?php echo esc_url(home_url('/services')); ?>">Creative &amp; Communication</a></li>
+                <li><a href="<?php echo esc_url(home_url('/services')); ?>">Content Marketing</a></li>
+                <li><a href="<?php echo esc_url(home_url('/services')); ?>">Reputation Management</a></li>
+              </ul>
+            </li>
+            <li class="ax-col-head">
+              <a href="<?php echo esc_url(home_url('/services')); ?>">SEO &amp; Performance</a>
+              <ul class="ax-mega-sub">
+                <li><a href="<?php echo esc_url(home_url('/services')); ?>">SEO Services</a></li>
+                <li class="ax-badge-new"><a href="<?php echo esc_url(home_url('/services')); ?>">AEO Services</a></li>
+                <li class="ax-badge-new"><a href="<?php echo esc_url(home_url('/services')); ?>">Generative Engine Optimization</a></li>
+                <li class="ax-badge-hot"><a href="<?php echo esc_url(home_url('/services')); ?>">Performance Marketing</a></li>
+                <li><a href="<?php echo esc_url(home_url('/services')); ?>">Search Engine Marketing</a></li>
+                <li><a href="<?php echo esc_url(home_url('/services')); ?>">Digital Marketing</a></li>
+                <li><a href="<?php echo esc_url(home_url('/services')); ?>">Ad Management</a></li>
+              </ul>
+            </li>
+            <li class="ax-col-head">
+              <a href="<?php echo esc_url(home_url('/services')); ?>">Social</a>
+              <ul class="ax-mega-sub">
+                <li><a href="<?php echo esc_url(home_url('/services')); ?>">Social Media Marketing</a></li>
+                <li><a href="<?php echo esc_url(home_url('/services')); ?>">Influencer Marketing</a></li>
+                <li><a href="<?php echo esc_url(home_url('/services')); ?>">UGC Video</a></li>
+                <li><a href="<?php echo esc_url(home_url('/services')); ?>">BGC (Brand Generated Content)</a></li>
+                <li class="ax-badge-best"><a href="<?php echo esc_url(home_url('/services')); ?>">Social + Performance Combo</a></li>
+              </ul>
+            </li>
+            <li class="ax-col-head">
+              <a href="<?php echo esc_url(home_url('/services')); ?>">Web &amp; Apps</a>
+              <ul class="ax-mega-sub">
+                <li><a href="<?php echo esc_url(home_url('/services')); ?>">Website Development</a></li>
+                <li><a href="<?php echo esc_url(home_url('/services')); ?>">Web Application Development</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </li>
+
+    <!-- Our Expertise (Deck Slide 3) -->
+    <li class="ax-nav-d0 ax-has-mega">
+      <a href="<?php echo esc_url(home_url('/our-expertise')); ?>" class="<?php echo esc_attr('axnav-link' . ($active === 'expertise' ? ' axnav-on' : '')); ?>" aria-haspopup="true" aria-expanded="false">
+        <span>Our Expertise</span>
+        <svg class="ax-caret" width="10" height="6" viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.4" fill="none" stroke-linecap="round"/></svg>
+      </a>
+      <div class="ax-mega">
+        <div class="ax-mega-inner">
+          <ul class="ax-mega-cols" style="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));">
+            <li><a href="<?php echo esc_url(home_url('/our-expertise')); ?>">B2B Digital Marketing</a></li>
+            <li><a href="<?php echo esc_url(home_url('/our-expertise')); ?>">FMCG Marketing</a></li>
+            <li><a href="<?php echo esc_url(home_url('/our-expertise')); ?>">Healthcare Digital Marketing</a></li>
+            <li><a href="<?php echo esc_url(home_url('/our-expertise')); ?>">Real Estate Digital Marketing</a></li>
+            <li><a href="<?php echo esc_url(home_url('/our-expertise')); ?>">Home Decor Digital Marketing</a></li>
+            <li><a href="<?php echo esc_url(home_url('/our-expertise')); ?>">EV Digital Marketing</a></li>
+            <li><a href="<?php echo esc_url(home_url('/our-expertise')); ?>">Education Digital Marketing</a></li>
+            <li><a href="<?php echo esc_url(home_url('/our-expertise')); ?>">Automotive Digital Marketing</a></li>
+            <li><a href="<?php echo esc_url(home_url('/our-expertise')); ?>">Finance Digital Marketing</a></li>
+            <li><a href="<?php echo esc_url(home_url('/our-expertise')); ?>">Travel &amp; Tourism Digital Marketing</a></li>
+            <li><a href="<?php echo esc_url(home_url('/our-expertise')); ?>">Skincare &amp; Beauty Digital Marketing</a></li>
+            <li><a href="<?php echo esc_url(home_url('/our-expertise')); ?>">Ecommerce Marketing Company</a></li>
+          </ul>
+        </div>
+      </div>
+    </li>
+
+    <li class="ax-nav-d0"><a href="<?php echo esc_url(home_url('/our-clients')); ?>" class="<?php echo esc_attr('axnav-link' . ($active === 'clients' ? ' axnav-on' : '')); ?>"><span>Our Clients</span></a></li>
+    <li class="ax-nav-d0"><a href="<?php echo esc_url(home_url('/contact')); ?>" class="<?php echo esc_attr('axnav-link' . ($active === 'contact' ? ' axnav-on' : '')); ?>"><span>Contact</span></a></li>
+  </ul>
+  <?php
 }
 
 /**
+ * Auto-seed menu on theme activation or admin visit.
+ */
+add_action('after_switch_theme', 'astrix_seed_primary_menu');
+
+/**
  * One-time seeding of the menu described in deck slides 1-4.
- *
- * Runs only when there is no 'Astrix Primary' menu yet, so it can never
- * overwrite the client's own edits. Re-runnable safely.
  */
 function astrix_seed_primary_menu() {
   $name = 'Astrix Primary';
