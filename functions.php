@@ -65,6 +65,24 @@ function astrix_enqueue_scripts() {
 add_action('wp_enqueue_scripts', 'astrix_enqueue_scripts');
 
 /**
+ * [astrix_container] Shortcode for custom raw HTML / Div blocks.
+ * Usage: [astrix_container bg="#F5F1EA"]<div>...</div>[/astrix_container]
+ */
+add_shortcode('astrix_container', function ($atts, $content = null) {
+  $a = shortcode_atts(array(
+    'bg'    => '#F5F1EA',
+    'color' => '#211C17',
+    'class' => '',
+  ), $atts);
+
+  return '<section class="astrix-custom-block ' . esc_attr($a['class']) . '" style="position: relative; background: ' . esc_attr($a['bg']) . '; color: ' . esc_attr($a['color']) . '; padding: clamp(60px, 10vh, 120px) clamp(28px, 5vw, 72px);">' .
+         '<div class="grid-12" style="display: grid; grid-template-columns: repeat(12, 1fr); gap: 24px;">' .
+         do_shortcode($content) .
+         '</div></section>';
+});
+
+
+/**
  * Contact form handler (page-contact.php)
  */
 add_action('admin_post_astrix_contact_submit', 'astrix_handle_contact_submit');
