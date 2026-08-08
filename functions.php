@@ -15,7 +15,7 @@ require_once get_template_directory() . '/inc/nav.php';            // editable m
 require_once get_template_directory() . '/inc/section-toggles.php';
 require_once get_template_directory() . '/inc/leads.php';
 require_once get_template_directory() . '/inc/admin-editor.php';
-
+require_once get_template_directory() . '/inc/block-builder.php';
 require_once get_template_directory() . '/inc/block-patterns.php';
 
 function astrix_theme_setup() {

@@ -5,6 +5,9 @@
 get_header();
 ?>
 
+<?php
+if (!astrix_render_page_blocks()) :
+?>
 <div style="position: relative; background: #F5F1EA; overflow: hidden;">
   <div style="position: relative; z-index: 2; display: grid; grid-template-columns: repeat(12, 1fr); gap: 24px; padding: clamp(140px, 20vh, 220px) clamp(28px, 5vw, 72px) clamp(90px, 13vh, 150px);">
 
@@ -21,6 +24,7 @@ get_header();
 
   </div>
 </div>
+<?php endif; ?>
 
 <?php
 get_footer();

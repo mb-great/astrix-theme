@@ -13,32 +13,37 @@
 get_header();
 
 /**
- * Homepage section order.
- *
- * slug => enabled
- * Disabled sections stay in the codebase and can be switched back on instantly.
+ * If custom blocks have been added/reordered in the Block Builder, render them.
  */
-$sections = array(
-  'intro-gate'      => true,   // 6-hour localStorage intro overlay
-  'hero'            => true,   // Prologue · The Belief
-  'challenge'       => true,   // Ch1 · Where Strategy Meets Story (video bg)
-  'invisible'       => true,   // Ch2 · Why Businesses Stay Invisible
-  'connection'      => true,   // Ch2b · The Missing Connection (thread SVG)
-  'engine'          => false,  // Ch3 · Transformation Engine (Hidden per PPTX Slide 11)
-  'ecosystems'      => true,   // Ch4 · What We Build
-  'stack'           => true,   // Ch5 · The Stack
-  'transformations' => true,   // Ch6 · Transformations, Not Portfolios
-  'knowledge'       => true,   // Ch7 · Knowledge & Recognition
-  'spinner'         => true,   // Animated Astrix mark
-  'epilogue'        => true,   // Epilogue · The Discovery Session
-);
+if (!astrix_render_page_blocks()) {
+  /**
+   * Homepage section default fallback order.
+   *
+   * slug => enabled
+   * Disabled sections stay in the codebase and can be switched back on instantly.
+   */
+  $sections = array(
+    'intro-gate'      => true,   // 6-hour localStorage intro overlay
+    'hero'            => true,   // Prologue · The Belief
+    'challenge'       => true,   // Ch1 · Where Strategy Meets Story (video bg)
+    'invisible'       => true,   // Ch2 · Why Businesses Stay Invisible
+    'connection'      => true,   // Ch2b · The Missing Connection (thread SVG)
+    'engine'          => false,  // Ch3 · Transformation Engine (Hidden per PPTX Slide 11)
+    'ecosystems'      => true,   // Ch4 · What We Build
+    'stack'           => true,   // Ch5 · The Stack
+    'transformations' => true,   // Ch6 · Transformations, Not Portfolios
+    'knowledge'       => true,   // Ch7 · Knowledge & Recognition
+    'spinner'         => true,   // Animated Astrix mark
+    'epilogue'        => true,   // Epilogue · The Discovery Session
+  );
 
-/** Allow a child theme or future ACF toggles to override visibility. */
-$sections = apply_filters('astrix_homepage_sections', $sections);
+  /** Allow a child theme or future ACF toggles to override visibility. */
+  $sections = apply_filters('astrix_homepage_sections', $sections);
 
-foreach ($sections as $slug => $enabled) {
-  if ($enabled) {
-    get_template_part('template-parts/sections/' . $slug);
+  foreach ($sections as $slug => $enabled) {
+    if ($enabled) {
+      get_template_part('template-parts/sections/' . $slug);
+    }
   }
 }
 
