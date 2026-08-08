@@ -1,30 +1,30 @@
 <?php
 /**
- * Astrix Media Theme Functions
+ * Astrix Media — Pure Block Theme (Full Site Editing / FSE)
+ *
+ * Built on modern WordPress Block Theme standards matching SaasLauncher / Invopilot.
  */
 
 if (!defined('ABSPATH')) {
-  exit; // Exit if accessed directly.
+  exit;
 }
 
-require_once get_template_directory() . '/inc/theme-settings.php';   // global text/contact values — no plugin needed
-require_once get_template_directory() . '/inc/fallback-content.php'; // must load first — defines astrix_field()
-require_once get_template_directory() . '/inc/cpts.php';
-require_once get_template_directory() . '/inc/acf-fields.php';
-require_once get_template_directory() . '/inc/nav.php';            // editable menus + mega-menu walker
-require_once get_template_directory() . '/inc/section-toggles.php';
-require_once get_template_directory() . '/inc/leads.php';
-require_once get_template_directory() . '/inc/admin-editor.php';
-require_once get_template_directory() . '/inc/block-builder.php';
-require_once get_template_directory() . '/inc/block-patterns.php';
+define('ASTRIX_VERSION', '8.0.0');
+define('ASTRIX_DIR', trailingslashit(get_template_directory()));
+define('ASTRIX_URL', trailingslashit(get_template_directory_uri()));
 
-function astrix_theme_setup() {
-  add_theme_support('title-tag');
+/**
+ * Sets up theme defaults and registers support for various WordPress features.
+ */
+function astrix_support() {
+  add_theme_support('automatic-feed-links');
+  add_theme_support('wp-block-styles');
   add_theme_support('post-thumbnails');
   add_theme_support('align-wide');
-  add_theme_support('block-templates');
-  add_theme_support('block-template-parts');
   add_theme_support('editor-styles');
+  add_editor_style('style.css');
+
+  // Register custom logo support
   add_theme_support('custom-logo', array(
     'height'      => 100,
     'width'       => 100,
@@ -32,119 +32,65 @@ function astrix_theme_setup() {
     'flex-width'  => true,
   ));
 
-  add_theme_support('html5', array(
-    'search-form',
-    'comment-form',
-    'comment-list',
-    'gallery',
-    'caption',
-    'style',
-    'script'
-  ));
+  load_theme_textdomain('astrix', get_template_directory());
 }
-add_action('after_setup_theme', 'astrix_theme_setup');
+add_action('after_setup_theme', 'astrix_support');
 
-function astrix_enqueue_scripts() {
-  // Version = file modification time, so every edit automatically busts
-  // browser/mobile-Safari cache instead of silently serving stale CSS/JS
-  // under a version string ('8.0.0') that never changed.
+/**
+ * Enqueue Styles & Scripts for Frontend.
+ */
+function astrix_styles() {
   $style_path = get_stylesheet_directory() . '/style.css';
-  $script_path = get_template_directory() . '/js/astrix-home.js';
+  $version = file_exists($style_path) ? filemtime($style_path) : ASTRIX_VERSION;
 
+  // Google Fonts: Geist Sans & Instrument Serif
   wp_enqueue_style(
-    'astrix-style',
-    get_stylesheet_uri(),
+    'astrix-google-fonts',
+    'https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap',
     array(),
-    file_exists($style_path) ? filemtime($style_path) : '8.0.0'
+    null
   );
 
-  wp_enqueue_script(
-    'astrix-home-script',
-    get_template_directory_uri() . '/js/astrix-home.js',
+  // Main Theme CSS
+  wp_enqueue_style('astrix-style', get_stylesheet_uri(), array(), $version);
+
+  // Frontend Dynamic Scripts & Micro-interactions
+  $script_path = get_template_directory() . '/js/astrix-home.js';
+  if (file_exists($script_path)) {
+    wp_enqueue_script(
+      'astrix-scripts',
+      get_template_directory_uri() . '/js/astrix-home.js',
+      array('jquery'),
+      filemtime($script_path),
+      true
+    );
+
+    wp_localize_script('astrix-scripts', 'astrixData', array(
+      'ajaxUrl'   => admin_url('admin-ajax.php'),
+      'leadNonce' => wp_create_nonce('astrix_lead_nonce'),
+      'homeUrl'   => home_url('/'),
+    ));
+  }
+}
+add_action('wp_enqueue_scripts', 'astrix_styles');
+
+/**
+ * Enqueue Assets for Block Editor (Backend).
+ */
+function astrix_block_assets() {
+  wp_enqueue_style(
+    'astrix-editor-google-fonts',
+    'https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap',
     array(),
-    file_exists($script_path) ? filemtime($script_path) : '8.0.0',
-    true
+    null
   );
 }
-add_action('wp_enqueue_scripts', 'astrix_enqueue_scripts');
+add_action('enqueue_block_assets', 'astrix_block_assets');
 
 /**
- * [astrix_container] Shortcode for custom raw HTML / Div blocks.
- * Usage: [astrix_container bg="#F5F1EA"]<div>...</div>[/astrix_container]
+ * Load Core Modules.
  */
-add_shortcode('astrix_container', function ($atts, $content = null) {
-  $a = shortcode_atts(array(
-    'bg'    => '#F5F1EA',
-    'color' => '#211C17',
-    'class' => '',
-  ), $atts);
-
-  return '<section class="astrix-custom-block ' . esc_attr($a['class']) . '" style="position: relative; background: ' . esc_attr($a['bg']) . '; color: ' . esc_attr($a['color']) . '; padding: clamp(60px, 10vh, 120px) clamp(28px, 5vw, 72px);">' .
-         '<div class="grid-12" style="display: grid; grid-template-columns: repeat(12, 1fr); gap: 24px;">' .
-         do_shortcode($content) .
-         '</div></section>';
-});
-
-
-/**
- * Contact form handler (page-contact.php)
- */
-add_action('admin_post_astrix_contact_submit', 'astrix_handle_contact_submit');
-add_action('admin_post_nopriv_astrix_contact_submit', 'astrix_handle_contact_submit');
-
-function astrix_handle_contact_submit() {
-  $redirect = wp_get_referer() ?: home_url('/contact');
-
-  // Honeypot — silently pretend success to bots
-  if (!empty($_POST['astrix_hp'])) {
-    wp_safe_redirect(add_query_arg('sent', '1', $redirect));
-    exit;
-  }
-
-  if (!isset($_POST['astrix_contact_nonce']) || !wp_verify_nonce($_POST['astrix_contact_nonce'], 'astrix_contact_submit')) {
-    wp_safe_redirect(add_query_arg('error', '1', $redirect));
-    exit;
-  }
-
-  // Per-IP rate limit: 1 submission per 60 seconds
-  $ip = isset($_SERVER['REMOTE_ADDR']) ? sanitize_text_field($_SERVER['REMOTE_ADDR']) : 'unknown';
-  $rate_key = 'astrix_contact_rl_' . md5($ip);
-  if (get_transient($rate_key)) {
-    wp_safe_redirect(add_query_arg('error', '1', $redirect));
-    exit;
-  }
-  set_transient($rate_key, 1, 60);
-
-  $name     = isset($_POST['name']) ? sanitize_text_field($_POST['name']) : '';
-  $email    = isset($_POST['email']) ? sanitize_email($_POST['email']) : '';
-  $company  = isset($_POST['company']) ? sanitize_text_field($_POST['company']) : '';
-  $industry = isset($_POST['industry']) ? sanitize_text_field($_POST['industry']) : '';
-  $site     = isset($_POST['site']) ? sanitize_text_field($_POST['site']) : '';
-  $message  = isset($_POST['message']) ? sanitize_textarea_field($_POST['message']) : '';
-  $budget   = isset($_POST['budget']) ? sanitize_text_field($_POST['budget']) : '';
-  $timeline = isset($_POST['timeline']) ? sanitize_text_field($_POST['timeline']) : '';
-
-  if (empty($name) || !is_email($email)) {
-    wp_safe_redirect(add_query_arg('error', '1', $redirect));
-    exit;
-  }
-
-  // Store FIRST, mail second. If wp_mail() is blocked by the host (common on
-  // shared hosting, and unverifiable from the server side) the lead is still
-  // recoverable from wp-admin → Leads instead of vanishing silently.
-  $lead_id = astrix_store_lead(compact('name', 'email', 'company', 'industry', 'site', 'budget', 'timeline', 'message'));
-
-  $to      = astrix_setting('email');
-  $subject = 'New Discovery Session inquiry from ' . $name;
-  $body    = "Name: $name\nEmail: $email\nCompany: $company\nIndustry: $industry\nWebsite: $site\nBudget: $budget\nTimeline: $timeline\n\nMessage:\n$message";
-  $headers = array('Content-Type: text/plain; charset=UTF-8', 'Reply-To: ' . $email);
-
-  $mailed = wp_mail($to, $subject, $body, $headers);
-  astrix_mark_lead_mail($lead_id, $mailed);
-
-  wp_safe_redirect(add_query_arg(array(
-    'sent'      => '1',
-    'sent_name' => rawurlencode(strtok($name, ' ')),
-  ), $redirect));
-  exit;
-}
+require_once get_template_directory() . '/inc/core/block-patterns.php';
+require_once get_template_directory() . '/inc/core/block-style.php';
+require_once get_template_directory() . '/inc/cpts.php';
+require_once get_template_directory() . '/inc/leads.php';
