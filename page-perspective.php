@@ -51,7 +51,7 @@ $downloads = array(
   <div data-reveal class="ax-card-static" style="display: block; padding: clamp(10px,2vh,30px) clamp(28px,5vw,72px) clamp(50px,8vh,90px);">
     <div class="feat-row" style="display: grid; grid-template-columns: 1.3fr 1fr; gap: clamp(28px,3.5vw,56px); align-items: center;">
       <div class="ax-frame" style="border-radius: 4px; aspect-ratio: 1.5; min-height: clamp(300px,50vh,540px);">
-        <img class="ax-photo" style="animation: kenburns 26s ease-in-out infinite alternate;" src="<?php echo esc_url($theme_uri . '/assets/page-clarity.webp'); ?>" alt="Attention is cheap, preference is the moat">
+        <img loading="lazy" decoding="async" class="ax-photo" style="animation: kenburns 26s ease-in-out infinite alternate;" src="<?php echo esc_url($theme_uri . '/assets/page-clarity.webp'); ?>" alt="Attention is cheap, preference is the moat">
         <div class="ax-grain-layer"></div>
         <div style="position: absolute; inset: 0; z-index: 3; pointer-events: none; margin: 18px; border: 1px solid rgba(245,241,234,0.22);"></div>
         <span style="position: absolute; left: 24px; top: 24px; z-index: 3; font-size: 10.5px; letter-spacing: 0.24em; text-transform: uppercase; color: rgba(245,241,234,0.9); font-weight: 500; display: flex; align-items: center; gap: 10px;"><span style="width: 18px; height: 1px; background: #C56A37;"></span>Editor's Pick</span>

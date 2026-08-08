@@ -119,26 +119,56 @@ $faqs = array(
     <aside data-reveal style="display: flex; flex-direction: column; gap: clamp(30px,4vh,44px);">
       <div style="display: flex; flex-direction: column; gap: 14px; border-top: 1px solid rgba(33,28,23,0.14); padding-top: 22px;">
         <span style="font-size: 11px; letter-spacing: 0.24em; text-transform: uppercase; color: #9A8E7D;">Prefer email?</span>
-        <a href="mailto:hello@astrixmedia.in" style="font-size: clamp(19px,1.8vw,24px); font-weight: 500; letter-spacing: -0.01em;">hello@astrixmedia.in</a>
+        <a href="mailto:<?php echo esc_attr(astrix_setting('email')); ?>" style="font-size: clamp(19px,1.8vw,24px); font-weight: 500; letter-spacing: -0.01em;"><?php echo esc_html(astrix_setting('email')); ?></a>
       </div>
       <div style="display: flex; flex-direction: column; gap: 12px; border-top: 1px solid rgba(33,28,23,0.14); padding-top: 22px;">
         <span style="font-size: 11px; letter-spacing: 0.24em; text-transform: uppercase; color: #9A8E7D;">Call or message</span>
-        <a href="tel:+919000000000" style="font-size: clamp(19px,1.8vw,24px); font-weight: 500; letter-spacing: -0.01em;">+91 90000 00000</a>
-        <a href="https://wa.me/919000000000" data-magnetic class="whatsapp-link" style="display: inline-flex; align-self: flex-start; align-items: center; gap: 10px; border: 1px solid rgba(33,28,23,0.2); border-radius: 100px; padding: 11px 20px; font-size: 13.5px; font-weight: 500; transition: background 0.35s ease, color 0.35s ease, border-color 0.35s ease;">WhatsApp us <span>→</span></a>
+        <a href="<?php echo esc_url(astrix_tel('phone_primary')); ?>" style="font-size: clamp(19px,1.8vw,24px); font-weight: 500; letter-spacing: -0.01em;"><?php echo esc_html(astrix_setting('phone_primary')); ?></a>
+        <a href="<?php echo esc_url(astrix_whatsapp_url()); ?>" data-magnetic class="whatsapp-link" style="display: inline-flex; align-self: flex-start; align-items: center; gap: 10px; border: 1px solid rgba(33,28,23,0.2); border-radius: 100px; padding: 11px 20px; font-size: 13.5px; font-weight: 500; transition: background 0.35s ease, color 0.35s ease, border-color 0.35s ease;">WhatsApp us <span>→</span></a>
       </div>
+      <?php
+      /**
+       * Calendly block — hidden until a real scheduling URL exists.
+       * Was shipping a dead href="#" plus the literal text
+       * "[Calendly scheduler embeds here]" onto a client-facing page.
+       *
+       * TO ENABLE: set $astrix_calendly_url to the real link. The block
+       * appears automatically; no other edit needed.
+       */
+      $astrix_calendly_url = astrix_setting('calendly'); // Astrix Settings → Contact details
+      if ($astrix_calendly_url) : ?>
       <div style="display: flex; flex-direction: column; gap: 14px; border-top: 1px solid rgba(33,28,23,0.14); padding-top: 22px;">
         <span style="font-size: 11px; letter-spacing: 0.24em; text-transform: uppercase; color: #9A8E7D;">Book a call</span>
-        <a href="#" data-magnetic class="calendly-link" style="display: inline-flex; align-self: flex-start; align-items: center; gap: 10px; border: 1px solid rgba(33,28,23,0.2); border-radius: 100px; padding: 12px 22px; font-size: 14px; font-weight: 500; transition: background 0.35s ease, color 0.35s ease, border-color 0.35s ease;">30-min intro via Calendly <span>→</span></a>
-        <span style="font-size: 12.5px; color: #9A8E7D;">[Calendly scheduler embeds here]</span>
+        <a href="<?php echo esc_url($astrix_calendly_url); ?>" target="_blank" rel="noopener" data-magnetic class="calendly-link" style="display: inline-flex; align-self: flex-start; align-items: center; gap: 10px; border: 1px solid rgba(33,28,23,0.2); border-radius: 100px; padding: 12px 22px; font-size: 14px; font-weight: 500; transition: background 0.35s ease, color 0.35s ease, border-color 0.35s ease;">30-min intro via Calendly <span>→</span></a>
       </div>
+      <?php endif; ?>
       <div style="display: flex; flex-direction: column; gap: 14px; border-top: 1px solid rgba(33,28,23,0.14); padding-top: 22px;">
         <span style="font-size: 11px; letter-spacing: 0.24em; text-transform: uppercase; color: #9A8E7D;">Studio</span>
-        <p style="margin: 0; font-size: 15px; line-height: 1.6; color: #211C17;">India — working with brands worldwide, across time zones.</p>
-        <div style="position: relative; overflow: hidden; border-radius: 4px; height: 150px; background: linear-gradient(150deg, #ECE5D9, #E4DBCC); border: 1px solid rgba(33,28,23,0.08);">
-          <div style="position: absolute; inset: 0; background-image: linear-gradient(rgba(33,28,23,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(33,28,23,0.05) 1px, transparent 1px); background-size: 26px 26px;"></div>
-          <span style="position: absolute; left: 50%; top: 46%; transform: translate(-50%,-50%); width: 12px; height: 12px; border-radius: 100px; background: #C56A37; box-shadow: 0 0 0 6px rgba(197,106,55,0.22);"></span>
-          <span style="position: absolute; left: 16px; bottom: 12px; font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: #9A8E7D;">[Interactive map]</span>
+        <?php /* Real address — deck slide 19. Replaced the decorative grid that
+                 carried a literal "[Interactive map]" label. */ ?>
+        <p style="margin: 0; font-size: 15px; line-height: 1.7; color: #211C17;">
+          <?php echo astrix_address_html(); // already escaped per line ?>
+        </p>
+        <?php
+        /**
+         * Map embed — keyless Google Maps (`output=embed`), so no API key or
+         * billing account is needed. loading="lazy" keeps it off the critical
+         * path; the grayscale filter matches the site's editorial treatment and
+         * lifts on hover so the map is fully legible when someone engages.
+         */
+        // NOTE: including "Astrix Media LLP" in the query geocodes to Chanakyapuri, New Delhi (wrong) — verified 2026-08-08.
+        // Keep the map query as a plain street address; edit it in Astrix Settings → Contact details.
+        $astrix_map_query = astrix_setting('maps_query');
+        ?>
+        <div class="ax-map">
+          <iframe
+            src="https://maps.google.com/maps?q=<?php echo rawurlencode($astrix_map_query); ?>&amp;z=15&amp;output=embed"
+            title="Astrix Media LLP location — Sector 113, Gurugram"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            allowfullscreen></iframe>
         </div>
+        <a href="https://maps.google.com/?q=<?php echo rawurlencode($astrix_map_query); ?>" target="_blank" rel="noopener" class="ax-underline-dark" style="display: inline-flex; align-self: flex-start; align-items: center; gap: 8px; font-size: 13.5px; font-weight: 500; color: #211C17; border: none; border-bottom: 1px solid #C9BFAE; padding: 4px 0;">Get directions <span>↗</span></a>
       </div>
       <div style="display: flex; gap: 26px; flex-wrap: wrap; border-top: 1px solid rgba(33,28,23,0.14); padding-top: 22px;">
         <div style="display: flex; flex-direction: column; gap: 4px;"><span style="font-size: 22px; font-weight: 600; letter-spacing: -0.02em; color: #C56A37;">&lt;1 day</span><span style="font-size: 12px; color: #9A8E7D;">Reply time</span></div>
@@ -178,6 +208,9 @@ $faqs = array(
 
 <style>
 .fld { width: 100%; box-sizing: border-box; background: transparent; border: none; border-bottom: 1px solid rgba(33,28,23,0.18); outline: none; color: #211C17; font-family: inherit; font-size: 17px; padding: 12px 0; transition: border-color 0.3s ease; }
+.ax-map { position: relative; overflow: hidden; border-radius: 4px; height: 300px; border: 1px solid rgba(33,28,23,0.10); background: #ECE5D9; }
+.ax-map iframe { width: 100%; height: 100%; border: 0; display: block; filter: grayscale(1) contrast(0.92) brightness(1.04); transition: filter 0.5s ease; }
+.ax-map:hover iframe { filter: grayscale(0) contrast(1) brightness(1); }
 .fld::placeholder { color: #B3A794; }
 .fld:focus { border-bottom-color: #C56A37; }
 .budget { font-size: 13px; font-weight: 500; padding: 9px 16px; border-radius: 100px; border: 1px solid rgba(33,28,23,0.16); color: #7A6F63; cursor: pointer; background: transparent; transition: all 0.3s ease; font-family: inherit; }

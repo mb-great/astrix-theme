@@ -23,20 +23,25 @@ if (!defined('ABSPATH')) {
  * Baked-in homepage copy. Mirrors the values seeded into ACF.
  */
 function astrix_fallback_fields() {
-  return array(
+  /**
+   * Subpage templates register their own defaults through the
+   * 'astrix_fallback_fields' filter (see inc/fields-*.php), so each page can be
+   * made editable in its own file without every one of them editing this array.
+   */
+  return apply_filters('astrix_fallback_fields', array(
     'hero_eyebrow'       => 'A Business Transformation Partner',
-    'hero_h1_line1'      => "Growth isn't a marketing problem.",
-    'hero_h1_line2'      => "It's a",
+    'hero_h1_line1'      => "Growth isn't a marketing challenge.",
+    'hero_h1_line2'      => "It's a business",
     'hero_h1_emphasis'   => 'systems',
-    'hero_h1_line2_end'  => 'problem.',
-    'hero_para'          => 'Strategy, brand, technology and marketing were never meant to live in separate rooms.',
+    'hero_h1_line2_end'  => 'challenge.',
+    'hero_para'          => 'Strategy, brand, technology and marketing were never meant to operate in separate rooms. At Astrix, we bring them together as one connected growth ecosystem, transforming ambitious businesses into brands that lead, scale and endure.',
 
-    'ch1_eyebrow'        => 'The Modern Business Challenge',
-    'ch1_headline'       => 'Your customer meets you in twenty places before they ever <em style="font-family: \'Instrument Serif\', serif; font-style: italic; font-weight: 400;">meet you.</em>',
+    'ch1_eyebrow'        => 'WHERE STRATEGY MEETS STORY',
+    'ch1_headline'       => 'Every Business Has a Story. Become the One People <em style="font-family: \'Instrument Serif\', serif; font-style: italic; font-weight: 400;">Choose.</em>',
 
-    'ch2_eyebrow'        => 'Why Businesses Stay Invisible',
-    'ch2_headline'       => 'Why good businesses stay <em style="font-family: \'Instrument Serif\', serif; font-style: italic; font-weight: 400; color: #C56A37;">invisible.</em>',
-    'ch2_pullquote'      => 'Fragmented effort reads as a fragmented <span style="color: #C56A37;">business.</span>',
+    'ch2_eyebrow'        => 'Being Chosen',
+    'ch2_headline'       => 'To be chosen is to be seen <em style="font-family: \'Instrument Serif\', serif; font-style: italic; font-weight: 400; color: #C56A37;">clearly.</em>',
+    'ch2_pullquote'      => 'Attention is easy to rent. Preference is worth <span style="color: #C56A37;">owning.</span>',
 
     'ch3_eyebrow'        => 'The Engine',
     'ch3_headline'       => 'The Astrix Transformation Engine',
@@ -59,10 +64,10 @@ function astrix_fallback_fields() {
     'essay_kicker'       => 'Strategy · 8 min read',
     'essay_headline'     => 'Attention is cheap. Preference is the only <em style="font-family: \'Instrument Serif\', serif; font-style: italic; font-weight: 400; color: #C56A37;">moat.</em>',
 
-    'epilogue_eyebrow'   => 'The Discovery Session',
-    'epilogue_headline'  => 'Bring us your business, not a <em style="font-family: \'Instrument Serif\', serif; font-style: italic; font-weight: 400; color: #C56A37;">brief.</em>',
-    'epilogue_body'      => 'Forty-five minutes. An honest read on where growth is leaking. No pitch, no deck.',
-  );
+    'epilogue_eyebrow'   => 'Let\'s Talk',
+    'epilogue_headline'  => "Let's have a coffee <em style=\"font-family: 'Instrument Serif', serif; font-style: italic; font-weight: 400; color: #C56A37;\">together</em>",
+    'epilogue_body'      => 'Every business starts with an idea. But ironically, plenty of great ones stay a well-kept secret.',
+  ));
 }
 
 /**

@@ -7,9 +7,13 @@ if (!defined('ABSPATH')) {
   exit; // Exit if accessed directly.
 }
 
-require_once get_template_directory() . '/inc/fallback-content.php'; // must load first — defines the get_field() shim
+require_once get_template_directory() . '/inc/theme-settings.php';   // global text/contact values — no plugin needed
+require_once get_template_directory() . '/inc/fallback-content.php'; // must load first — defines astrix_field()
 require_once get_template_directory() . '/inc/cpts.php';
 require_once get_template_directory() . '/inc/acf-fields.php';
+require_once get_template_directory() . '/inc/nav.php';            // editable menus + mega-menu walker
+require_once get_template_directory() . '/inc/section-toggles.php';
+require_once get_template_directory() . '/inc/leads.php';
 
 function astrix_theme_setup() {
   add_theme_support('title-tag');
@@ -93,12 +97,18 @@ function astrix_handle_contact_submit() {
     exit;
   }
 
-  $to      = 'info@astrixmedia.in';
+  // Store FIRST, mail second. If wp_mail() is blocked by the host (common on
+  // shared hosting, and unverifiable from the server side) the lead is still
+  // recoverable from wp-admin → Leads instead of vanishing silently.
+  $lead_id = astrix_store_lead(compact('name', 'email', 'company', 'industry', 'site', 'budget', 'timeline', 'message'));
+
+  $to      = astrix_setting('email');
   $subject = 'New Discovery Session inquiry from ' . $name;
   $body    = "Name: $name\nEmail: $email\nCompany: $company\nIndustry: $industry\nWebsite: $site\nBudget: $budget\nTimeline: $timeline\n\nMessage:\n$message";
   $headers = array('Content-Type: text/plain; charset=UTF-8', 'Reply-To: ' . $email);
 
-  wp_mail($to, $subject, $body, $headers);
+  $mailed = wp_mail($to, $subject, $body, $headers);
+  astrix_mark_lead_mail($lead_id, $mailed);
 
   wp_safe_redirect(add_query_arg(array(
     'sent'      => '1',

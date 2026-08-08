@@ -7,6 +7,7 @@ global $astrix_nav_active;
 $astrix_nav_active = 'work';
 get_header();
 $theme_uri = get_template_directory_uri();
+$page_id   = get_the_ID();
 ?>
 
 <div style="background: #F5F1EA;">
@@ -27,7 +28,7 @@ $theme_uri = get_template_directory_uri();
   <div data-reveal class="ax-card-static" style="display: block; padding: clamp(20px,3vh,40px) clamp(28px,5vw,72px) clamp(40px,6vh,70px);">
     <div class="feat-row" style="display: grid; grid-template-columns: 1.35fr 1fr; gap: clamp(28px,3.5vw,56px); align-items: center;">
       <div class="ax-frame" style="border-radius: 4px; aspect-ratio: 1.5; min-height: clamp(300px,52vh,560px);">
-        <img class="ax-photo" style="animation: kenburns 26s ease-in-out infinite alternate;" src="<?php echo esc_url($theme_uri . '/assets/page-vision2.webp'); ?>" alt="Meridian Financial — from overlooked to category default">
+        <img loading="lazy" decoding="async" class="ax-photo" style="animation: kenburns 26s ease-in-out infinite alternate;" src="<?php echo esc_url($theme_uri . '/assets/page-vision2.webp'); ?>" alt="Meridian Financial — from overlooked to category default">
         <div class="ax-grain-layer"></div>
         <div style="position: absolute; inset: 0; z-index: 3; pointer-events: none; margin: 18px; border: 1px solid rgba(245,241,234,0.22);"></div>
         <span style="position: absolute; left: 24px; top: 24px; z-index: 3; font-size: 10.5px; letter-spacing: 0.28em; text-transform: uppercase; color: rgba(245,241,234,0.9); font-weight: 500; display: flex; align-items: center; gap: 10px;"><span style="width: 18px; height: 1px; background: #C56A37;"></span>Featured Case</span>
@@ -70,7 +71,7 @@ $theme_uri = get_template_directory_uri();
     <?php foreach ($cases as $c): ?>
     <div data-reveal class="ax-card-static" data-cat="<?php echo esc_attr($c['cat']); ?>">
       <div class="ax-frame" style="border-radius: 4px; aspect-ratio: 1.14;">
-        <img class="ax-photo" style="animation: kenburns 28s ease-in-out infinite alternate;" src="<?php echo esc_url($theme_uri . '/assets/' . $c['img']); ?>" alt="<?php echo esc_attr($c['client']); ?>">
+        <img loading="lazy" decoding="async" class="ax-photo" style="animation: kenburns 28s ease-in-out infinite alternate;" src="<?php echo esc_url($theme_uri . '/assets/' . $c['img']); ?>" alt="<?php echo esc_attr($c['client']); ?>">
         <div class="ax-grain-layer"></div>
         <div style="position: absolute; inset: 0; z-index: 3; pointer-events: none; margin: 14px; border: 1px solid rgba(245,241,234,0.18);"></div>
         <span style="position: absolute; right: 16px; top: 14px; z-index: 3; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(245,241,234,0.85); font-weight: 500; border: 1px solid rgba(245,241,234,0.3); border-radius: 100px; padding: 4px 10px;"><?php echo esc_html($c['tag']); ?></span>

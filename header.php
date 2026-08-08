@@ -13,12 +13,54 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
   
-  <meta name="description" content="Astrix Media integrates strategy, brand, experience, technology and growth into one connected engine. Not an agency, a business transformation partner.">
-  <link rel="canonical" href="<?php echo esc_url(home_url('/')); ?>">
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="Astrix Media: Growth is a systems problem.">
-  <meta property="og:description" content="Strategy, brand, technology and marketing, built as one engine. The Astrix Transformation Engine.">
-  <meta property="og:url" content="<?php echo esc_url(home_url('/')); ?>">
+  <?php
+  /**
+   * Per-page SEO/social meta.
+   *
+   * These were previously hardcoded to the homepage on EVERY template, which
+   * self-canonicalised all six subpages to "/" and made every share card
+   * identical. Now derived from the queried object, falling back to the site
+   * defaults on the front page and on archives.
+   */
+  $astrix_is_front = is_front_page();
+  $astrix_url      = $astrix_is_front ? home_url('/') : get_permalink();
+  if (!$astrix_url) { $astrix_url = home_url(add_query_arg(array(), $GLOBALS['wp']->request)); }
+
+  $astrix_default_desc = 'Astrix Media integrates strategy, brand, experience, technology and growth into one connected engine. Not an agency, a business transformation partner.';
+  $astrix_desc = $astrix_default_desc;
+  if (!$astrix_is_front && is_singular()) {
+    // These pages are built by PHP templates and mostly carry no post_content,
+    // so get_the_excerpt() returns a stub like "Work" — worse for search results
+    // than the site default. Only take an excerpt with real substance in it.
+    $excerpt = trim(preg_replace('/\s+/', ' ', wp_strip_all_tags(get_the_excerpt())));
+    if (mb_strlen($excerpt) >= 60) { $astrix_desc = $excerpt; }
+  }
+  $astrix_desc = trim(preg_replace('/\s+/', ' ', $astrix_desc));
+  if (mb_strlen($astrix_desc) > 200) { $astrix_desc = mb_substr($astrix_desc, 0, 197) . '…'; }
+
+  $astrix_title = $astrix_is_front
+    ? 'Astrix Media: Growth is a business systems challenge.'
+    : wp_get_document_title();
+
+  // 1200x630 card. A square favicon here would be cropped badly by most platforms.
+  $astrix_og_image = get_template_directory_uri() . '/assets/og-image.jpg';
+  ?>
+  <meta name="description" content="<?php echo esc_attr($astrix_desc); ?>">
+  <?php /* No rel=canonical here — WordPress core's rel_canonical() already emits a
+           correct per-page one via wp_head(). Adding our own produced duplicates. */ ?>
+  <meta property="og:type" content="<?php echo $astrix_is_front ? 'website' : 'article'; ?>">
+  <meta property="og:site_name" content="<?php echo esc_attr(get_bloginfo('name')); ?>">
+  <meta property="og:title" content="<?php echo esc_attr($astrix_title); ?>">
+  <meta property="og:description" content="<?php echo esc_attr($astrix_desc); ?>">
+  <meta property="og:url" content="<?php echo esc_url($astrix_url); ?>">
+  <meta property="og:image" content="<?php echo esc_url($astrix_og_image); ?>">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Astrix Media — strategy, brand, technology and growth as one connected system.">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="<?php echo esc_attr($astrix_title); ?>">
+  <meta name="twitter:description" content="<?php echo esc_attr($astrix_desc); ?>">
+  <meta name="twitter:image" content="<?php echo esc_url($astrix_og_image); ?>">
 
   <script type="application/ld+json">
   {
@@ -26,11 +68,11 @@
     "@type": "Organization",
     "name": "Astrix Media",
     "url": "https://astrixmedia.in",
-    "slogan": "Growth is a systems problem.",
+    "slogan": "Growth is a business systems challenge.",
     "description": "A business transformation partner that integrates strategy, brand, experience, technology and growth into one connected ecosystem.",
     "foundingLocation": "India",
     "areaServed": "Global",
-    "email": "info@astrixmedia.in",
+    "email": "<?php echo esc_js(astrix_setting('email')); ?>",
     "knowsAbout": [
       "Business Transformation",
       "Brand Strategy",
@@ -60,17 +102,14 @@ $astrix_nav_class = function ($key) use ($astrix_nav_active) {
 ?>
 <nav class="main-nav" style="position: relative; z-index: 3; display: flex; align-items: center; justify-content: space-between; padding: 34px clamp(28px, 5vw, 72px); background: #F5F1EA;">
   <a href="<?php echo esc_url(home_url('/')); ?>" style="display: flex; align-items: center; gap: 12px;">
-    <img src="<?php echo esc_url($theme_uri . '/assets/Astrix Logo-01.webp'); ?>" alt="Astrix" style="width: 26px; height: 26px; display: block; object-fit: contain;">
-    <span style="font-weight: 700; font-size: 17px; letter-spacing: 0.22em; color: #211C17;">ASTRIX</span>
+    <img loading="eager" fetchpriority="high" decoding="async" src="<?php echo esc_url($theme_uri . '/assets/Astrix Logo-01.webp'); ?>" alt="Astrix" style="width: clamp(44px, 4.6vw, 58.5px); height: clamp(44px, 4.6vw, 58.5px); display: block; object-fit: contain;">
+    <span style="font-weight: 700; font-size: clamp(17px, 1.8vw, 22.4px); letter-spacing: 0.22em; color: #211C17;">ASTRIX</span>
     <span style="width: 1px; height: 14px; background: #D6CDBE; display: block;"></span>
-    <span style="font-size: 10px; letter-spacing: 0.28em; color: #9A8E7D; font-weight: 500;">MEDIA</span>
+    <span style="font-size: clamp(10px, 1.05vw, 13.2px); letter-spacing: 0.28em; color: #9A8E7D; font-weight: 500;">MEDIA</span>
   </a>
   <div class="nav-links" style="display: flex; gap: clamp(20px, 3vw, 44px); align-items: center; font-size: 13.5px; font-weight: 500; letter-spacing: 0.02em;">
-    <a href="<?php echo esc_url(home_url('/work')); ?>" class="<?php echo esc_attr($astrix_nav_class('work')); ?>">Work</a>
-    <a href="<?php echo esc_url(home_url('/services')); ?>" class="<?php echo esc_attr($astrix_nav_class('services')); ?>">What We Do</a>
-    <a href="<?php echo esc_url(home_url('/perspective')); ?>" class="<?php echo esc_attr($astrix_nav_class('perspective')); ?>">Insights</a>
-    <a href="<?php echo esc_url(home_url('/studio')); ?>" class="<?php echo esc_attr($astrix_nav_class('studio')); ?>">Who We Are</a>
-    <a href="<?php echo esc_url(home_url('/contact')); ?>" class="axnav-cta" data-magnetic>Book a Discovery Session</a>
+    <?php astrix_primary_nav(); ?>
+    <a href="<?php echo esc_url(home_url('/contact')); ?>" class="axnav-cta" data-magnetic>Let's Connect!</a>
   </div>
 
   <button id="nav-burger" class="nav-burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav-sheet">
@@ -82,7 +121,7 @@ $astrix_nav_class = function ($key) use ($astrix_nav_active) {
 <div id="nav-sheet" class="nav-sheet" role="dialog" aria-modal="true" aria-label="Site menu">
   <div class="nav-sheet-top">
     <a href="<?php echo esc_url(home_url('/')); ?>" class="nav-sheet-brand">
-      <img src="<?php echo esc_url($theme_uri . '/assets/Astrix Logo-01.webp'); ?>" alt="Astrix" width="26" height="26">
+      <img loading="lazy" decoding="async" src="<?php echo esc_url($theme_uri . '/assets/Astrix Logo-01.webp'); ?>" alt="Astrix" width="39" height="39">
       <span>ASTRIX</span>
     </a>
     <button id="nav-close" class="nav-close" type="button" aria-label="Close menu">&times;</button>
@@ -94,7 +133,7 @@ $astrix_nav_class = function ($key) use ($astrix_nav_active) {
     <a href="<?php echo esc_url(home_url('/studio')); ?>">Who We Are</a>
   </nav>
   <div class="nav-sheet-foot">
-    <a href="<?php echo esc_url(home_url('/contact')); ?>" class="nav-sheet-cta">Book a Discovery Session <span>&rarr;</span></a>
-    <a href="mailto:info@astrixmedia.in" class="nav-sheet-mail">info@astrixmedia.in</a>
+    <a href="<?php echo esc_url(home_url('/contact')); ?>" class="nav-sheet-cta">Let's Connect! <span>&rarr;</span></a>
+    <a href="mailto:<?php echo esc_attr(astrix_setting('email')); ?>" class="nav-sheet-mail"><?php echo esc_html(astrix_setting('email')); ?></a>
   </div>
 </div>

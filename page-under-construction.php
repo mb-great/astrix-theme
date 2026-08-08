@@ -5,6 +5,16 @@
  * (the original V8 reference is a standalone page with no nav/footer; this project's
  * convention keeps header/footer on every page, so that's added here deliberately).
  */
+// Keep unbuilt pages out of the index. The V8 reference set
+// <meta name="robots" content="noindex, follow"> and the original port dropped it —
+// without this, every "coming soon" placeholder gets indexed as thin content.
+// Must be registered BEFORE get_header(), since wp_head() fires inside it.
+add_filter('wp_robots', function ($robots) {
+  $robots['noindex'] = true;
+  $robots['follow']  = true;
+  return $robots;
+});
+
 get_header();
 $theme_uri = get_template_directory_uri();
 $page_label = get_the_title() ?: 'This page';
@@ -12,7 +22,7 @@ $page_label = get_the_title() ?: 'This page';
 
 <div style="background: #F5F1EA; min-height: 70vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: clamp(48px,8vh,110px) clamp(28px,5vw,72px); gap: clamp(26px,4vh,44px);">
 
-  <img src="<?php echo esc_url($theme_uri . '/assets/Astrix Logo-01.webp'); ?>" alt="Astrix Media" style="width: 40px; height: 40px; object-fit: contain; animation: axSpin 16s linear infinite;">
+  <img loading="lazy" decoding="async" src="<?php echo esc_url($theme_uri . '/assets/Astrix Logo-01.webp'); ?>" alt="Astrix Media" style="width: 40px; height: 40px; object-fit: contain; animation: axSpin 16s linear infinite;">
 
   <div style="display: flex; align-items: center; gap: 14px;">
     <span style="width: 22px; height: 1px; background: #C56A37;"></span>

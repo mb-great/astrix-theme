@@ -260,32 +260,32 @@ a:hover {
 
 /* ── Primary CTA Hover (lift + glow, lost from the .dc.html style-hover attr) ── */
 .ax-cta-dark:hover {
-  color: #F5F1EA;
-  transform: translateY(-2px);
-  box-shadow: 0 14px 34px -12px rgba(197, 106, 55, 0.5);
+  color: #F5F1EA !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 14px 34px -12px rgba(197, 106, 55, 0.5) !important;
 }
 
 .ax-cta-light:hover {
-  color: #211C17;
-  transform: translateY(-2px);
-  box-shadow: 0 12px 32px -12px rgba(0, 0, 0, 0.5);
+  color: #211C17 !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 12px 32px -12px rgba(0, 0, 0, 0.5) !important;
 }
 
 .ax-cta-outline-light:hover {
-  background: #F5F1EA;
-  color: #211C17;
-  border-color: #F5F1EA;
+  background: #F5F1EA !important;
+  color: #211C17 !important;
+  border-color: #F5F1EA !important;
 }
 
 /* ── Underline Links (lost hover states from .dc.html style-hover attr) ── */
 .ax-underline-dark:hover {
-  border-bottom-color: #211C17;
-  color: #211C17;
+  border-bottom-color: #211C17 !important;
+  color: #211C17 !important;
 }
 
 .ax-underline-light:hover {
-  border-bottom-color: #F5F1EA;
-  color: #F5F1EA;
+  border-bottom-color: #F5F1EA !important;
+  color: #F5F1EA !important;
 }
 
 /* ── Ecosystem Grid Card Hover ── */
@@ -333,7 +333,7 @@ a:hover {
 }
 
 .ax-footer-meta-link:hover {
-  color: #F5F1EA;
+  color: #F5F1EA !important;
 }
 
 /* ── Reveal Elements Initial State ──
@@ -431,8 +431,8 @@ html.js [data-reveal].revealed {
 }
 
 .nav-sheet-brand img {
-  width: 26px;
-  height: 26px;
+  width: 39px;
+  height: 39px;
   object-fit: contain;
 }
 
@@ -555,4 +555,67 @@ body.nav-open #astrix-float-group {
   .thread-label {
     display: none !important;
   }
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Editable navigation + mega menu (inc/nav.php, deck slides 1-4)
+   ───────────────────────────────────────────────────────────── */
+
+.ax-nav-list { display: flex; gap: clamp(18px, 2.6vw, 38px); align-items: center; list-style: none; margin: 0; padding: 0; }
+.ax-nav-list > li { position: relative; }
+.ax-nav-list > li > a { display: inline-flex; align-items: center; gap: 6px; color: #211C17; padding: 8px 0; white-space: nowrap; }
+.ax-nav-list > li > a > span { position: relative; }
+/* Underline grows from the left on hover, matching the site's link treatment. */
+.ax-nav-list > li > a > span::after {
+  content: ""; position: absolute; left: 0; bottom: -3px; width: 0; height: 1px;
+  background: #C56A37; transition: width 0.32s cubic-bezier(0.16,1,0.3,1);
+}
+.ax-nav-list > li > a:hover > span::after,
+.ax-nav-list > li.ax-open > a > span::after { width: 100%; }
+.ax-caret { transition: transform 0.3s ease; flex: none; }
+.ax-nav-list > li.ax-open .ax-caret { transform: rotate(180deg); }
+
+/* The panel. Hidden by visibility rather than display so it can transition,
+   and pointer-events:none so an invisible panel can never eat clicks. */
+.ax-mega {
+  position: absolute; top: calc(100% + 14px); left: 50%; transform: translate(-50%, -6px);
+  min-width: min(880px, 92vw); background: #FFFDF9; border: 1px solid rgba(33,28,23,0.10);
+  border-radius: 6px; box-shadow: 0 24px 60px rgba(33,28,23,0.13);
+  opacity: 0; visibility: hidden; pointer-events: none;
+  transition: opacity 0.26s ease, transform 0.26s cubic-bezier(0.16,1,0.3,1), visibility 0.26s;
+  z-index: 60;
+}
+.ax-nav-list > li.ax-open > .ax-mega,
+.ax-nav-list > li:hover > .ax-mega { opacity: 1; visibility: visible; pointer-events: auto; transform: translate(-50%, 0); }
+.ax-mega-inner { padding: clamp(22px, 2.4vw, 34px); }
+.ax-mega-cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: clamp(20px, 2.4vw, 40px); list-style: none; margin: 0; padding: 0; }
+
+/* A depth-1 item WITH children is a column heading. */
+.ax-mega-cols > li.ax-col-head > a {
+  display: block; font-size: 10.5px; letter-spacing: 0.26em; text-transform: uppercase;
+  color: #C56A37; font-weight: 600; padding-bottom: 9px; margin-bottom: 9px;
+  border-bottom: 1px solid rgba(33,28,23,0.12); pointer-events: none;
+}
+/* A depth-1 item WITHOUT children is just a link — the flat "Our Expertise" case. */
+.ax-mega-cols > li:not(.ax-col-head) > a { display: block; padding: 7px 0; font-size: 13.5px; color: #211C17; }
+.ax-mega-sub { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 2px; }
+.ax-mega-sub > li > a { display: flex; align-items: center; gap: 8px; padding: 6px 0; font-size: 13.5px; line-height: 1.45; color: #3A322B; transition: color 0.22s ease, transform 0.22s ease; }
+.ax-mega-sub > li > a:hover,
+.ax-mega-cols > li:not(.ax-col-head) > a:hover { color: #C56A37; transform: translateX(3px); }
+
+/* Badges — driven by a CSS class the client sets in Appearance → Menus. */
+.ax-badge-new > a::after,
+.ax-badge-hot > a::after,
+.ax-badge-best > a::after {
+  font-size: 8.5px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 700;
+  padding: 2px 6px; border-radius: 3px; white-space: nowrap; flex: none;
+}
+.ax-badge-new  > a::after { content: "New";        background: #F2E3C9; color: #8A6A2F; }
+.ax-badge-hot  > a::after { content: "In demand";  background: #F6D9C7; color: #A2502A; }
+.ax-badge-best > a::after { content: "Bestseller"; background: #DCE9DA; color: #3F6B45; }
+
+/* Below the hamburger breakpoint the desktop list is hidden entirely; the
+   mobile sheet handles navigation, so the mega panel must never appear. */
+@media (max-width: 900px) {
+  .ax-mega { display: none; }
 }

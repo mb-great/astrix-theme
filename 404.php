@@ -10,7 +10,7 @@ $theme_uri = get_template_directory_uri();
 
   <span style="position: absolute; top: 8%; left: 50%; transform: translateX(-50%); font-family: 'Instrument Serif', serif; font-style: italic; font-weight: 400; font-size: clamp(80px,34vw,440px); line-height: 1; color: rgba(33,28,23,0.04); user-select: none; pointer-events: none; white-space: nowrap;">404</span>
 
-  <img src="<?php echo esc_url($theme_uri . '/assets/Astrix Logo-01.webp'); ?>" alt="Astrix Media" style="position: relative; width: 40px; height: 40px; object-fit: contain;">
+  <img loading="lazy" decoding="async" src="<?php echo esc_url($theme_uri . '/assets/Astrix Logo-01.webp'); ?>" alt="Astrix Media" style="position: relative; width: 40px; height: 40px; object-fit: contain;">
 
   <div style="position: relative; display: flex; align-items: center; gap: 14px;">
     <span style="width: 22px; height: 1px; background: #C56A37;"></span>

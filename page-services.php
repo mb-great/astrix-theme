@@ -82,7 +82,7 @@ $faqs = array(
         <a href="<?php echo esc_url(home_url('/contact')); ?>" class="ax-underline-dark" style="display: inline-flex; align-items: center; gap: 10px; margin-top: 4px; align-self: flex-start; font-size: 14.5px; font-weight: 500; color: #211C17; border: none; border-bottom: 1px solid #C9BFAE; padding: 6px 0; transition: border-color 0.3s ease;">Explore <?php echo esc_html($s['label']); ?> <span style="font-size: 15px;">→</span></a>
       </div>
       <div class="svc-img ax-frame" style="border-radius: 4px; aspect-ratio: 1.06; min-height: clamp(320px,50vh,540px);">
-        <img class="ax-photo" style="animation: kenburns 26s ease-in-out infinite alternate;" src="<?php echo esc_url($theme_uri . '/assets/' . $s['img']); ?>" alt="<?php echo esc_attr($s['outcome']); ?>">
+        <img loading="lazy" decoding="async" class="ax-photo" style="animation: kenburns 26s ease-in-out infinite alternate;" src="<?php echo esc_url($theme_uri . '/assets/' . $s['img']); ?>" alt="<?php echo esc_attr($s['outcome']); ?>">
         <div class="ax-grain-layer"></div>
         <div style="position: absolute; inset: 0; z-index: 3; pointer-events: none; margin: 18px; border: 1px solid rgba(245,241,234,0.20);"></div>
         <span class="ax-word" style="left: 22px; bottom: 16px; font-size: clamp(40px,4.4vw,80px); color: rgba(245,241,234,0.16);"><?php echo esc_html($s['word']); ?></span>

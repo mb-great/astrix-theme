@@ -69,7 +69,7 @@ $stats = array(
       <p style="margin: 0; max-width: 52ch; font-size: clamp(16px,1.4vw,19px); line-height: 1.6; color: #7A6F63; opacity: 0; animation: riseIn 1.1s cubic-bezier(0.16,1,0.3,1) 0.62s forwards;">Astrix is a brand, creative and growth studio built around one belief: businesses don't grow because they speak louder — they grow because people choose them.</p>
     </div>
     <div class="ax-frame" style="grid-column: 8 / span 5; align-self: stretch; border-radius: 4px; min-height: clamp(320px,52vh,540px); opacity: 0; animation: fadeIn 1.6s ease 0.5s forwards;">
-      <img class="ax-photo" style="animation: kenburns 24s ease-in-out infinite alternate;" src="<?php echo esc_url($theme_uri . '/assets/page-possibility.webp'); ?>" alt="A studio built on belief and possibility">
+      <img loading="lazy" decoding="async" class="ax-photo" style="animation: kenburns 24s ease-in-out infinite alternate;" src="<?php echo esc_url($theme_uri . '/assets/page-possibility.webp'); ?>" alt="A studio built on belief and possibility">
       <div class="ax-grain-layer"></div>
       <div style="position: absolute; inset: 0; z-index: 3; pointer-events: none; margin: 18px; border: 1px solid rgba(245,241,234,0.22);"></div>
       <span class="ax-word" style="left: 22px; bottom: 20px; font-size: clamp(42px,4.6vw,78px); color: rgba(245,241,234,0.16);">Belief</span>
