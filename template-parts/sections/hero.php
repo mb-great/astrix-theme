@@ -48,13 +48,14 @@ $front_id  = (int) get_option('page_on_front');
     </div>
   </div>
 
-  <div style="position: relative; z-index: 2; display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; padding: clamp(30px, 5vh, 60px) clamp(28px, 5vw, 72px) 40px; opacity: 0; animation: fadeIn 1.4s ease 1.5s forwards;">
-    <div style="display: flex; gap: clamp(16px, 2.5vw, 36px); flex-wrap: wrap; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: #9A8E7D; font-weight: 500;">
+  <div class="hero-foot" style="position: relative; z-index: 2; display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; padding: clamp(24px, 4vh, 50px) clamp(28px, 5vw, 72px) 30px; opacity: 0; animation: fadeIn 1.4s ease 1.5s forwards;">
+    <div class="hero-disciplines" style="display: flex; gap: clamp(14px, 2.2vw, 36px); flex-wrap: wrap; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: #9A8E7D; font-weight: 500;">
       <span>Strategy</span><span>Brand</span><span>Experience</span><span>Technology</span><span>Growth</span><span>AI</span>
     </div>
-    <div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
+    <div class="hero-scroll-cue" style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
       <span style="font-size: 10px; letter-spacing: 0.26em; color: #9A8E7D; text-transform: uppercase;">Scroll</span>
       <span style="width: 1px; height: 34px; background: #C0B4A2; display: block; animation: cueDrop 2.6s cubic-bezier(0.65, 0, 0.35, 1) 2s infinite;"></span>
     </div>
   </div>
 </div>
+

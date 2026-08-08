@@ -512,8 +512,18 @@ body.nav-open #astrix-float-group {
   .nav-burger {
     display: flex;
   }
+  nav.main-nav {
+    padding: 18px clamp(20px, 4.5vw, 36px) !important;
+  }
+
+  /* Grid & Section Spacing */
   .grid-12 {
     grid-template-columns: 1fr !important;
+    padding-left: clamp(20px, 4.5vw, 36px) !important;
+    padding-right: clamp(20px, 4.5vw, 36px) !important;
+    padding-top: clamp(40px, 6vh, 60px) !important;
+    padding-bottom: clamp(40px, 6vh, 60px) !important;
+    gap: 20px !important;
   }
   .grid-12 > * {
     grid-column: 1 / -1 !important;
@@ -523,25 +533,69 @@ body.nav-open #astrix-float-group {
     position: static !important;
     top: auto !important;
   }
-  nav.main-nav {
-    padding-top: 22px !important;
-    padding-bottom: 22px !important;
+
+  /* Hero Section Mobile Polish */
+  #hero {
+    min-height: auto !important;
   }
+  #hero > .grid-12 {
+    padding-top: clamp(20px, 3.5vh, 36px) !important;
+    padding-bottom: 0 !important;
+    gap: 28px !important;
+  }
+  #hero .ax-frame {
+    min-height: 280px !important;
+    aspect-ratio: 16/10 !important;
+  }
+  .hero-foot {
+    padding: 20px clamp(20px, 4.5vw, 36px) 24px !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 14px !important;
+  }
+  .hero-disciplines {
+    gap: 8px 16px !important;
+    font-size: 10.5px !important;
+    letter-spacing: 0.16em !important;
+    line-height: 1.6 !important;
+  }
+  .hero-scroll-cue {
+    display: none !important; /* Hide floating drop line on mobile */
+  }
+
+  /* Chapter 1 Video Frame */
+  .ax-frame[data-screen-label*="Chapter One"] {
+    min-height: clamp(380px, 55vh, 480px) !important;
+    padding: clamp(40px, 6vh, 60px) clamp(20px, 4.5vw, 36px) !important;
+  }
+
+  /* Pullquote Spacing */
+  div[data-reveal][style*="margin: clamp(60px"],
+  div[data-reveal][style*="margin:clamp(60px"] {
+    margin-top: 32px !important;
+  }
+
+  /* Ecosystems & Handoff Grids */
   .eco-grid {
     grid-template-columns: 1fr !important;
   }
   .handoff-row {
     flex-direction: column !important;
   }
-  .ft-grid {
-    grid-template-columns: 1fr 1fr !important;
-  }
-  .ft-brand {
-    grid-column: 1 / -1 !important;
-  }
+
+  /* Proof & Transformations */
   .proof-grid {
     grid-template-columns: 1fr !important;
     gap: 16px !important;
+  }
+
+  /* Footer */
+  .ft-grid {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 32px 24px !important;
+  }
+  .ft-brand {
+    grid-column: 1 / -1 !important;
   }
 }
 
@@ -555,7 +609,20 @@ body.nav-open #astrix-float-group {
   .thread-label {
     display: none !important;
   }
+  .ax-frame {
+    min-height: 220px !important;
+  }
+  #astrix-float-group {
+    bottom: 20px !important;
+    right: 16px !important;
+    gap: 10px !important;
+  }
+  .ax-float-btn {
+    width: 44px !important;
+    height: 44px !important;
+  }
 }
+
 
 /* ─────────────────────────────────────────────────────────────
    Editable navigation + mega menu (inc/nav.php, deck slides 1-4)
