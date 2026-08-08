@@ -1,0 +1,148 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/theme.json",
+  "version": 3,
+  "settings": {
+    "appearanceTools": true,
+    "useRootPaddingAwareAlignments": true,
+    "layout": {
+      "contentSize": "1440px",
+      "wideSize": "100%"
+    },
+    "color": {
+      "custom": true,
+      "customGradient": true,
+      "link": true,
+      "palette": [
+        {
+          "slug": "background",
+          "color": "#F5F1EA",
+          "name": "Astrix Cream Background"
+        },
+        {
+          "slug": "foreground",
+          "color": "#211C17",
+          "name": "Astrix Dark Ink"
+        },
+        {
+          "slug": "accent",
+          "color": "#C56A37",
+          "name": "Astrix Burnt Orange Accent"
+        },
+        {
+          "slug": "muted",
+          "color": "#7A6F63",
+          "name": "Astrix Muted Text"
+        },
+        {
+          "slug": "border",
+          "color": "#E5DEC9",
+          "name": "Astrix Hairline Border"
+        },
+        {
+          "slug": "card-dark",
+          "color": "#221C16",
+          "name": "Astrix Dark Card"
+        },
+        {
+          "slug": "white",
+          "color": "#FFFFFF",
+          "name": "White"
+        }
+      ]
+    },
+    "typography": {
+      "customFontSize": true,
+      "fontFamilies": [
+        {
+          "fontFamily": "'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
+          "name": "Geist Sans",
+          "slug": "geist"
+        },
+        {
+          "fontFamily": "'Instrument Serif', Georgia, serif",
+          "name": "Instrument Serif",
+          "slug": "instrument-serif"
+        }
+      ],
+      "fontSizes": [
+        {
+          "name": "Eyebrow",
+          "size": "11.5px",
+          "slug": "eyebrow"
+        },
+        {
+          "name": "Small",
+          "size": "13px",
+          "slug": "small"
+        },
+        {
+          "name": "Medium / Body",
+          "size": "16px",
+          "slug": "body"
+        },
+        {
+          "name": "Large",
+          "size": "24px",
+          "slug": "large"
+        },
+        {
+          "name": "Display 2",
+          "size": "clamp(34px, 4.6vw, 68px)",
+          "slug": "display-2"
+        },
+        {
+          "name": "Display 1 / Hero",
+          "size": "clamp(44px, 7.2vw, 108px)",
+          "slug": "hero"
+        }
+      ]
+    },
+    "spacing": {
+      "units": ["px", "em", "rem", "vh", "vw", "%"]
+    }
+  },
+  "styles": {
+    "color": {
+      "background": "#F5F1EA",
+      "text": "#211C17"
+    },
+    "typography": {
+      "fontFamily": "var(--wp--preset--font-family--geist)",
+      "fontSize": "16px",
+      "lineHeight": "1.5"
+    },
+    "elements": {
+      "link": {
+        "color": {
+          "text": "#211C17"
+        },
+        ":hover": {
+          "color": {
+            "text": "#C56A37"
+          }
+        }
+      },
+      "heading": {
+        "color": {
+          "text": "#211C17"
+        },
+        "typography": {
+          "fontWeight": "600",
+          "letterSpacing": "-0.03em"
+        }
+      }
+    }
+  },
+  "templateParts": [
+    {
+      "name": "header",
+      "title": "Site Header",
+      "area": "header"
+    },
+    {
+      "name": "footer",
+      "title": "Site Footer",
+      "area": "footer"
+    }
+  ]
+}

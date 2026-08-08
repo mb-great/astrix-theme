@@ -21,6 +21,10 @@ require_once get_template_directory() . '/inc/block-patterns.php';
 function astrix_theme_setup() {
   add_theme_support('title-tag');
   add_theme_support('post-thumbnails');
+  add_theme_support('align-wide');
+  add_theme_support('block-templates');
+  add_theme_support('block-template-parts');
+  add_theme_support('editor-styles');
   add_theme_support('custom-logo', array(
     'height'      => 100,
     'width'       => 100,
