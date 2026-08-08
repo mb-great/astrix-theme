@@ -109,7 +109,35 @@ add_action('add_meta_boxes', function () {
   } elseif ($is_work) {
     add_meta_box('astrix_work_editor', '⚡ Astrix Work Page Editor', 'astrix_render_work_metabox', 'page', 'normal', 'high');
   }
+
+  // Add SEO & Social Sharing meta box to all pages
+  add_meta_box('astrix_seo_editor', '🔍 SEO & Social Sharing Settings', 'astrix_render_seo_metabox', 'page', 'normal', 'low');
 });
+
+/**
+ * Render SEO & Social Sharing Meta Box for any page.
+ */
+function astrix_render_seo_metabox($post) {
+  wp_nonce_field('astrix_save_meta', 'astrix_meta_nonce');
+  $seo_title = get_post_meta($post->ID, 'astrix_seo_title', true);
+  $seo_desc  = get_post_meta($post->ID, 'astrix_seo_desc', true);
+  ?>
+  <div style="padding: 10px 0;">
+    <div style="margin-bottom: 14px;">
+      <label style="display:block; font-weight:600; font-size:13px; margin-bottom:4px; color:#1d2327;">Custom SEO Meta Title</label>
+      <input type="text" name="astrix_meta[astrix_seo_title]" value="<?php echo esc_attr($seo_title); ?>" placeholder="e.g. Astrix Media · Growth is a business systems challenge" style="width:100%; padding:8px; border:1px solid #8c8f94; border-radius:4px;">
+      <p style="margin:4px 0 0; font-size:12px; color:#646970;">Custom title for Google search results and browser tab (50–60 chars recommended). Leave blank to use default page title.</p>
+    </div>
+    <div style="margin-bottom: 14px;">
+      <label style="display:block; font-weight:600; font-size:13px; margin-bottom:4px; color:#1d2327;">Custom SEO Meta Description</label>
+      <textarea name="astrix_meta[astrix_seo_desc]" rows="3" placeholder="e.g. Astrix Media integrates strategy, brand, experience, technology and growth into one connected engine..." style="width:100%; padding:8px; border:1px solid #8c8f94; border-radius:4px;"><?php echo esc_textarea($seo_desc); ?></textarea>
+      <p style="margin:4px 0 0; font-size:12px; color:#646970;">Snippet description for Google search and social preview cards (140–160 chars recommended).</p>
+    </div>
+    <?php astrix_admin_image_field($post->ID, 'astrix_og_image', 'Custom Social Sharing Card Image (1200x630px for WhatsApp, LinkedIn, Facebook)', 'og-image.jpg'); ?>
+  </div>
+  <?php
+}
+
 
 /**
  * Register Meta Box for Case Studies / Clients CPT.
@@ -525,6 +553,7 @@ function astrix_render_unified_options_page() {
 
     <h2 class="nav-tab-wrapper" style="margin-bottom: 24px;">
       <a href="?page=astrix-editor&tab=home" class="nav-tab <?php echo $active_tab === 'home' ? 'nav-tab-active' : ''; ?>">🏠 Homepage Slides</a>
+      <a href="?page=astrix-editor&tab=seo" class="nav-tab <?php echo $active_tab === 'seo' ? 'nav-tab-active' : ''; ?>">🔍 SEO & Social Share</a>
       <a href="?page=astrix-editor&tab=contact" class="nav-tab <?php echo $active_tab === 'contact' ? 'nav-tab-active' : ''; ?>">📞 Contact & Global Info</a>
       <a href="?page=astrix-editor&tab=toggles" class="nav-tab <?php echo $active_tab === 'toggles' ? 'nav-tab-active' : ''; ?>">🎚️ Section Toggles</a>
       <a href="<?php echo admin_url('edit.php?post_type=case_study'); ?>" class="nav-tab">📈 Client Case Studies ↗</a>
@@ -624,8 +653,36 @@ function astrix_render_unified_options_page() {
           </div>
         </div>
 
+      <?php elseif ($active_tab === 'seo'): ?>
+        <!-- Tab 2: SEO & Social Share -->
+        <div style="background: #fff; border: 1px solid #ccd0d4; border-radius: 6px; padding: 24px; box-shadow: 0 1px 3px rgba(0,0,0,0.04);">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+            <h2 style="margin: 0; font-size: 18px;">Homepage SEO & Social Sharing Settings</h2>
+            <input type="submit" name="astrix_unified_submit" class="button button-primary button-hero" value="Save All Changes">
+          </div>
+          <p style="color:#646970; font-size:13px; margin-bottom:20px;">Control how the Homepage appears in Google search results, WhatsApp previews, LinkedIn cards, and Twitter shares:</p>
+
+          <div style="margin-bottom: 20px;">
+            <label style="display:block; font-weight:600; font-size:13px; margin-bottom:4px; color:#1d2327;">Homepage Meta Title</label>
+            <input type="text" name="astrix_home_meta[astrix_seo_title]" value="<?php echo esc_attr(get_post_meta($front_id, 'astrix_seo_title', true)); ?>" placeholder="Astrix Media: Growth is a business systems challenge." style="width:100%; padding:8px; border:1px solid #8c8f94; border-radius:4px;">
+            <p style="margin:4px 0 0; font-size:12px; color:#646970;">Recommended length: 50–60 characters.</p>
+          </div>
+
+          <div style="margin-bottom: 20px;">
+            <label style="display:block; font-weight:600; font-size:13px; margin-bottom:4px; color:#1d2327;">Homepage Meta Description</label>
+            <textarea name="astrix_home_meta[astrix_seo_desc]" rows="3" placeholder="Astrix Media integrates strategy, brand, experience, technology and growth into one connected engine. Not an agency, a business transformation partner." style="width:100%; padding:8px; border:1px solid #8c8f94; border-radius:4px;"><?php echo esc_textarea(get_post_meta($front_id, 'astrix_seo_desc', true)); ?></textarea>
+            <p style="margin:4px 0 0; font-size:12px; color:#646970;">Recommended length: 140–160 characters.</p>
+          </div>
+
+          <?php astrix_admin_image_field($front_id, 'astrix_og_image', 'Homepage Social Sharing Image (1200x630px OG Image for WhatsApp, LinkedIn, Twitter)', 'og-image.jpg'); ?>
+
+          <div style="margin-top: 24px; text-align: right;">
+            <input type="submit" name="astrix_unified_submit" class="button button-primary button-hero" value="Save All Changes">
+          </div>
+        </div>
+
       <?php elseif ($active_tab === 'contact'): ?>
-        <!-- Tab 2: Contact & Global Info -->
+        <!-- Tab 3: Contact & Global Info -->
         <div style="background: #fff; border: 1px solid #ccd0d4; border-radius: 6px; padding: 24px; box-shadow: 0 1px 3px rgba(0,0,0,0.04);">
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
             <h2 style="margin: 0; font-size: 18px;">Global Contact, Social & Address Details</h2>
@@ -680,7 +737,7 @@ function astrix_render_unified_options_page() {
         </div>
 
       <?php elseif ($active_tab === 'toggles'): ?>
-        <!-- Tab 3: Section Toggles -->
+        <!-- Tab 4: Section Toggles -->
         <div style="background: #fff; border: 1px solid #ccd0d4; border-radius: 6px; padding: 24px; box-shadow: 0 1px 3px rgba(0,0,0,0.04);">
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
             <h2 style="margin: 0; font-size: 18px;">Homepage 12-Section Visibility Toggles</h2>
@@ -721,6 +778,7 @@ function astrix_render_unified_options_page() {
       <?php endif; ?>
     </form>
   </div>
+
   <?php
 }
 

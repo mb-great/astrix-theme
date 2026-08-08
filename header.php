@@ -29,27 +29,31 @@
    * defaults on the front page and on archives.
    */
   $astrix_is_front = is_front_page();
+  $astrix_obj_id   = get_queried_object_id();
   $astrix_url      = $astrix_is_front ? home_url('/') : get_permalink();
   if (!$astrix_url) { $astrix_url = home_url(add_query_arg(array(), $GLOBALS['wp']->request)); }
 
+  // Check custom editable SEO meta from page/theme settings
+  $custom_title = $astrix_obj_id ? get_post_meta($astrix_obj_id, 'astrix_seo_title', true) : '';
+  $custom_desc  = $astrix_obj_id ? get_post_meta($astrix_obj_id, 'astrix_seo_desc', true) : '';
+  $custom_og    = $astrix_obj_id ? get_post_meta($astrix_obj_id, 'astrix_og_image', true) : '';
+
   $astrix_default_desc = 'Astrix Media integrates strategy, brand, experience, technology and growth into one connected engine. Not an agency, a business transformation partner.';
-  $astrix_desc = $astrix_default_desc;
-  if (!$astrix_is_front && is_singular()) {
-    // These pages are built by PHP templates and mostly carry no post_content,
-    // so get_the_excerpt() returns a stub like "Work" — worse for search results
-    // than the site default. Only take an excerpt with real substance in it.
+  $astrix_desc = $custom_desc ? $custom_desc : $astrix_default_desc;
+  if (!$custom_desc && !$astrix_is_front && is_singular()) {
     $excerpt = trim(preg_replace('/\s+/', ' ', wp_strip_all_tags(get_the_excerpt())));
     if (mb_strlen($excerpt) >= 60) { $astrix_desc = $excerpt; }
   }
   $astrix_desc = trim(preg_replace('/\s+/', ' ', $astrix_desc));
   if (mb_strlen($astrix_desc) > 200) { $astrix_desc = mb_substr($astrix_desc, 0, 197) . '…'; }
 
-  $astrix_title = $astrix_is_front
+  $astrix_title = $custom_title ? $custom_title : ($astrix_is_front
     ? 'Astrix Media: Growth is a business systems challenge.'
-    : wp_get_document_title();
+    : wp_get_document_title());
 
-  // 1200x630 card. A square favicon here would be cropped badly by most platforms.
-  $astrix_og_image = get_template_directory_uri() . '/assets/og-image.jpg';
+  // 1200x630 card with fallback to default asset
+  $astrix_og_image = $custom_og ? $custom_og : (get_template_directory_uri() . '/assets/og-image.jpg');
+
   ?>
   <meta name="description" content="<?php echo esc_attr($astrix_desc); ?>">
   <?php /* No rel=canonical here — WordPress core's rel_canonical() already emits a
