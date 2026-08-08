@@ -1,39 +1,85 @@
 <?php
 /**
- * Title: Slide 14: Chapter 5 (The Stack Technology Matrix)
+ * Title: Slide 13-14: Chapter 5 (The Technology Stack)
  * Slug: astrix/stack-section
  * Categories: astrix
  * Inserter: true
  */
 ?>
 <!-- wp:html -->
-<section class="sec-stack-wrap" style="position:relative;background:#1A1611;color:#F5F1EA;padding:clamp(100px,16vh,180px) clamp(24px,4.5vw,64px);overflow:hidden;">
-  <div style="max-width:1440px;margin:0 auto;display:grid;grid-template-columns:repeat(12,1fr);gap:clamp(24px,3.5vw,48px);position:relative;z-index:2;">
-    <div style="grid-column:1 / span 12;display:flex;align-items:center;gap:12px;margin-bottom:12px;">
-      <span style="display:inline-block;width:22px;height:1px;background:#C56A37;"></span>
-      <span style="font-size:11.5px;letter-spacing:0.32em;font-weight:600;color:rgba(245,241,234,0.6);text-transform:uppercase;">Chapter Five · The Stack</span>
+<section style="position:relative;background:#211C17;color:#F5F1EA;overflow:hidden;" data-screen-label="Chapter Five · The Stack">
+  <div class="grid-12" style="position:relative;z-index:2;display:grid;grid-template-columns:repeat(12, 1fr);gap:24px;padding:clamp(80px,14vh,160px) clamp(28px,5vw,72px);">
+    <div data-reveal style="grid-column:1 / span 12;display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap;margin-bottom:clamp(36px,6vh,64px);">
+      <div style="display:flex;flex-direction:column;gap:24px;">
+        <div style="display:flex;align-items:center;gap:14px;">
+          <span style="width:22px;height:1px;background:#C56A37;"></span>
+          <span style="font-size:11.5px;letter-spacing:0.32em;font-weight:500;color:rgba(245,241,234,0.6);text-transform:uppercase;">The Stack</span>
+        </div>
+        <h2 style="margin:0;font-weight:600;font-size:clamp(34px,4.4vw,66px);line-height:1.04;letter-spacing:-0.035em;max-width:17ch;color:#F5F1EA;">
+          Technology, translated into <em style="font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;color:#C56A37;">business.</em>
+        </h2>
+      </div>
+      <p style="margin:0;max-width:36ch;font-size:15px;line-height:1.68;color:rgba(245,241,234,0.65);">Most agencies hide the engineering. We consider it half the argument.</p>
     </div>
 
-    <h2 style="grid-column:1 / span 11;font-size:clamp(36px,5vw,76px);font-weight:600;line-height:1.06;letter-spacing:-0.035em;color:#F5F1EA;margin:0 0 clamp(36px,5vh,64px);">
-      Architecture that compounds. Technology that endures.
-    </h2>
+    <div style="grid-column:1 / span 12;display:flex;flex-direction:column;">
+      <div data-reveal style="display:grid;grid-template-columns:repeat(12, 1fr);gap:24px;padding:clamp(28px,4.5vh,44px) 0;border-top:1px solid rgba(245,241,234,0.14);align-items:start;">
+        <div style="grid-column:1 / span 4;">
+          <h3 style="margin:0;font-size:clamp(20px,2vw,26px);font-weight:600;letter-spacing:-0.02em;color:#F5F1EA;">Experience Engineering</h3>
+        </div>
+        <div style="grid-column:5 / span 8;display:flex;flex-direction:column;gap:14px;">
+          <div style="display:flex;flex-wrap:wrap;gap:8px;">
+            <span style="font-size:12px;font-weight:500;letter-spacing:0.04em;color:rgba(245,241,234,0.85);border:1px solid rgba(245,241,234,0.22);border-radius:100px;padding:7px 14px;">Front-end engineering</span>
+            <span style="font-size:12px;font-weight:500;letter-spacing:0.04em;color:rgba(245,241,234,0.85);border:1px solid rgba(245,241,234,0.22);border-radius:100px;padding:7px 14px;">Design systems</span>
+            <span style="font-size:12px;font-weight:500;letter-spacing:0.04em;color:rgba(245,241,234,0.85);border:1px solid rgba(245,241,234,0.22);border-radius:100px;padding:7px 14px;">Web performance</span>
+          </div>
+          <p style="margin:0;font-size:13.5px;line-height:1.6;color:rgba(245,241,234,0.55);max-width:44ch;">What your customers touch</p>
+        </div>
+      </div>
 
-    <div style="grid-column:1 / span 4;background:rgba(245,241,234,0.04);border:1px solid rgba(245,241,234,0.1);border-radius:4px;padding:clamp(24px,3vw,36px);">
-      <span style="font-size:11px;letter-spacing:0.24em;color:#C56A37;text-transform:uppercase;font-weight:600;">Layer 01</span>
-      <h3 style="font-size:22px;font-weight:600;color:#F5F1EA;margin:14px 0 10px;">Brand Core & System</h3>
-      <p style="font-size:14.5px;line-height:1.65;color:rgba(245,241,234,0.7);margin:0;">Design tokens, typographic scale, component libraries, and visual hierarchy that keep every touchpoint cohesive.</p>
-    </div>
+      <div data-reveal style="display:grid;grid-template-columns:repeat(12, 1fr);gap:24px;padding:clamp(28px,4.5vh,44px) 0;border-top:1px solid rgba(245,241,234,0.14);align-items:start;">
+        <div style="grid-column:1 / span 4;">
+          <h3 style="margin:0;font-size:clamp(20px,2vw,26px);font-weight:600;letter-spacing:-0.02em;color:#F5F1EA;">Platform Engineering</h3>
+        </div>
+        <div style="grid-column:5 / span 8;display:flex;flex-direction:column;gap:14px;">
+          <div style="display:flex;flex-wrap:wrap;gap:8px;">
+            <span style="font-size:12px;font-weight:500;letter-spacing:0.04em;color:rgba(245,241,234,0.85);border:1px solid rgba(245,241,234,0.22);border-radius:100px;padding:7px 14px;">Back-end & APIs</span>
+            <span style="font-size:12px;font-weight:500;letter-spacing:0.04em;color:rgba(245,241,234,0.85);border:1px solid rgba(245,241,234,0.22);border-radius:100px;padding:7px 14px;">CMS & headless architecture</span>
+            <span style="font-size:12px;font-weight:500;letter-spacing:0.04em;color:rgba(245,241,234,0.85);border:1px solid rgba(245,241,234,0.22);border-radius:100px;padding:7px 14px;">Cloud infrastructure</span>
+          </div>
+          <p style="margin:0;font-size:13.5px;line-height:1.6;color:rgba(245,241,234,0.55);max-width:44ch;">What holds it all up</p>
+        </div>
+      </div>
 
-    <div style="grid-column:5 / span 4;background:rgba(245,241,234,0.04);border:1px solid rgba(245,241,234,0.1);border-radius:4px;padding:clamp(24px,3vw,36px);">
-      <span style="font-size:11px;letter-spacing:0.24em;color:#C56A37;text-transform:uppercase;font-weight:600;">Layer 02</span>
-      <h3 style="font-size:22px;font-weight:600;color:#F5F1EA;margin:14px 0 10px;">Digital Experience Layer</h3>
-      <p style="font-size:14.5px;line-height:1.65;color:rgba(245,241,234,0.7);margin:0;">High-performance frontends, headless WordPress architectures, WebGL shaders, and ultra-fluid mobile viewports.</p>
-    </div>
+      <div data-reveal style="display:grid;grid-template-columns:repeat(12, 1fr);gap:24px;padding:clamp(28px,4.5vh,44px) 0;border-top:1px solid rgba(245,241,234,0.14);align-items:start;">
+        <div style="grid-column:1 / span 4;">
+          <h3 style="margin:0;font-size:clamp(20px,2vw,26px);font-weight:600;letter-spacing:-0.02em;color:#F5F1EA;">Growth Infrastructure</h3>
+        </div>
+        <div style="grid-column:5 / span 8;display:flex;flex-direction:column;gap:14px;">
+          <div style="display:flex;flex-wrap:wrap;gap:8px;">
+            <span style="font-size:12px;font-weight:500;letter-spacing:0.04em;color:rgba(245,241,234,0.85);border:1px solid rgba(245,241,234,0.22);border-radius:100px;padding:7px 14px;">SEO architecture</span>
+            <span style="font-size:12px;font-weight:500;letter-spacing:0.04em;color:rgba(245,241,234,0.85);border:1px solid rgba(245,241,234,0.22);border-radius:100px;padding:7px 14px;">Analytics</span>
+            <span style="font-size:12px;font-weight:500;letter-spacing:0.04em;color:rgba(245,241,234,0.85);border:1px solid rgba(245,241,234,0.22);border-radius:100px;padding:7px 14px;">Marketing automation</span>
+          </div>
+          <p style="margin:0;font-size:13.5px;line-height:1.6;color:rgba(245,241,234,0.55);max-width:44ch;">What makes it findable</p>
+        </div>
+      </div>
 
-    <div style="grid-column:9 / span 4;background:rgba(245,241,234,0.04);border:1px solid rgba(245,241,234,0.1);border-radius:4px;padding:clamp(24px,3vw,36px);">
-      <span style="font-size:11px;letter-spacing:0.24em;color:#C56A37;text-transform:uppercase;font-weight:600;">Layer 03</span>
-      <h3 style="font-size:22px;font-weight:600;color:#F5F1EA;margin:14px 0 10px;">Intelligence & Distribution</h3>
-      <p style="font-size:14.5px;line-height:1.65;color:rgba(245,241,234,0.7);margin:0;">Data pipelines, predictive attribution models, conversion funnels, and automated CRM orchestration.</p>
+      <div data-reveal style="display:grid;grid-template-columns:repeat(12, 1fr);gap:24px;padding:clamp(28px,4.5vh,44px) 0;border-top:1px solid rgba(245,241,234,0.14);align-items:start;">
+        <div style="grid-column:1 / span 4;">
+          <h3 style="margin:0;font-size:clamp(20px,2vw,26px);font-weight:600;letter-spacing:-0.02em;color:#F5F1EA;">Applied Intelligence</h3>
+        </div>
+        <div style="grid-column:5 / span 8;display:flex;flex-direction:column;gap:14px;">
+          <div style="display:flex;flex-wrap:wrap;gap:8px;">
+            <span style="font-size:12px;font-weight:500;letter-spacing:0.04em;color:rgba(245,241,234,0.85);border:1px solid rgba(245,241,234,0.22);border-radius:100px;padding:7px 14px;">AI integrations</span>
+            <span style="font-size:12px;font-weight:500;letter-spacing:0.04em;color:rgba(245,241,234,0.85);border:1px solid rgba(245,241,234,0.22);border-radius:100px;padding:7px 14px;">Personalisation</span>
+            <span style="font-size:12px;font-weight:500;letter-spacing:0.04em;color:rgba(245,241,234,0.85);border:1px solid rgba(245,241,234,0.22);border-radius:100px;padding:7px 14px;">Performance intelligence</span>
+          </div>
+          <p style="margin:0;font-size:13.5px;line-height:1.6;color:rgba(245,241,234,0.55);max-width:44ch;">What compounds it</p>
+        </div>
+      </div>
+
+      <div style="border-top:1px solid rgba(245,241,234,0.14);"></div>
     </div>
   </div>
 </section>

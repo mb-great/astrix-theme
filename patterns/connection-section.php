@@ -7,42 +7,46 @@
  */
 ?>
 <!-- wp:html -->
-<section class="sec-connection-wrap" style="position:relative;background:#211C17;color:#F5F1EA;padding:clamp(100px,16vh,180px) clamp(24px,4.5vw,64px);overflow:hidden;">
-  <div style="max-width:1440px;margin:0 auto;display:grid;grid-template-columns:repeat(12,1fr);gap:clamp(24px,3.5vw,48px);align-items:center;position:relative;z-index:2;">
-    <div style="grid-column:1 / span 6;display:flex;flex-direction:column;gap:clamp(18px,2.5vh,28px);">
-      <div style="display:inline-flex;align-items:center;gap:12px;">
-        <span style="display:inline-block;width:22px;height:1px;background:#C56A37;"></span>
-        <span style="font-size:11.5px;letter-spacing:0.32em;font-weight:600;color:rgba(245,241,234,0.6);text-transform:uppercase;">Chapter Three · The Missing Connection</span>
+<section style="position: relative; background: #EFE9DF; overflow: hidden; border-top: 1px solid rgba(33,28,23,0.05);" data-screen-label="Chapter Two · The Missing Connection">
+  <div class="grid-12" style="position: relative; z-index: 2; display: grid; grid-template-columns: repeat(12, 1fr); gap: 24px; padding: clamp(90px, 15vh, 180px) clamp(28px, 5vw, 72px);">
+    <h2 data-reveal style="grid-column: 1 / span 9; margin: clamp(24px, 3vh, 40px) 0 clamp(18px, 2.4vh, 26px); font-weight: 600; font-size: clamp(34px, 4.4vw, 68px); line-height: 1.05; letter-spacing: -0.035em;">Not Under One Roof. <em style="font-family: 'Instrument Serif', serif; font-style: italic; font-weight: 400; color: #C56A37;">Built as One</em></h2>
+    <p data-reveal style="grid-column: 1 / span 8; margin: 0 0 clamp(20px, 3vh, 32px); font-size: 15.5px; line-height: 1.72; color: #7A6F63; max-width: 66ch; text-wrap: pretty;">We bring disciplines together. Each discipline operates as one connected system, creating faster decisions, stronger experiences for a measurable business impact.</p>
+
+    <div data-reveal class="handoff-row" style="grid-column: 1 / span 12; display: flex; align-items: stretch; gap: 14px;">
+      <div style="flex: 1; display: flex; flex-direction: column; gap: 10px; border: 1px dashed rgba(33,28,23,0.28); border-radius: 4px; padding: clamp(20px, 3vh, 30px) clamp(18px, 2vw, 26px); background: rgba(245,241,234,0.5);">
+        <span style="font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: #9A8E7D; font-weight: 500;">The consultancy</span>
+        <span style="font-size: clamp(17px, 1.6vw, 21px); font-weight: 600; letter-spacing: -0.015em;">Strategy</span>
+        <span style="font-size: 13px; line-height: 1.55; color: #7A6F63;">A deck nobody downstream reads twice.</span>
       </div>
-
-      <h2 style="font-size:clamp(36px,5vw,76px);font-weight:600;line-height:1.05;letter-spacing:-0.035em;color:#F5F1EA;margin:0;">
-        From fragmented silos to a unified <em style="font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;color:#C56A37;">engine.</em>
-      </h2>
-
-      <p style="font-size:clamp(16px,1.4vw,20px);line-height:1.65;color:rgba(245,241,234,0.75);margin:0;">
-        Most businesses hire separate agencies for branding, design, development, and marketing. Each optimizes for their own deliverable, leaving you to bridge the gaps. Astrix closes the loop.
-      </p>
+      <div style="flex: 1; display: flex; flex-direction: column; gap: 10px; border: 1px dashed rgba(33,28,23,0.28); border-radius: 4px; padding: clamp(20px, 3vh, 30px) clamp(18px, 2vw, 26px); background: rgba(245,241,234,0.5);">
+        <span style="font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: #9A8E7D; font-weight: 500;">The agency</span>
+        <span style="font-size: clamp(17px, 1.6vw, 21px); font-weight: 600; letter-spacing: -0.015em;">Design</span>
+        <span style="font-size: 13px; line-height: 1.55; color: #7A6F63;">Beautiful files, briefed second-hand.</span>
+      </div>
+      <div style="flex: 1; display: flex; flex-direction: column; gap: 10px; border: 1px dashed rgba(33,28,23,0.28); border-radius: 4px; padding: clamp(20px, 3vh, 30px) clamp(18px, 2vw, 26px); background: rgba(245,241,234,0.5);">
+        <span style="font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: #9A8E7D; font-weight: 500;">The dev shop</span>
+        <span style="font-size: clamp(17px, 1.6vw, 21px); font-weight: 600; letter-spacing: -0.015em;">Technology</span>
+        <span style="font-size: 13px; line-height: 1.55; color: #7A6F63;">Built to spec, blind to the strategy.</span>
+      </div>
+      <div style="flex: 1; display: flex; flex-direction: column; gap: 10px; border: 1px dashed rgba(33,28,23,0.28); border-radius: 4px; padding: clamp(20px, 3vh, 30px) clamp(18px, 2vw, 26px); background: rgba(245,241,234,0.5);">
+        <span style="font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: #9A8E7D; font-weight: 500;">The media buyer</span>
+        <span style="font-size: clamp(17px, 1.6vw, 21px); font-weight: 600; letter-spacing: -0.015em;">Growth</span>
+        <span style="font-size: 13px; line-height: 1.55; color: #7A6F63;">Spending against a story it never heard.</span>
+      </div>
     </div>
 
-    <div style="grid-column:7 / span 6;background:rgba(245,241,234,0.03);border:1px solid rgba(245,241,234,0.08);border-radius:6px;padding:clamp(28px,4vw,48px);">
-      <div style="display:flex;flex-direction:column;gap:20px;">
-        <div style="display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(245,241,234,0.1);padding-bottom:14px;">
-          <span style="font-size:15px;color:#F5F1EA;font-weight:500;">Brand & Positioning</span>
-          <span style="color:#C56A37;font-weight:600;">→ Connects to</span>
-        </div>
-        <div style="display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(245,241,234,0.1);padding-bottom:14px;">
-          <span style="font-size:15px;color:#F5F1EA;font-weight:500;">Visual Craft & Narrative</span>
-          <span style="color:#C56A37;font-weight:600;">→ Amplifies</span>
-        </div>
-        <div style="display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(245,241,234,0.1);padding-bottom:14px;">
-          <span style="font-size:15px;color:#F5F1EA;font-weight:500;">Digital Product & Interface</span>
-          <span style="color:#C56A37;font-weight:600;">→ Converts</span>
-        </div>
-        <div style="display:flex;align-items:center;justify-content:space-between;">
-          <span style="font-size:15px;color:#F5F1EA;font-weight:500;">Growth Infrastructure & Data</span>
-          <span style="color:#C56A37;font-weight:600;">→ Scales</span>
-        </div>
+    <div data-reveal style="grid-column: 1 / span 12; margin-top: clamp(14px, 2.5vh, 28px); border: 1px solid rgba(33,28,23,0.22); border-radius: 4px; background: #F5F1EA; padding: clamp(24px, 4vh, 38px) clamp(20px, 3vw, 36px); display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap;">
+      <div style="display: flex; align-items: center; gap: 16px; flex-wrap: wrap;">
+        <span style="font-size: clamp(17px, 1.6vw, 21px); font-weight: 600; letter-spacing: -0.015em;">Strategy</span><span style="color: #C56A37;">·</span>
+        <span style="font-size: clamp(17px, 1.6vw, 21px); font-weight: 600; letter-spacing: -0.015em;">Design</span><span style="color: #C56A37;">·</span>
+        <span style="font-size: clamp(17px, 1.6vw, 21px); font-weight: 600; letter-spacing: -0.015em;">Technology</span><span style="color: #C56A37;">·</span>
+        <span style="font-size: clamp(17px, 1.6vw, 21px); font-weight: 600; letter-spacing: -0.015em;">Growth</span>
       </div>
+      <span style="font-size: 13.5px; color: #7A6F63;">One Vision. Every Capability. Perfectly Connected</span>
+    </div>
+
+    <div data-reveal style="grid-column: 1 / span 12; margin-top: clamp(40px, 6vh, 76px); display: flex; align-items: center; justify-content: center;">
+      <a href="/studio" data-magnetic class="ax-cta-dark" style="display: inline-flex; align-items: center; gap: 12px; background: #211C17; color: #F5F1EA; font-size: 14.5px; font-weight: 500; padding: 16px 30px; border-radius: 100px; white-space: nowrap; transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease;">Explore The System <span style="font-size: 15px;">→</span></a>
     </div>
   </div>
 </section>

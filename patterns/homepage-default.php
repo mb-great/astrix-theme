@@ -1,6 +1,6 @@
 <?php
 /**
- * Title: Astrix Full Homepage Presentation Deck
+ * Title: Astrix Full Homepage Assembly
  * Slug: astrix/homepage-default
  * Categories: astrix-pages, astrix
  * Inserter: true

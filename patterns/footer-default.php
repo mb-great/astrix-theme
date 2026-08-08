@@ -6,51 +6,61 @@
  * Block Types: core/template-part/footer
  * Inserter: true
  */
+$theme_uri = get_template_directory_uri();
 ?>
 <!-- wp:html -->
-<footer class="astrix-site-footer" style="background-color:#211C17;color:#F5F1EA;padding:clamp(60px,9vh,96px) clamp(24px,4.5vw,64px) clamp(32px,4.5vh,48px);">
-  <div style="max-width:1440px;margin:0 auto;">
-    <div style="display:grid;grid-template-columns:repeat(12,1fr);gap:clamp(24px,3.5vw,48px);margin-bottom:clamp(48px,6vh,72px);">
-      <div style="grid-column:1 / span 5;">
-        <div style="font-family:'Instrument Serif',serif;font-size:36px;font-style:italic;font-weight:700;color:#F5F1EA;margin-bottom:16px;">astrix<span style="color:#C56A37;">.</span></div>
-        <p style="font-size:14.5px;line-height:1.7;color:#A39B8F;max-width:38ch;margin-bottom:24px;">Architecture, Intelligence & Cinematic Digital Production for market leaders and visionaries.</p>
-        <div style="display:flex;align-items:center;gap:12px;">
-          <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#10b981;box-shadow:0 0 10px #10b981;"></span>
-          <span style="font-size:12.5px;letter-spacing:0.06em;color:#A39B8F;text-transform:uppercase;">Accepting Select Engagements Q3/Q4</span>
-        </div>
-      </div>
-
-      <div style="grid-column:6 / span 2;">
-        <h4 style="font-size:11.5px;letter-spacing:0.28em;text-transform:uppercase;color:#C56A37;margin-bottom:18px;font-weight:600;">Ecosystem</h4>
-        <div style="display:flex;flex-direction:column;gap:10px;">
-          <a href="/services" style="color:#E5DEC9;text-decoration:none;font-size:14px;">Services</a>
-          <a href="/studio" style="color:#E5DEC9;text-decoration:none;font-size:14px;">Studio</a>
-          <a href="/perspective" style="color:#E5DEC9;text-decoration:none;font-size:14px;">Perspective</a>
-          <a href="/work" style="color:#E5DEC9;text-decoration:none;font-size:14px;">Work</a>
-        </div>
-      </div>
-
-      <div style="grid-column:8 / span 2;">
-        <h4 style="font-size:11.5px;letter-spacing:0.28em;text-transform:uppercase;color:#C56A37;margin-bottom:18px;font-weight:600;">Social</h4>
-        <div style="display:flex;flex-direction:column;gap:10px;">
-          <a href="https://linkedin.com" target="_blank" rel="noopener" style="color:#E5DEC9;text-decoration:none;font-size:14px;">LinkedIn ↗</a>
-          <a href="https://instagram.com" target="_blank" rel="noopener" style="color:#E5DEC9;text-decoration:none;font-size:14px;">Instagram ↗</a>
-          <a href="https://x.com" target="_blank" rel="noopener" style="color:#E5DEC9;text-decoration:none;font-size:14px;">X / Twitter ↗</a>
-        </div>
-      </div>
-
-      <div style="grid-column:10 / span 3;">
-        <h4 style="font-size:11.5px;letter-spacing:0.28em;text-transform:uppercase;color:#C56A37;margin-bottom:18px;font-weight:600;">Direct Contact</h4>
-        <p style="font-size:14px;color:#A39B8F;line-height:1.6;margin-bottom:8px;">Studio 402, Highline Tower<br>London & New York</p>
-        <a href="mailto:hello@astrixmedia.com" style="color:#F5F1EA;font-size:14.5px;text-decoration:none;font-weight:500;">hello@astrixmedia.com</a>
+<footer style="position:relative;background:#17130F;color:#F5F1EA;padding:clamp(60px,10vh,100px) clamp(28px,5vw,72px) 36px;overflow:hidden;border-top:1px solid rgba(245,241,234,0.08);">
+  <div style="max-width:1440px;margin:0 auto;display:grid;grid-template-columns:repeat(12,1fr);gap:clamp(24px,3.5vw,48px);">
+    <div style="grid-column:1 / span 4;display:flex;flex-direction:column;gap:20px;">
+      <a href="/" style="display:flex;align-items:center;gap:14px;text-decoration:none;">
+        <img src="<?php echo esc_url($theme_uri . '/assets/Astrix Logo-01.webp'); ?>" alt="Astrix" style="width:48px;height:48px;object-fit:contain;">
+        <span style="font-weight:700;font-size:20px;letter-spacing:0.22em;color:#F5F1EA;text-transform:uppercase;">ASTRIX</span>
+        <span style="width:1px;height:16px;background:rgba(245,241,234,0.2);display:block;"></span>
+        <span style="font-size:12px;letter-spacing:0.28em;color:rgba(245,241,234,0.6);font-weight:500;text-transform:uppercase;">MEDIA</span>
+      </a>
+      <p style="font-size:14px;line-height:1.65;color:rgba(245,241,234,0.65);max-width:32ch;margin:0;">
+        A business transformation partner. We integrate strategy, brand, technology, and growth into one connected engine.
+      </p>
+      <div style="display:inline-flex;align-items:center;gap:8px;padding:6px 14px;background:rgba(245,241,234,0.06);border-radius:100px;width:fit-content;margin-top:4px;">
+        <span style="width:7px;height:7px;border-radius:50%;background:#38A169;box-shadow:0 0 8px #38A169;"></span>
+        <span style="font-size:11.5px;letter-spacing:0.06em;color:rgba(245,241,234,0.8);text-transform:uppercase;font-weight:500;">Accepting Q3/Q4 Partnerships</span>
       </div>
     </div>
 
-    <div style="display:flex;align-items:center;justify-content:space-between;border-top:1px solid rgba(245,241,234,0.12);padding-top:24px;font-size:12.5px;color:#7A6F63;flex-wrap:wrap;gap:14px;">
-      <div>© <?php echo date('Y'); ?> Astrix Media. All Rights Reserved. Built for Leaders.</div>
-      <div style="display:flex;align-items:center;gap:20px;">
-        <a href="/privacy" style="color:#7A6F63;text-decoration:none;">Privacy Policy</a>
-        <a href="/terms" style="color:#7A6F63;text-decoration:none;">Terms of Service</a>
+    <div style="grid-column:6 / span 2;display:flex;flex-direction:column;gap:12px;">
+      <span style="font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:#C56A37;font-weight:600;">Ecosystems</span>
+      <a href="/services" class="ft-link">Brand Launch</a>
+      <a href="/services" class="ft-link">Digital Growth</a>
+      <a href="/services" class="ft-link">Commerce</a>
+      <a href="/services" class="ft-link">Lead Generation</a>
+      <a href="/services" class="ft-link">AI Marketing</a>
+      <a href="/services" class="ft-link">Corporate Brand</a>
+    </div>
+
+    <div style="grid-column:8 / span 2;display:flex;flex-direction:column;gap:12px;">
+      <span style="font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:#C56A37;font-weight:600;">Studio</span>
+      <a href="/studio" class="ft-link">Philosophy</a>
+      <a href="/studio" class="ft-link">Methodology</a>
+      <a href="/work" class="ft-link">Transformations</a>
+      <a href="/perspective" class="ft-link">Perspectives</a>
+      <a href="/contact" class="ft-link">Careers</a>
+    </div>
+
+    <div style="grid-column:10 / span 3;display:flex;flex-direction:column;gap:16px;">
+      <span style="font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:#C56A37;font-weight:600;">Direct Inquiries</span>
+      <a href="mailto:hello@astrixmedia.com" style="font-size:16px;font-weight:500;color:#F5F1EA;text-decoration:none;">hello@astrixmedia.com</a>
+      <div style="display:flex;gap:10px;margin-top:6px;">
+        <a href="https://linkedin.com" target="_blank" rel="noopener" class="ft-social">LI</a>
+        <a href="https://x.com" target="_blank" rel="noopener" class="ft-social">X</a>
+        <a href="https://instagram.com" target="_blank" rel="noopener" class="ft-social">IG</a>
+      </div>
+    </div>
+
+    <div style="grid-column:1 / span 12;border-top:1px solid rgba(245,241,234,0.08);padding-top:24px;margin-top:24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;font-size:12px;color:rgba(245,241,234,0.45);">
+      <span>&copy; <?php echo esc_html(date('Y')); ?> Astrix Media Group. All rights reserved.</span>
+      <div style="display:flex;gap:20px;">
+        <a href="/privacy-policy" style="color:rgba(245,241,234,0.45);text-decoration:none;">Privacy Policy</a>
+        <a href="/terms" style="color:rgba(245,241,234,0.45);text-decoration:none;">Terms of Engagement</a>
       </div>
     </div>
   </div>

@@ -10,6 +10,8 @@ License: GNU General Public License v2 or later
 Text Domain: astrix
 */
 
+@import url('https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Instrument+Serif:ital,wght@0,400;1,400&family=Geist+Mono:wght@400;500&display=swap');
+
 /* ── Fonts & Global Resets ── */
 *, *::before, *::after {
   box-sizing: border-box;
