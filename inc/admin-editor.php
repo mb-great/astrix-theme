@@ -30,12 +30,41 @@ add_action('admin_enqueue_scripts', function ($hook) {
   }
 });
 
+/**
+ * Hide default empty editor on structured Astrix page templates so only the dedicated
+ * Astrix Content Panels and image pickers are displayed.
+ */
+add_action('admin_init', function () {
+  if (isset($_GET['post'])) {
+    $post_id = (int) $_GET['post'];
+    $front_id = (int) get_option('page_on_front');
+    $template = get_post_meta($post_id, '_wp_page_template', true);
+    $slug = get_post_field('post_name', $post_id);
 
+    $is_structured = ($post_id === $front_id) || in_array($template, array(
+      'front-page.php',
+      'templates/template-services.php',
+      'templates/template-studio.php',
+      'templates/template-perspective.php',
+      'templates/template-work.php',
+      'templates/template-contact.php',
+      'page-services.php',
+      'page-studio.php',
+      'page-perspective.php',
+      'page-work.php',
+      'page-contact.php',
+    )) || in_array($slug, array('home', 'services', 'studio', 'perspective', 'work', 'contact'));
 
+    if ($is_structured) {
+      remove_post_type_support('page', 'editor');
+    }
+  }
+});
 
 /**
  * Register Astrix Custom Meta Boxes.
  */
+
 add_action('add_meta_boxes', function () {
   global $post;
   if (!$post || $post->post_type !== 'page') {
